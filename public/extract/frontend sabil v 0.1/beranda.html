@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+   integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+   <!-- font google -->
+   <link rel="preconnect" href="https://fonts.gstatic.com">
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+   <link rel="preconnect" href="https://fonts.gstatic.com">
+   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+
+   <!-- font awsome -->
+   <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" />
+
+   <!-- Local css -->
+   <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+   <!-- header -->
+   <div class="container-fluid mb-5 shadow bg-white">
+      <div class="col">
+         <nav class="navbar navbar-expand-md bg-white">
+            <a id="link" class="navbar-brand" href="index.html">
+               <img id="logoku" src="img/logoUPN.png" alt="logo" height="63" width="243" class="d-inline-block align-top">
+            </a>
+            <div class="collapse navbar-collapse">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                     <a class="nav-link active" href="beranda.html"><i class="fa fa-home"></i></a>
+                  </li>
+                  <li class="nav-item ml-2">
+                     <a class="nav-link" href="pesan.html">Pesan</a>
+                  </li>
+                  <!-- <li class="nav-item ml-2">
+                     <a class="nav-link" href="#">Pembayaran</a>
+                  </li> -->
+                  <li class="nav-item ml-2">
+                     <a class="nav-link" href="riwayat.html">Riwayat Pemesanan</a>
+                  </li>
+               </ul>
+               <div class="dropdown ml-2">
+                  <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Bantuan
+               </a>
+               <div class="dropdown-menu dropdown-menu-sm-right" aria-labelledby="dropdownMenu2">
+                  <a href="alursistem.html" class="dropdown-item" type="button" style="font-size: small;">Alur Proses Pemesanan</a>
+                  <!-- <button class="dropdown-item text-sm" type="button">Petunjuk Pembayaran</button> -->
+                  
+               </div>
+
+               </div>
+               <div class="dropdown">
+                  <a style="text-decoration: none;" class="dropdown-toggle text-dark" href="#" data-toggle="dropdown">
+                  <img src="img/OwO logo.png" height="64px" width="64px" style="border-radius: 50%; margin-left: 30px;">
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-sm-right">
+                     <ul class="list-unstyled p-3">
+                        <li style="font-size: medium; font-weight: 500;">Sabilillah Fauzal Addim</li>
+                        <li style="font-size: small;">1810511017</li>
+                     </ul>
+                     <div class="dropdown-divider" style="width: 270px;"></div>
+                     <a class="dropdown-item" href="index.html"><i class="fa fa-sign-out"></i> Keluar</a>
+                  </div>
+               </div>
+               <a href="#"><img src="img/icon/lonceng.png" alt="notif" class="align-self-center ml-4 mb-2"></a>
+            </div>
+         </nav>
+      </div> 
+   </div>
+   <!-- end header -->
+
+   <!-- Konten -->
+   <div class="container mb-5">
+      <!-- Palet Sambutan -->
+      <div class="row bg-white rounded shadow mb-5">
+         <div class="col p-3">
+            <h5 class="text-left" style="font-family: 'Lora', serif;">Selamat Datang,<span style="color: #0c5012;"> Sabilillah Fauzal Addim</span> di Sistem Layanan Dokumen Alumni UPN Veteran Jakarta</h5>
+         </div>
+         <img src="img/greeting.png" alt="aksesoris" style="float: right; margin-bottom: 5px; opacity: 45%;" height="60px">
+      </div>
+
+      <!-- table Profil -->
+      <div class="row">
+         <div class="col bg-white p-3 rounded shadow">
+            <h3>Profil Saya</h3><hr><br>
+            <table class="table table-borderless table-responsive-sm table-sm">
+               <tr>
+                  <td>Nama</td>
+                  <td>
+                     <input type="text" name="nama_alumni" class="form-control form-control-sm" placeholder="Nama anda" readonly>
+                  </td>
+               </tr>
+
+               <tr>
+                  <td>NIM</td>
+                  <td>
+                     <input type="text" name="nim" class="form-control form-control-sm" placeholder="NIM" readonly>
+                  </td>
+               </tr>
+
+               <tr>
+                  <td>Tahun Lulus</td>
+                  <td>
+                     <input type="number" name="nim" class="form-control form-control-sm" placeholder="Tahun Lulus" value="xxxx" readonly>
+                  </td>
+               </tr>
+
+               <tr>
+                  <td>Email</td>
+                  <td>
+                     <input type="email" name="email" class="form-control form-control-sm" placeholder="Email lengkap anda">
+                  </td>
+               </tr>
+
+               <tr>
+                  <td>Password</td>
+                  <td>
+                     <input type="password" name="password" class="form-control form-control-sm" placeholder="Password" value=""><p class="text-danger text-right" style="font-size: 13px;">Ketik Minimal 6 karakter untuk mengganti ke sandi baru.</p>
+                  </td>
+               </tr>
+
+               <tr>
+                  <td>Telepon</td>
+                  <td>
+                     <input type="text" name="telepon" class="form-control form-control-sm" placeholder="No. Telepon">
+                  </td>
+               </tr>
+
+               <tr>
+                  <td>Ganti Foto</td>
+                  <td>
+                     <input type="file" name="foto" class="btn-sm" placeholder="Foto anda">
+                  </td>       
+               </tr>
+
+               <tr>
+                  <td>Alamat</td>
+                  <td>
+                     <textarea name="alamat" class="form-control form-control-sm" placeholder="Alamat" style="height: 250px;">                      
+                     
+                     </textarea>
+                  </td>       
+               </tr>
+               
+            </table> 
+            <!-- <button type="reset" class="btn btn-sm btn-outline-dark pull-left">
+               <i class="fa fa-times" aria-hidden="true"></i> Reset
+            </button> -->
+            <button type="submit" class="btn btn-sm btn-outline-success pull-right">
+               <i class="fa fa-check-circle-o" aria-hidden="true"></i> Update Data Profil
+            </button>
+         </div>
+
+      </div>
+   </div>
+
+   <section style="background-color: #06750F;" class="bottom mt-4">
+      <div class="container text-center p-2 text-white">
+         © 2013 - 2021 Universitas Pembangunan Nasional Veteran Jakarta | made with <img src="img/icon/coffee-cup.png" alt="kopi" width="24px" height="24px">
+      </div>
+   </section>
+
+   <!-- JS -->
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+</body>
+</html>
