@@ -38,25 +38,31 @@ Route::post('formpengajuan',[LainyaController::class,'store'])->middleware('auth
 Route::post('apiupn',[ApiController::class,'apiUpn'])->name('apiupn');
 Route::post('storeData',[ApiController::class,'storeData'])->name('storeData');
 Route::post('verifikasi',[ApiController::class,'verifikasi'])->name('verifikasi');
-
+#
 Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
-Route::get('admin/download', [PesananController::class, 'fileDownload'])->name('admin.download')->middleware('is_admin');
-Route::get('admin/legalisir', [PesananController::class, 'legalisir'])->name('admin.legalisir')->middleware('is_admin');
-Route::get('admin/legalisir/{legalisir:id}', [PesananController::class, 'detailLegalisir'])->name('admin.legalisir.detail')->middleware('is_admin');
-Route::put('admin/legalisir/{legalisir:id}', [PesananController::class, 'updateLegalisir'])->name('admin.legalisir.detail')->middleware('is_admin');
+#
 
-Route::get('admin/surat', [PesananController::class, 'surat'])->name('admin.surat')->middleware('is_admin');
-Route::get('admin/surat/{surat:id}', [PesananController::class, 'detailSurat'])->name('admin.surat.detail')->middleware('is_admin');
-Route::put('admin/surat/{surat:id}', [PesananController::class, 'updateSurat'])->name('admin.surat.detail')->middleware('is_admin');
+#akpk
+Route::get('akpk/home', [HomeController::class, 'akpkHome'])->name('akpk.home')->middleware('is_akpk');
+Route::get('akpk/download', [PesananController::class, 'fileDownload'])->name('akpk.download')->middleware('is_akpk');
+Route::get('akpk/legalisir', [PesananController::class, 'legalisir'])->name('akpk.legalisir')->middleware('is_akpk');
+Route::get('akpk/legalisir/{legalisir:id}', [PesananController::class, 'detailLegalisir'])->name('akpk.legalisir.detail')->middleware('is_akpk');
+Route::put('akpk/legalisir/{legalisir:id}', [PesananController::class, 'updateLegalisir'])->name('akpk.legalisir.detail')->middleware('is_akpk');
 
-Route::get('admin/lainnya', [PesananController::class, 'lainnya'])->name('admin.lainnya')->middleware('is_admin');
-Route::get('admin/lainnya/{lainnya:id}', [PesananController::class, 'detailLainnya'])->name('admin.lainnya.detail')->middleware('is_admin');
-Route::put('admin/lainnya/{lainnya:id}', [PesananController::class, 'updateLainnya'])->name('admin.lainnya.detail')->middleware('is_admin');
+Route::get('akpk/surat', [PesananController::class, 'surat'])->name('akpk.surat')->middleware('is_akpk');
+Route::get('akpk/surat/{surat:id}', [PesananController::class, 'detailSurat'])->name('akpk.surat.detail')->middleware('is_akpk');
+Route::put('akpk/surat/{surat:id}', [PesananController::class, 'updateSurat'])->name('akpk.surat.detail')->middleware('is_akpk');
+
+Route::get('akpk/lainnya', [PesananController::class, 'lainnya'])->name('akpk.lainnya')->middleware('is_akpk');
+Route::get('akpk/lainnya/{lainnya:id}', [PesananController::class, 'detailLainnya'])->name('akpk.lainnya.detail')->middleware('is_akpk');
+Route::put('akpk/lainnya/{lainnya:id}', [PesananController::class, 'updateLainnya'])->name('akpk.lainnya.detail')->middleware('is_akpk');
+
+#dekan
+route::get('dekan/home', [HomeController::class, 'dekanHome'])->name('dekan.home')->middleware('is_dekan');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/tracestudy', [App\Http\Controllers\HomeController::class, 'tracestudy'])->name('tracestudy');
-Route::post('/tracestudy', [App\Http\Controllers\HomeController::class, 'updateTracer']);
 Route::get('/riwayat', [App\Http\Controllers\RiwayatController::class, 'index'])->name('riwayat');
 Route::get('/riwayat/detail/{id}', [App\Http\Controllers\RiwayatController::class, 'detail']);
 Route::get('/riwayat/ambil/{id}', [App\Http\Controllers\RiwayatController::class, 'ambil']);
 Route::get('/download/{pesanan:id}', [App\Http\Controllers\RiwayatController::class, 'download'])->name('riwayat.download');
+

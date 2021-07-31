@@ -35,7 +35,7 @@
 	  <div class="col">
 		 <nav class="navbar navbar-expand-md bg-white">
 			<a id="link" class="navbar-brand" href="{{route('home')}}">
-            @if (auth()->user()->is_admin===1)
+            @if (auth()->user()->is_admin>0)
             <img id="logoku" src="{{asset('img/logoUPNAdmin.png')}}" alt="logo" height="63" width="100%"
                class="d-inline-block align-top">
             @else
@@ -50,7 +50,7 @@
 					 <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
 				  </li>
               
-				  @if (auth()->user()->is_admin===1)
+				  @if (auth()->user()->is_admin>0)
               <li class="nav-item ml-2">
                <div class="dropdown ml-2">
                    <a class="nav-link dropdown-toggle active" type="button" id="dropdownMenu2"
@@ -58,15 +58,15 @@
                        Daftar Pesanan
                    </a>
                    <div class="dropdown-menu dropdown-menu-sm-right " aria-labelledby="dropdownMenu2">
-                       <a href="{{route('admin.legalisir')}}" class="dropdown-item on" type="button"
+                       <a href="{{route('akpk.legalisir')}}" class="dropdown-item on" type="button"
                            style="font-size: small; font-weight: 600;">
                            Legalisir
                        </a>
-                       <a href="{{route('admin.surat')}}" class="dropdown-item" type="button"
+                       <a href="{{route('akpk.surat')}}" class="dropdown-item" type="button"
                            style="font-size: small; font-weight: 600;">
                            Surat Keterangan
                        </a>
-                       <a href="{{route('admin.lainnya')}}" class="dropdown-item" type="button"
+                       <a href="{{route('akpk.lainnya')}}" class="dropdown-item" type="button"
                            style="font-size: small; font-weight: 600;">
                            Lainnya
                        </a>

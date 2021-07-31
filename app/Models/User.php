@@ -49,9 +49,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'thn_lulus'=>'datetime',
     ];
-
-    public function tracerstudy()
-    {
-        return $this->hasOne(TracerStudy::class);
-    }
 }

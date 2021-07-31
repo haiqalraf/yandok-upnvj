@@ -22,7 +22,7 @@ class PesananController extends Controller
             $legalisir = Legalisir::where('verifikasi', '1')->get();
         }
 
-        return view('admin.legalisir.index', [
+        return view('akpk.legalisir.index', [
             'legalisir' => $legalisir,
             'status' => $request->status
         ]);
@@ -68,7 +68,7 @@ class PesananController extends Controller
             $daftar_pesanan->put('Legalisir Akreditasi Program Profesi - Spesialis (Saat Ini)', $legalisir->dok_12);
         }
 
-        return view('admin.legalisir.detail', [
+        return view('akpk.legalisir.detail', [
             'legalisir' => $legalisir,
             'daftar_pesanan' => $daftar_pesanan
         ]);
@@ -107,7 +107,7 @@ class PesananController extends Controller
         $legalisir->verifikasi = $request->status;
         $legalisir->save();
 
-        return redirect()->route('admin.legalisir', ['status' => $request->status]);
+        return redirect()->route('akpk.legalisir', ['status' => $request->status]);
     }
 
     public function surat(Request $request)
@@ -119,7 +119,7 @@ class PesananController extends Controller
             $surat = Suket::where('verifikasi', '1')->get();
         }
 
-        return view('admin.surat.index', [
+        return view('akpk.surat.index', [
             'surat' => $surat,
             'status' => $request->status
         ]);
@@ -130,7 +130,7 @@ class PesananController extends Controller
         $daftar_pesanan = collect([]);
         $daftar_pesanan->put($surat->dokumen_dipesan, 1);
 
-        return view('admin.surat.detail', [
+        return view('akpk.surat.detail', [
             'surat' => $surat,
             'daftar_pesanan' => $daftar_pesanan
         ]);
@@ -169,7 +169,7 @@ class PesananController extends Controller
         $surat->verifikasi = $request->status;
         $surat->save();
 
-        return redirect()->route('admin.surat', ['status' => $request->status]);
+        return redirect()->route('akpk.surat', ['status' => $request->status]);
     }
 
     public function lainnya(Request $request)
@@ -180,7 +180,7 @@ class PesananController extends Controller
         } else {
             $lainya = Lainya::where('verifikasi', '1')->get();
         }
-        return view('admin.lainnya.index', [
+        return view('akpk.lainnya.index', [
             'lainnya' => $lainya,
             'status' => $request->status
         ]);
@@ -190,7 +190,7 @@ class PesananController extends Controller
     {
         $daftar_pesanan = collect([]);
         $daftar_pesanan->put($lainnya->dokumen_dipesan, 1);
-        return view('admin.lainnya.detail', [
+        return view('akpk.lainnya.detail', [
             'lainnya' => $lainnya,
             'daftar_pesanan' => $daftar_pesanan
         ]);
@@ -229,7 +229,7 @@ class PesananController extends Controller
         $lainnya->verifikasi = $request->status;
         $lainnya->save();
 
-        return redirect()->route('admin.lainnya', ['status' => $request->status]);
+        return redirect()->route('akpk.lainnya', ['status' => $request->status]);
     }
 
     public function fileDownload(Request $request)
