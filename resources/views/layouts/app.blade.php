@@ -50,7 +50,7 @@
 					 <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
 				  </li>
               
-				  @if (auth()->user()->is_admin>0)
+				  @if (auth()->user()->is_admin>1)
               <li class="nav-item ml-2">
                <div class="dropdown ml-2">
                    <a class="nav-link dropdown-toggle active" type="button" id="dropdownMenu2"
@@ -58,15 +58,15 @@
                        Daftar Pesanan
                    </a>
                    <div class="dropdown-menu dropdown-menu-sm-right " aria-labelledby="dropdownMenu2">
-                       <a href="{{route('akpk.legalisir')}}" class="dropdown-item on" type="button"
+                       <a href="@if(auth()->user()->is_admin==2){{route('akpk.legalisir')}}@elseif(auth()->user()->is_admin==3){{route('dekan.legalisir')}}@endif" class="dropdown-item on" type="button"
                            style="font-size: small; font-weight: 600;">
                            Legalisir
                        </a>
-                       <a href="{{route('akpk.surat')}}" class="dropdown-item" type="button"
+                       <a href="@if(auth()->user()->is_admin==2){{route('akpk.surat')}}@elseif(auth()->user()->is_admin==3){{route('dekan.surat')}}@endif" class="dropdown-item" type="button"
                            style="font-size: small; font-weight: 600;">
                            Surat Keterangan
                        </a>
-                       <a href="{{route('akpk.lainnya')}}" class="dropdown-item" type="button"
+                       <a href="@if(auth()->user()->is_admin==2){{route('akpk.lainnya')}}@elseif(auth()->user()->is_admin==3){{route('dekan.lainnya')}}@endif" class="dropdown-item" type="button"
                            style="font-size: small; font-weight: 600;">
                            Lainnya
                        </a>

@@ -8,15 +8,19 @@
 @section('content')
 <div class="container p-3 bg-white shadow rounded">
     <ul class="nav nav-tabs nav-fill justify-content-center">
+       @if (auth()->user()->is_admin==2)
        <li class="nav-item">
-          <a class="nav-link @if ($status==='1'||$status===null){{'active'}}@endif" href="{{ route('admin.legalisir', ['status' => '1'])}}">Belum Diproses</a>
+          <a class="nav-link @if ($status==='1'||$status===null){{'active'}}@endif" href="{{ route('akpk.legalisir', ['status' => '1'])}}">Belum Diproses</a>
+       </li>
+       @endif
+       @if (auth()->user()->is_admin==3)
+       <li class="nav-item">
+          <a class="nav-link @if ($status==='1'||$status===null){{'active'}}@endif" href="{{ route('dekan.legalisir', ['status' => '1'])}}">Sedang Diproses</a>
        </li>
        <li class="nav-item">
-          <a class="nav-link @if ($status==='2' ){{'active'}}@endif" href="{{ route('admin.legalisir', ['status' => '2'])}}">Sedang Diproses</a>
+          <a class="nav-link @if ($status==='2' ){{'active'}}@endif" href="{{ route('dekan.legalisir', ['status' => '2'])}}">Sudah Diproses</a>
        </li>
-       <li class="nav-item">
-          <a class="nav-link @if ($status==='3' ){{'active'}}@endif" href="{{ route('admin.legalisir', ['status' => '3'])}}">Sudah Diproses</a>
-       </li>
+       @endif
     </ul>
 
     <div class="tab-content">
@@ -43,7 +47,11 @@
                                 {{auth()->user()->where('nim', $item->nim_pemesan)->first()->name}}
                             </td>
                             <td>
-                               <a href="{{route('admin.legalisir.detail', [ 'legalisir' => $item ])}}" title="Detail" class="btn btn-sm btn-success">Detail</a>
+                              @if (auth()->user()->is_admin==2)
+                              <a href="{{route('akpk.legalisir.detail', [ 'legalisir' => $item ])}}" title="Detail" class="btn btn-sm btn-success">Detail</a>
+                              @elseif(auth()->user()->is_admin==3)
+                              <a href="{{route('dekan.legalisir.detail', [ 'legalisir' => $item ])}}" title="Detail" class="btn btn-sm btn-success">Detail</a>
+                              @endif
                             </td>
                          </tr>
                           @endforeach

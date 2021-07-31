@@ -43,7 +43,7 @@ Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home
 #
 
 #akpk
-Route::get('akpk/home', [HomeController::class, 'akpkHome'])->name('akpk.home')->middleware('is_akpk');
+Route::get('akpk/home', [HomeController::class, 'adminHome'])->name('akpk.home')->middleware('is_akpk');
 Route::get('akpk/download', [PesananController::class, 'fileDownload'])->name('akpk.download')->middleware('is_akpk');
 Route::get('akpk/legalisir', [PesananController::class, 'legalisir'])->name('akpk.legalisir')->middleware('is_akpk');
 Route::get('akpk/legalisir/{legalisir:id}', [PesananController::class, 'detailLegalisir'])->name('akpk.legalisir.detail')->middleware('is_akpk');
@@ -58,7 +58,19 @@ Route::get('akpk/lainnya/{lainnya:id}', [PesananController::class, 'detailLainny
 Route::put('akpk/lainnya/{lainnya:id}', [PesananController::class, 'updateLainnya'])->name('akpk.lainnya.detail')->middleware('is_akpk');
 
 #dekan
-route::get('dekan/home', [HomeController::class, 'dekanHome'])->name('dekan.home')->middleware('is_dekan');
+route::get('dekan/home', [HomeController::class, 'adminHome'])->name('dekan.home')->middleware('is_dekan');
+Route::get('dekan/download', [PesananController::class, 'fileDownload'])->name('dekan.download')->middleware('is_dekan');
+Route::get('dekan/legalisir', [PesananController::class, 'legalisir'])->name('dekan.legalisir')->middleware('is_dekan');
+Route::get('dekan/legalisir/{legalisir:id}', [PesananController::class, 'detailLegalisir'])->name('dekan.legalisir.detail')->middleware('is_dekan');
+Route::put('dekan/legalisir/{legalisir:id}', [PesananController::class, 'updateLegalisir'])->name('dekan.legalisir.detail')->middleware('is_dekan');
+
+Route::get('dekan/surat', [PesananController::class, 'surat'])->name('dekan.surat')->middleware('is_dekan');
+Route::get('dekan/surat/{surat:id}', [PesananController::class, 'detailSurat'])->name('dekan.surat.detail')->middleware('is_dekan');
+Route::put('dekan/surat/{surat:id}', [PesananController::class, 'updateSurat'])->name('dekan.surat.detail')->middleware('is_dekan');
+
+Route::get('dekan/lainnya', [PesananController::class, 'lainnya'])->name('dekan.lainnya')->middleware('is_dekan');
+Route::get('dekan/lainnya/{lainnya:id}', [PesananController::class, 'detailLainnya'])->name('dekan.lainnya.detail')->middleware('is_dekan');
+Route::put('dekan/lainnya/{lainnya:id}', [PesananController::class, 'updateLainnya'])->name('dekan.lainnya.detail')->middleware('is_dekan');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/riwayat', [App\Http\Controllers\RiwayatController::class, 'index'])->name('riwayat');
