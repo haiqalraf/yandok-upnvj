@@ -66,6 +66,8 @@ class LoginController extends Controller
                 case 3:
                   return redirect()->route('dekan.home');
                   break;
+                case 4:
+                  return redirect()->route('superadmin.home');
                 default:
                   return redirect()->route('home');
             } 

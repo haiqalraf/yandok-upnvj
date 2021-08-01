@@ -46,6 +46,11 @@ class HomeController extends Controller
         return view('dekan.home');
     }
 
+    public function superAdminHome()
+    {
+        return view('superadmin.home');
+    }
+
     public function alur()
     {
         return view('alur');

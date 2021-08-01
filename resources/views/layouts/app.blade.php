@@ -35,8 +35,11 @@
 	  <div class="col">
 		 <nav class="navbar navbar-expand-md bg-white">
 			<a id="link" class="navbar-brand" href="{{route('home')}}">
-            @if (auth()->user()->is_admin>0)
+            @if (in_array(auth()->user()->is_admin, [2,3]))
             <img id="logoku" src="{{asset('img/logoUPNAdmin.png')}}" alt="logo" height="63" width="100%"
+               class="d-inline-block align-top">
+            @elseif(in_array(auth()->user()->is_admin, [4]))
+            <img id="logoku" src="{{asset('img/logoUPNSuperAdmin.png')}}" alt="logo" height="63" width="100%"
                class="d-inline-block align-top">
             @else
             <img id="logoku" src="{{asset('img/logoUPN.png')}}" alt="logo" height="63" width="243"
@@ -50,7 +53,7 @@
 					 <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
 				  </li>
               
-				  @if (auth()->user()->is_admin>1)
+				  @if (in_array(auth()->user()->is_admin, [2,3]))
               <li class="nav-item ml-2">
                <div class="dropdown ml-2">
                    <a class="nav-link dropdown-toggle active" type="button" id="dropdownMenu2"
@@ -74,6 +77,26 @@
 
                </div>
            </li>
+              @elseif(in_array(auth()->user()->is_admin, [4]))
+            <li class="nav-item ml-2">
+               <div class="dropdown ml-2">
+                  <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false">
+                     Pengolahan Akun
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-sm-right" aria-labelledby="dropdownMenu2">
+                     <a href="{{route('superadmin.akpk')}}" class="dropdown-item" type="button"
+                        style="font-size: small; font-weight: 600;">
+                        AKPK
+                     </a>
+                     <a href="{{route('superadmin.dekan')}}" class="dropdown-item" type="button"
+                        style="font-size: small; font-weight: 600;">
+                        Dekanat
+                     </a>
+                  </div>
+
+               </div>
+            </li>
 				  @else
             <li class="nav-item ml-2">
                <div class="dropdown ml-2">
