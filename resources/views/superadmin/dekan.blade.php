@@ -9,10 +9,10 @@
         <table class="table table-striped table-bordered mydatatable text-center" style="width: 100%;">
             <thead class="text-white" style="background-color: #06750F;">
                 <tr>
-                <th>Akun</th>
-                <th>Password</th>
-                <th>NIP/NIK/NIM</th>
-                <th>Status</th>
+                    <th>NIP</th>
+                    <th>Nama</th>
+                    <th>Password</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
