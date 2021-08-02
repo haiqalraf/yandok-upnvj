@@ -9,18 +9,18 @@
         <table class="table table-striped table-bordered mydatatable" style="width: 100%;">
             <thead class="text-white" style="background-color: #06750F;">
                 <tr>
-                <th>Akun</th>
+                <th>NIP</th>
+                <th>Nama</th>
                 <th>Password</th>
-                <th>NIP/NIK/NIM</th>
                 <th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($akpk as $item)
                 <tr>
-                    <td>-</td>
-                    <td>CANNOT IMPLEMENTED</td>
                     <td>{{$item->nim}}</td>
+                    <td>{{$item->name}}</td>
+                    <td>{{$item->password}}</td>
                     <td>
                         <span><i class="fa fa-circle" style="color: #06750F;"></i> NOT IMPLEMENTED
                     </td>

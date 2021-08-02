@@ -18,9 +18,9 @@
             <tbody>
                 @foreach ($dekan as $item)
                 <tr>
-                    <td>-</td>
-                    <td>CANNOT IMPLEMENTED</td>
                     <td>{{$item->nim}}</td>
+                    <td>{{$item->name}}</td>
+                    <td>{{$item->password}}</td>
                     <td>
                         <span><i class="fa fa-circle" style="color: #06750F;"></i> NOT IMPLEMENTED
                     </td>
