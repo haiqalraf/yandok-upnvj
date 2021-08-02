@@ -22,13 +22,14 @@ class AkpkController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'name' => 'required',
             'nim' => 'required',
             'password' => 'required|confirmed|string|min:8',
             'role' => 'required',
         ]);
 
         User::create([
-            'name' => 'NOT IMPLEMENTED',
+            'name' => $request->name,
             'nim' => $request->nim,
             'password' => bcrypt($request->password),
             'is_admin' => $request->role,

@@ -19,6 +19,11 @@
         @endif
         @csrf
             <div class="form-group">
+                <label for="Nama" class="text-sm font-weight-bold">Nama</label>
+                <input type="text" class="form-control form-control-sm" id="Nama"
+                placeholder="Harap masukan nama anda disini" name="name">
+            </div>
+            <div class="form-group">
                 <label for="NIM" class="text-sm font-weight-bold">NIP</label>
                 <input type="text" class="form-control form-control-sm" id="NIM"
                 placeholder="Harap masukan NIM anda disini" name="nim">
