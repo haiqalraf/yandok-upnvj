@@ -33,7 +33,7 @@ class HomeController extends Controller
      */
     public function adminHome()
     {
-        return view('admin.home');
+        return view('superadmin.home');
     }
 
     public function akpkHome()
@@ -44,11 +44,6 @@ class HomeController extends Controller
     public function dekanHome()
     {
         return view('dekan.home');
-    }
-
-    public function superAdminHome()
-    {
-        return view('superadmin.home');
     }
 
     public function alur()

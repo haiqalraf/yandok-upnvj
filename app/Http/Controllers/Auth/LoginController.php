@@ -58,7 +58,7 @@ class LoginController extends Controller
             */
             switch (auth()->user()->is_admin) {
                 case 1:
-                  return redirect()->route('admin.home');
+                  return redirect()->route('superadmin.home');
                   break;
                 case 2:
                   return redirect()->route('akpk.home');
@@ -66,8 +66,6 @@ class LoginController extends Controller
                 case 3:
                   return redirect()->route('dekan.home');
                   break;
-                case 4:
-                  return redirect()->route('superadmin.home');
                 default:
                   return redirect()->route('home');
             } 

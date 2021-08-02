@@ -42,8 +42,6 @@ Route::post('apiupn',[ApiController::class,'apiUpn'])->name('apiupn');
 Route::post('storeData',[ApiController::class,'storeData'])->name('storeData');
 Route::post('verifikasi',[ApiController::class,'verifikasi'])->name('verifikasi');
 #
-Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
-#
 
 #akpk
 Route::get('akpk/home', [HomeController::class, 'adminHome'])->name('akpk.home')->middleware('is_akpk');
@@ -77,7 +75,7 @@ Route::put('dekan/lainnya/{lainnya:id}', [PesananController::class, 'updateLainn
 
 #superadmin
 Route::prefix('superadmin')->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'superAdminHome'])->name('superadmin.home');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('superadmin.home');
 
     Route::get('/akpk', [AkpkController::class, 'index'])->name('superadmin.akpk');
     Route::post('/akpk', [AkpkController::class, 'store']);

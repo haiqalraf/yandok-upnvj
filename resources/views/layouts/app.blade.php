@@ -34,14 +34,22 @@
    <div class="container-fluid mb-5 shadow bg-white">
 	  <div class="col">
 		 <nav class="navbar navbar-expand-md bg-white">
-			<a id="link" class="navbar-brand" href="{{route('home')}}">
             @if (in_array(auth()->user()->is_admin, [2,3]))
-            <img id="logoku" src="{{asset('img/logoUPNAdmin.png')}}" alt="logo" height="63" width="100%"
+               @if (auth()->user()->is_admin==2)
+            <a id="link" class="navbar-brand" href="{{route('akpk.home')}}">
+               <img id="logoku" src="{{asset('img/logoUPNAdmin.png')}}" alt="logo" height="63" width="100%"
                class="d-inline-block align-top">
-            @elseif(in_array(auth()->user()->is_admin, [4]))
+               @else
+            <a id="link" class="navbar-brand" href="{{route('dekan.home')}}">
+               <img id="logoku" src="{{asset('img/logoUPNAdmin.png')}}" alt="logo" height="63" width="100%"
+               class="d-inline-block align-top">
+               @endif
+            @elseif(in_array(auth()->user()->is_admin, [1]))
+         <a id="link" class="navbar-brand" href="{{route('superadmin.home')}}">
             <img id="logoku" src="{{asset('img/logoUPNSuperAdmin.png')}}" alt="logo" height="63" width="100%"
-               class="d-inline-block align-top">
+            class="d-inline-block align-top">
             @else
+         <a id="link" class="navbar-brand" href="{{route('home')}}">
             <img id="logoku" src="{{asset('img/logoUPN.png')}}" alt="logo" height="63" width="243"
 				  class="d-inline-block align-top">
             @endif
@@ -49,10 +57,25 @@
 			</a>
 			<div class="collapse navbar-collapse">
 			   <ul class="navbar-nav ml-auto">
-				  <li class="nav-item">
-					 <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
-				  </li>
-              
+               @if (in_array(auth()->user()->is_admin, [2,3]))
+                  @if (auth()->user()->is_admin==2)
+               <li class="nav-item">
+                  <a class="nav-link active" href="{{route('akpk.home')}}"><i class="fa fa-home"></i></a>
+               </li>
+                  @else
+               <li class="nav-item">
+                  <a class="nav-link active" href="{{route('dekan.home')}}"><i class="fa fa-home"></i></a>
+               </li>
+                  @endif
+               @elseif(in_array(auth()->user()->is_admin, [1]))
+               <li class="nav-item">
+                  <a class="nav-link active" href="{{route('superadmin.home')}}"><i class="fa fa-home"></i></a>
+               </li>
+               @else
+               <li class="nav-item">
+                  <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
+               </li>
+               @endif
 				  @if (in_array(auth()->user()->is_admin, [2,3]))
               <li class="nav-item ml-2">
                <div class="dropdown ml-2">
@@ -77,7 +100,7 @@
 
                </div>
            </li>
-              @elseif(in_array(auth()->user()->is_admin, [4]))
+              @elseif(in_array(auth()->user()->is_admin, [1]))
             <li class="nav-item ml-2">
                <div class="dropdown ml-2">
                   <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"

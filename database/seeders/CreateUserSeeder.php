@@ -47,12 +47,6 @@ class CreateUserSeeder extends Seeder
                 'is_admin'=>'0',
                'password'=> bcrypt('123456'),
             ],
-            [
-                'name'=>'Superadmin',
-                'nim'=>'18109',
-                 'is_admin'=>'4',
-                'password'=> bcrypt('123456'),
-             ],
         ];
   
         foreach ($user as $key => $value) {
