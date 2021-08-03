@@ -57,7 +57,7 @@
                <td>Password</td>
                <td>
                   <input type="password" name="password" class="form-control form-control-sm" placeholder="Password"
-                     value="" required>
+                     value="">
                   <p class="text-danger text-right" style="font-size: 13px;">Ketik Minimal 6 karakter untuk mengganti
                      ke sandi baru.</p>
                </td>
