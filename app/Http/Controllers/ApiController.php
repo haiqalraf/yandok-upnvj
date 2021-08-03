@@ -11,6 +11,10 @@ class ApiController extends Controller
 {
     public function apiUpn(Request $request)
     {
+        $request->validate([
+            'nim' => 'required',
+            'tgl' => 'required|date_format:Y-m-d'
+        ]);
         $client = new Client();
         $url = "https://api.upnvj.ac.id/mahasiswa/getAlumni";
 
@@ -31,8 +35,11 @@ class ApiController extends Controller
             'form_params' => $mybody
         ]);
         $responseBody = json_decode($response->getBody()->getContents());
-
-        return view('auth.register2', compact('responseBody'));
+        if ($responseBody->message == null) {
+            return view('auth.register2', compact('responseBody'));
+        } else {
+            return back()->with('message', $responseBody->message);
+        }
     }
 
     public function storeData(Request $request){
