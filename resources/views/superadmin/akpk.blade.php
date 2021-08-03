@@ -22,7 +22,11 @@
                     <td>{{$item->name}}</td>
                     <td>{{$item->password}}</td>
                     <td>
-                        <span><i class="fa fa-circle" style="color: #06750F;"></i> NOT IMPLEMENTED
+                        @if(Cache::has('user-is-online-' . $item->id))
+                            <span><i class="fa fa-circle" style="color: #06750F;"></i> Online
+                        @else
+                            <span><i class="fa fa-circle" style="color: #06750F;"></i> Offline
+                        @endif
                     </td>
                 </tr>
                 @endforeach
