@@ -24,11 +24,11 @@
                             <td>Detail Status</td>
                             @if ($data->verifikasi == 1)
 
-                                <td>Menunggu peninjauan oleh pihak Dekanat</td>
+                                <td>Pesanan akan ditinjau oleh bagian AKPK</td>
                             
                             @elseif ($data->verifikasi == 2)
 
-                                <td>Dalam proses penyiapan dokumen oleh pihak akpk</td>
+                                <td>Masih dalam peninjauan di bagian AKPK</td>
 
                             @else
 

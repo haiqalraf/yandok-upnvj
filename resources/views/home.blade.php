@@ -10,7 +10,7 @@
 
 
    </div>
-   <img src="img/greeting.png" alt="aksesoris" style="float: right; margin-bottom: 5px; opacity: 45%;"
+   <img src="{{asset('img/greeting.png')}}" alt="aksesoris" style="float: right; margin-bottom: 5px; opacity: 45%;"
       height="60px">
 </div>
 
@@ -28,7 +28,7 @@
                   <input type="text" name="nama_alumni" class="form-control form-control-sm" placeholder="Nama anda" value="{{ $user->name }}" readonly>
                </td>
             </tr>
-
+            @if ($user->is_admin == 0)
             <tr>
                <td>NIM</td>
                <td>
@@ -42,11 +42,14 @@
                   <input type="number" name="thn_lulus" class="form-control form-control-sm" placeholder="Tahun Lulus" value="{{ date('Y', strtotime($user->thn_lulus)) }}" readonly>
                </td>
             </tr>
+            @else
+                  <input type="hidden" name="nim" class="form-control form-control-sm" placeholder="NIM" value="{{ $user->nim }}" readonly>
+            @endif
 
             <tr>
                <td>Email</td>
                <td>
-                  <input type="email" name="email" class="form-control form-control-sm" value="{{ $user->email }}" placeholder="Email lengkap anda" readonly>
+                  <input type="email" name="email" class="form-control form-control-sm" value="{{ $user->email }}" placeholder="Email lengkap anda">
                </td>
             </tr>
 
@@ -62,38 +65,48 @@
 
             <tr>
                <td>Telepon Ponsel</td>
-               <td>
+               <td id="handphone">
                   <input type="text" name="handphone" class="form-control form-control-sm" value="{{ $user->no_hp }}"
                      placeholder="No. Telepon Ponsel Anda">
+                     
+                  <div class="invalid-feedback">Please fill out this field.</div>
                </td>
             </tr>
 
             <tr>
                <td>Telepon Rumah</td>
-               <td>
+               <td id="telepon">
                   <input type="text" name="telepon" class="form-control form-control-sm" value="{{ $user->no_rumah }}"
                      placeholder="No. Telepon Rumah Anda">
+                     
+                  <div class="invalid-feedback">Please fill out this field.</div>
                </td>
             </tr>
 
             <tr>
                <td>Ganti Foto</td>
-               <td>
+               <td id="foto">
                   <input type="file" name="foto" class="btn-sm" placeholder="Foto anda">
+                     
+                  <div class="invalid-feedback">Please fill out this field.</div>
                </td>
             </tr>
 
+            @if ($user->is_admin == 0)
             <tr>
                <td>Pekerjaan</td>
                <td>
                   <input type="text" name="pekerjaan" class="form-control form-control-sm" readonly value="{{ $user->pekerjaan }}">
                </td>
             </tr>
+            @endif
 
             <tr>
                <td>Alamat</td>
-               <td>
+               <td id="alamat">
                   <textarea name="alamat" class="form-control form-control-sm" placeholder="Alamat" style="height: 250px;">{{ $user->address }}</textarea>
+                     
+                  <div class="invalid-feedback">Please fill out this field.</div>
                </td>
             </tr>
 
@@ -144,7 +157,10 @@ $(document).ready(function () {
             }
          },
          error: function (xhr, status, error){
-            alert("Somethink Error, Please Try Again Later.");
+
+            var text = xhr.responseJSON.message
+
+            alert(text);
 
             $(':input[type="submit"]').prop('disabled', false);
          }

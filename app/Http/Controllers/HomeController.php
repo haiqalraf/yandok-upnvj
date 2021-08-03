@@ -31,20 +31,23 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function adminHome()
-    {
-        return view('superadmin.home');
-    }
+    // public function adminHome()
+    // {
+    //     print_r(auth()->user());
+    //     return view('superadmin.home');
+    // }
 
-    public function akpkHome()
-    {
-        return view('akpk.home');
-    }
+    // public function akpkHome()
+    // {
+    //     print_r(auth()->user());
+    //     return view('akpk.home');
+    // }
     
-    public function dekanHome()
-    {
-        return view('dekan.home');
-    }
+    // public function dekanHome()
+    // {
+    //     print_r(auth()->user());
+    //     return view('dekan.home');
+    // }
 
     public function alur()
     {

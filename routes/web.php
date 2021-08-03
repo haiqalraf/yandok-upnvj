@@ -44,7 +44,7 @@ Route::post('verifikasi',[ApiController::class,'verifikasi'])->name('verifikasi'
 #
 
 #akpk
-Route::get('akpk/home', [HomeController::class, 'adminHome'])->name('akpk.home')->middleware('is_akpk');
+Route::get('home', [HomeController::class, 'index'])->name('akpk.home')->middleware('is_akpk');
 Route::get('akpk/download', [PesananController::class, 'fileDownload'])->name('akpk.download')->middleware('is_akpk');
 Route::get('akpk/legalisir', [PesananController::class, 'legalisir'])->name('akpk.legalisir')->middleware('is_akpk');
 Route::get('akpk/legalisir/{legalisir:id}', [PesananController::class, 'detailLegalisir'])->name('akpk.legalisir.detail')->middleware('is_akpk');
@@ -59,7 +59,7 @@ Route::get('akpk/lainnya/{lainnya:id}', [PesananController::class, 'detailLainny
 Route::put('akpk/lainnya/{lainnya:id}', [PesananController::class, 'updateLainnya'])->name('akpk.lainnya.detail')->middleware('is_akpk');
 
 #dekan
-route::get('dekan/home', [HomeController::class, 'adminHome'])->name('dekan.home')->middleware('is_dekan');
+route::get('home', [HomeController::class, 'index'])->name('dekan.home')->middleware('is_dekan');
 Route::get('dekan/download', [PesananController::class, 'fileDownload'])->name('dekan.download')->middleware('is_dekan');
 Route::get('dekan/legalisir', [PesananController::class, 'legalisir'])->name('dekan.legalisir')->middleware('is_dekan');
 Route::get('dekan/legalisir/{legalisir:id}', [PesananController::class, 'detailLegalisir'])->name('dekan.legalisir.detail')->middleware('is_dekan');
@@ -75,7 +75,7 @@ Route::put('dekan/lainnya/{lainnya:id}', [PesananController::class, 'updateLainn
 
 #superadmin
 Route::prefix('superadmin')->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('superadmin.home');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('superadmin.home');
 
     Route::get('/akpk', [AkpkController::class, 'index'])->name('superadmin.akpk');
     Route::post('/akpk', [AkpkController::class, 'store']);

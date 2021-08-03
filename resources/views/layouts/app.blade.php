@@ -36,16 +36,16 @@
 		 <nav class="navbar navbar-expand-md bg-white">
             @if (in_array(auth()->user()->is_admin, [2,3]))
                @if (auth()->user()->is_admin==2)
-            <a id="link" class="navbar-brand" href="{{route('akpk.home')}}">
+            <a id="link" class="navbar-brand" href="{{route('home')}}">
                <img id="logoku" src="{{asset('img/logoUPNAdmin.png')}}" alt="logo" height="63" width="100%"
                class="d-inline-block align-top">
                @else
-            <a id="link" class="navbar-brand" href="{{route('dekan.home')}}">
+            <a id="link" class="navbar-brand" href="{{route('home')}}">
                <img id="logoku" src="{{asset('img/logoUPNAdmin.png')}}" alt="logo" height="63" width="100%"
                class="d-inline-block align-top">
                @endif
             @elseif(in_array(auth()->user()->is_admin, [1]))
-         <a id="link" class="navbar-brand" href="{{route('superadmin.home')}}">
+         <a id="link" class="navbar-brand" href="{{route('home')}}">
             <img id="logoku" src="{{asset('img/logoUPNSuperAdmin.png')}}" alt="logo" height="63" width="100%"
             class="d-inline-block align-top">
             @else
@@ -60,16 +60,16 @@
                @if (in_array(auth()->user()->is_admin, [2,3]))
                   @if (auth()->user()->is_admin==2)
                <li class="nav-item">
-                  <a class="nav-link active" href="{{route('akpk.home')}}"><i class="fa fa-home"></i></a>
+                  <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
                </li>
                   @else
                <li class="nav-item">
-                  <a class="nav-link active" href="{{route('dekan.home')}}"><i class="fa fa-home"></i></a>
+                  <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
                </li>
                   @endif
                @elseif(in_array(auth()->user()->is_admin, [1]))
                <li class="nav-item">
-                  <a class="nav-link active" href="{{route('superadmin.home')}}"><i class="fa fa-home"></i></a>
+                  <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
                </li>
                @else
                <li class="nav-item">
@@ -164,13 +164,19 @@
 			   </div>
 			   <div class="dropdown">
 				  <a style="text-decoration: none;" class="dropdown-toggle text-dark" href="#" data-toggle="dropdown">
+               @if (auth()->user()->photo != null)
+					 <img src="{{asset('img/user/'.auth()->user()->photo)}}" height="64px" width="64px"
+						style="border-radius: 50%; margin-left: 30px;">
+
+               @else
 					 <img src="{{asset('img/profil.png')}}" height="64px" width="64px"
 						style="border-radius: 50%; margin-left: 30px;">
+				  @endif
 				  </a>
 				  <div class="dropdown-menu dropdown-menu-sm-right">
 					 <ul class="list-unstyled p-3">
-						<li style="font-size: medium; font-weight: 500;">Albet Dwi Pangestu</li>
-						<li style="font-size: small;">18105110XX</li>
+						<li style="font-size: medium; font-weight: 500;">{{auth()->user()->name}}</li>
+						<li style="font-size: small;">{{auth()->user()->nim}}</li>
 					 </ul>
 					 <div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="{{ route('logout') }}"
@@ -186,21 +192,12 @@
 			   </div>
 			   <!-- Notif -->
 			   <div class="dropdown">
-				  <a style="text-decoration: none;" class=" text-dark" href="#" data-toggle="dropdown">
-					 <img src="{{asset('img/icon/lonceng.png')}}" alt="notif" class="align-self-center ml-4 mb-2">
+				  <a style="text-decoration: none;" class="text-dark" href="#" data-toggle="dropdown">
+
+                  <i class="fa fa-bell-o fa-fw align-self-center ml-4 mb-2" aria-hidden="true"></i>
 
 				  </a>
 				  <div class="dropdown-menu dropdown-menu-sm-right">
-					 <a href="{{route('alur')}}" class="dropdown-item" type="button" style="font-size: small;">
-						<p>
-						   Pesanan nomor XXX telah diverifikasi/selesai <span class="text-right">
-						</p>
-					 </a>
-					 <a href="{{route('alur')}}" class="dropdown-item" type="button" style="font-size: small;">
-						<p>
-						   Pesanan nomor XXX telah diverifikasi/selesai <span class="text-right">
-						</p>
-					 </a>
 					 <a href="{{route('alur')}}" class="dropdown-item" type="button" style="font-size: small;">
 						<p>
 						   Pesanan nomor XXX telah diverifikasi/selesai <span class="text-right">
