@@ -26,6 +26,7 @@
    <!-- Local css -->
    <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
 
+   @livewireStyles
    @yield('css')
 </head>
 
@@ -192,24 +193,8 @@
 			   </div>
 			   <!-- Notif -->
             @if (auth()->user()->is_admin!=1)
-			   <div class="dropdown">
-				  <a style="text-decoration: none;" class="text-dark" href="#" data-toggle="dropdown">
-
-                  <i class="fa fa-bell-o fa-fw align-self-center ml-4 mb-2" aria-hidden="true"></i>
-
-				  </a>
-				  <div class="dropdown-menu dropdown-menu-sm-right">
-               @forelse (auth()->user()->unreadNotifications as $notification)
-					<a href="{{route('alur')}}" class="dropdown-item" type="button" style="font-size: small;">
-						<p> 
-                     {{$notification->data['message']}}
-                     <span class="text-right">
-                  </p>
-               </a>
-               @empty
-                  {{"Empty"}}
-               @endforelse
-				  </div>
+			   <div class="dropdown ml-4">
+               <livewire:notification />
 			   </div>
             @endif
 			</div>
@@ -236,6 +221,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
 </script>
+@livewireScripts
 @yield('script')
 </body>
 
