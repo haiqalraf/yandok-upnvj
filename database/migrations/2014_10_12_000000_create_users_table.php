@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('pekerjaan')->nullable();
             $table->string('photo')->nullable();
             $table->text('address')->nullable();
-            $table->decimal('is_admin')->nullable()->default(0.00);
+            $table->boolean('is_admin')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

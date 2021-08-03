@@ -17,17 +17,9 @@ class PesananController extends Controller
     {
         $legalisir = [];
         if ($request->has('status')) {
-            if (auth()->user()->is_admin==2 && $request->status===1) {
-                $legalisir = Legalisir::where('verifikasi', $request->status)->get();
-            } elseif(auth()->user()->is_admin==3 && in_array($request->status, [1,2])) {
-                $legalisir = Legalisir::where('verifikasi', '',$request->status+1)->get();
-            }
+            $legalisir = Legalisir::where('verifikasi', $request->status)->get();
         } else {
-            if (auth()->user()->is_admin==2) {
-                $legalisir = Legalisir::where('verifikasi', '1')->get();
-            } elseif(auth()->user()->is_admin==3) {
-                $legalisir = Legalisir::where('verifikasi', '2')->get();
-            }
+            $legalisir = Legalisir::where('verifikasi', '1')->get();
         }
 
         return view('admin.legalisir.index', [
@@ -38,9 +30,6 @@ class PesananController extends Controller
 
     public function detailLegalisir(Legalisir $legalisir)
     {
-        if (($legalisir->verifikasi===1 && auth()->user()->is_admin==3) || (in_array($legalisir->verifikasi, [2,3]) && auth()->user()->is_admin==2)) {
-            return abort('404'); 
-        }
         $daftar_pesanan = collect([]);
         if ($legalisir->dok_01 > 0) {
             $daftar_pesanan->put('Legalisir Ijazah', $legalisir->dok_01);
@@ -92,59 +81,44 @@ class PesananController extends Controller
         ]);
 
         if ($request->status === '3') {
-            if (auth()->user()->is_admin==3) {
-                $request->validate([
-                    'upload' => 'required|file|mimes:zip,rar'
-                ]);
-    
-                if ($request->hasFile('upload')) {
-                    $file = $request->file("upload");
-    
-                    $extension = $file->getClientOriginalExtension();
-                    $username = User::where('nim', $legalisir->nim_pemesan)->first()->name;
-                    $date = now("Asia/Jakarta")->format('YmdHis');
-    
-                    $newName = $date . '_' . 'legalisir' . '_' . $username . '.' . $extension;
-    
-                    if (!Storage::disk('local')->exists('legalisir/selesai/' . $newName)) {
-                        Storage::disk('local')->put('legalisir/selesai/' . $newName, $file->get());
-                    }
-    
-                    $legalisir->final_dokumen = $newName;
-                } else {
-                    return back()->with("message", "File Not Found");
+            $request->validate([
+                'upload' => 'required|file|mimes:zip,rar'
+            ]);
+
+            if ($request->hasFile('upload')) {
+                $file = $request->file("upload");
+
+                $extension = $file->getClientOriginalExtension();
+                $username = User::where('nim', $legalisir->nim_pemesan)->first()->name;
+                $date = now("Asia/Jakarta")->format('YmdHis');
+
+                $newName = $date . '_' . 'legalisir' . '_' . $username . '.' . $extension;
+
+                if (!Storage::disk('local')->exists('legalisir/selesai/' . $newName)) {
+                    Storage::disk('local')->put('legalisir/selesai/' . $newName, $file->get());
                 }
+
+                $legalisir->final_dokumen = $newName;
             } else {
-                return back()->with("message", "You Don't Have Permission");
+                return back()->with("message", "File Not Found");
             }
         }
-        
+
         $legalisir->verifikasi = $request->status;
         $legalisir->save();
-        if (auth()->user()->is_admin==2) {
-            return redirect()->route('akpk.legalisir', ['status' => $request->status]);
-        } elseif (auth()->user()->is_admin==3) {
-            return redirect()->route('dekan.legalisir', ['status' => $request->status-1]);
-        }
+
+        return redirect()->route('admin.legalisir', ['status' => $request->status]);
     }
 
     public function surat(Request $request)
     {
         $surat = [];
         if ($request->has('status')) {
-            if (auth()->user()->is_admin==2 && $request->status===1) {
-                $surat = Suket::where('verifikasi', $request->status)->get();
-            } elseif(auth()->user()->is_admin==3 && in_array($request->status, [1,2])) {
-                $surat = Suket::where('verifikasi', '',$request->status+1)->get();
-            }
+            $surat = Suket::where('verifikasi', $request->status)->get();
         } else {
-            if (auth()->user()->is_admin==2) {
-                $surat = Suket::where('verifikasi', '1')->get();
-            } elseif(auth()->user()->is_admin==3) {
-                $surat = Suket::where('verifikasi', '2')->get();
-            }
+            $surat = Suket::where('verifikasi', '1')->get();
         }
-        
+
         return view('admin.surat.index', [
             'surat' => $surat,
             'status' => $request->status
@@ -153,9 +127,6 @@ class PesananController extends Controller
 
     public function detailSurat(Suket $surat)
     {
-        if (($surat->verifikasi===1 && auth()->user()->is_admin==3) || (in_array($surat->verifikasi, [2,3]) && auth()->user()->is_admin==2)) {
-            return abort('404'); 
-        }
         $daftar_pesanan = collect([]);
         $daftar_pesanan->put($surat->dokumen_dipesan, 1);
 
@@ -172,71 +143,51 @@ class PesananController extends Controller
         ]);
 
         if ($request->status === '3') {
-            if (auth()->user()->is_admin==3) {
-                $request->validate([
-                    'upload' => 'required|file|mimes:zip,rar'
-                ]);
-    
-                if ($request->hasFile('upload')) {
-                    $file = $request->file("upload");
-    
-                    $extension = $file->getClientOriginalExtension();
-                    $username = User::where('nim', $surat->nim_pemesan)->first()->name;
-                    $date = now("Asia/Jakarta")->format('YmdHis');
-    
-                    $newName = $date . '_' . Str::slug($surat->dokumen_dipesan, '') . '_' . $username . '.' . $extension;
-    
-                    if (!Storage::disk('local')->exists('suket/selesai/' . $newName)) {
-                        Storage::disk('local')->put('suket/selesai/' . $newName, $file->get());
-                    }
-    
-                    $surat->final_dokumen = $newName;
-                } else {
-                    return back()->with("message", "File Not Found");
+            $request->validate([
+                'upload' => 'required|file|mimes:zip,rar'
+            ]);
+
+            if ($request->hasFile('upload')) {
+                $file = $request->file("upload");
+
+                $extension = $file->getClientOriginalExtension();
+                $username = User::where('nim', $surat->nim_pemesan)->first()->name;
+                $date = now("Asia/Jakarta")->format('YmdHis');
+
+                $newName = $date . '_' . Str::slug($surat->dokumen_dipesan, '') . '_' . $username . '.' . $extension;
+
+                if (!Storage::disk('local')->exists('suket/selesai/' . $newName)) {
+                    Storage::disk('local')->put('suket/selesai/' . $newName, $file->get());
                 }
+
+                $surat->final_dokumen = $newName;
             } else {
-                return back()->with("message", "You Don't Have Permission");
+                return back()->with("message", "File Not Found");
             }
         }
 
         $surat->verifikasi = $request->status;
         $surat->save();
 
-        if (auth()->user()->is_admin==2) {
-            return redirect()->route('akpk.surat', ['status' => $request->status]);
-        } elseif (auth()->user()->is_admin==3) {
-            return redirect()->route('dekan.surat', ['status' => $request->status]);
-        }
+        return redirect()->route('admin.surat', ['status' => $request->status]);
     }
 
     public function lainnya(Request $request)
     {
-        $lainnya = [];
+        $lainya = [];
         if ($request->has('status')) {
-            if (auth()->user()->is_admin==2 && $request->status===1) {
-                $lainnya = Lainya::where('verifikasi', $request->status)->get();
-            } elseif(auth()->user()->is_admin==3 && in_array($request->status, ['1','2'])) {
-                $lainnya = Lainya::where('verifikasi', '',$request->status+1)->get();
-            }
+            $lainya = Lainya::where('verifikasi', $request->status)->get();
         } else {
-            if (auth()->user()->is_admin==2) {
-                $lainnya = Lainya::where('verifikasi', '1')->get();
-            } elseif(auth()->user()->is_admin==3) {
-                $lainnya = Lainya::where('verifikasi', '2')->get();
-            }
+            $lainya = Lainya::where('verifikasi', '1')->get();
         }
-        
         return view('admin.lainnya.index', [
-            'lainnya' => $lainnya,
+            'lainnya' => $lainya,
             'status' => $request->status
         ]);
     }
 
     public function detailLainnya(Lainya $lainnya)
     {
-        if (($lainnya->verifikasi===1 && auth()->user()->is_admin==3) || (in_array($lainnya->verifikasi, [2,3]) && auth()->user()->is_admin==2)) {
-            return abort('404'); 
-        }
         $daftar_pesanan = collect([]);
         $daftar_pesanan->put($lainnya->dokumen_dipesan, 1);
         return view('admin.lainnya.detail', [
@@ -252,41 +203,33 @@ class PesananController extends Controller
         ]);
 
         if ($request->status === '3') {
-            if (auth()->user()->is_admin==3) {
-                $request->validate([
-                    'upload' => 'required|file|mimes:zip,rar'
-                ]);
-                if ($request->hasFile('upload')) {
-                    $file = $request->file("upload");
-    
-                    $extension = $file->getClientOriginalExtension();
-                    $username = User::where('nim', $lainnya->nim_pemesan)->first()->name;
-                    $date = now("Asia/Jakarta")->format('YmdHis');
-    
-                    $newName = $date . '_' . Str::slug($lainnya->dokumen_dipesan, '') . '_' . $username . '.' . $extension;
-    
-                    if (!Storage::disk('local')->exists('lainnya/selesai/' . $newName)) {
-                        Storage::disk('local')->put('lainnya/selesai/' . $newName, $file->get());
-                    }
-    
-                    $lainnya->final_dokumen = $newName;
-                } else {
-                    return back()->with("message", "File Not Found");
-                }
-            } else {
-                return back()->with("message", "You Don't Have Permission");
-            }
+            $request->validate([
+                'upload' => 'required|file|mimes:zip,rar'
+            ]);
 
+            if ($request->hasFile('upload')) {
+                $file = $request->file("upload");
+
+                $extension = $file->getClientOriginalExtension();
+                $username = User::where('nim', $lainnya->nim_pemesan)->first()->name;
+                $date = now("Asia/Jakarta")->format('YmdHis');
+
+                $newName = $date . '_' . Str::slug($lainnya->dokumen_dipesan, '') . '_' . $username . '.' . $extension;
+
+                if (!Storage::disk('local')->exists('lainnya/selesai/' . $newName)) {
+                    Storage::disk('local')->put('lainnya/selesai/' . $newName, $file->get());
+                }
+
+                $lainnya->final_dokumen = $newName;
+            } else {
+                return back()->with("message", "File Not Found");
+            }
         }
 
         $lainnya->verifikasi = $request->status;
         $lainnya->save();
 
-        if (auth()->user()->is_admin==2) {
-            return redirect()->route('akpk.lainnya', ['status' => $request->status]);
-        } elseif (auth()->user()->is_admin==3) {
-            return redirect()->route('dekan.lainnya', ['status' => $request->status]);
-        }
+        return redirect()->route('admin.lainnya', ['status' => $request->status]);
     }
 
     public function fileDownload(Request $request)

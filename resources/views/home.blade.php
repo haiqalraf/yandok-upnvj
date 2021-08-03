@@ -105,6 +105,29 @@
    </div>
 
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="tracestudy" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-warning"></i> Pemberitahuan
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            Agar dapat melakukan pemesanan pada layanan YANDOK UPNVJ, anda harus mengisi <span
+               class="font-weight-bold">Trace Study</span> terlebih dahulu
+         </div>
+         <div class="modal-footer">
+            <a href="{{route('tracestudy')}}" class="btn btn-success">Isi sekarang</a>
+         </div>
+      </div>
+   </div>
+</div>
 @endsection
 @section('script')
 <script>
@@ -152,4 +175,11 @@ $(document).ready(function () {
    });
 });
 </script>
+
+@if (!auth()->user()->tracerstudy)
+<script>
+   $('#tracestudy').modal('show');
+</script>
+@endif
+
 @endsection
