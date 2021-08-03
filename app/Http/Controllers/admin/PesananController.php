@@ -20,7 +20,7 @@ class PesananController extends Controller
             if (auth()->user()->is_admin==2 && $request->status===1) {
                 $legalisir = Legalisir::where('verifikasi', $request->status)->get();
             } elseif(auth()->user()->is_admin==3 && in_array($request->status, [1,2])) {
-                $legalisir = Legalisir::where('verifikasi', '',$request->status+1)->get();
+                $legalisir = Legalisir::where('verifikasi', $request->status+1)->get();
             }
         } else {
             if (auth()->user()->is_admin==2) {
@@ -135,7 +135,7 @@ class PesananController extends Controller
             if (auth()->user()->is_admin==2 && $request->status===1) {
                 $surat = Suket::where('verifikasi', $request->status)->get();
             } elseif(auth()->user()->is_admin==3 && in_array($request->status, [1,2])) {
-                $surat = Suket::where('verifikasi', '',$request->status+1)->get();
+                $surat = Suket::where('verifikasi', $request->status+1)->get();
             }
         } else {
             if (auth()->user()->is_admin==2) {
@@ -216,7 +216,7 @@ class PesananController extends Controller
             if (auth()->user()->is_admin==2 && $request->status===1) {
                 $lainnya = Lainya::where('verifikasi', $request->status)->get();
             } elseif(auth()->user()->is_admin==3 && in_array($request->status, ['1','2'])) {
-                $lainnya = Lainya::where('verifikasi', '',$request->status+1)->get();
+                $lainnya = Lainya::where('verifikasi', $request->status+1)->get();
             }
         } else {
             if (auth()->user()->is_admin==2) {

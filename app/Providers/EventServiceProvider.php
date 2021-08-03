@@ -2,10 +2,16 @@
 
 namespace App\Providers;
 
+use App\Models\Lainya;
+use App\Models\Suket;
+use App\Models\Legalisir;
+use App\Observers\SuratObserver;
+use App\Observers\LainnyaObserver;
+use App\Observers\LegalisirObserver;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -27,6 +33,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Legalisir::observe(LegalisirObserver::class);
+        Suket::observe(SuratObserver::class);
+        Lainya::observe(LainnyaObserver::class);
     }
 }

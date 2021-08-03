@@ -15,7 +15,7 @@
         @endif
         @if (auth()->user()->is_admin==3)
         <li class="nav-item">
-            <a class="nav-link @if ($status==='1'||$status===null)){{'active'}}@endif" href="{{ route('dekan.lainnya', ['status' => '1'])}}">Sedang Diproses</a>
+            <a class="nav-link @if ($status==='1'||$status===null){{'active'}}@endif" href="{{ route('dekan.lainnya', ['status' => '1'])}}">Sedang Diproses</a>
         </li>
         <li class="nav-item">
             <a class="nav-link @if ($status==='2' ){{'active'}}@endif" href="{{ route('dekan.lainnya', ['status' => '2'])}}">Sudah Diproses</a>

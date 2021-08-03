@@ -7,7 +7,7 @@
         'lainnya' => $lainnya, 
         'status' =>  2
         ])}}" method="post">
-    @elseif ($lainnya->verifikasi===2 auth()->user()->is_admin==3)
+    @elseif ($lainnya->verifikasi===2 && auth()->user()->is_admin==3)
     <form action="{{route('dekan.lainnya.detail', [ 
         'lainnya' => $lainnya, 
         'status' =>  3
@@ -48,19 +48,19 @@
                             <td class="text-center">{{$item}}</td>
 
                             @if ($loop->first)
-                                @if ($lainnya->verifikasi===1 auth()->user()->is_admin==2)
+                                @if ($lainnya->verifikasi===1 && auth()->user()->is_admin==2)
                                     <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
                                         <a href="{{route('akpk.download', [ 
                                             'filePath' => 'lainnya/'.$lainnya->file
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     </td>
-                                @elseif ($lainnya->verifikasi===2 auth()->user()->is_admin==3)
+                                @elseif ($lainnya->verifikasi===2 && auth()->user()->is_admin==3)
                                     <td class="align-middle text-center">
                                         <label for="Upload" class="btn-light p-2 rounded" id="upload" name="upload">
                                             <input type="file" name="upload">
                                         </label>
                                     </td>
-                                @elseif ($lainnya->verifikasi===3 auth()->user()->is_admin==3)
+                                @elseif ($lainnya->verifikasi===3 && auth()->user()->is_admin==3)
                                     <td class="align-middle text-center">
                                         <a href="{{route('dekan.download', [ 
                                             'filePath' => 'lainnya/selesai/'.$lainnya->final_dokumen

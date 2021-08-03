@@ -198,11 +198,16 @@
 
 				  </a>
 				  <div class="dropdown-menu dropdown-menu-sm-right">
-					 <a href="{{route('alur')}}" class="dropdown-item" type="button" style="font-size: small;">
-						<p>
-						   Pesanan nomor XXX telah diverifikasi/selesai <span class="text-right">
-						</p>
-					 </a>
+               @forelse (auth()->user()->unreadNotifications as $notification)
+					<a href="{{route('alur')}}" class="dropdown-item" type="button" style="font-size: small;">
+						<p> 
+                     {{$notification->data['message']}}
+                     <span class="text-right">
+                  </p>
+               </a>
+               @empty
+                  {{"Empty"}}
+               @endforelse
 				  </div>
 			   </div>
 			</div>
