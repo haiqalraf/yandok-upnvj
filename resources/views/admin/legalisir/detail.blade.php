@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-@if ($legalisir->verifikasi===1)
-<form action="{{route('admin.legalisir.detail', [ 
+@if ($legalisir->verifikasi===1 && auth()->user()->is_admin==2)
+<form action="{{route('akpk.legalisir.detail', [ 
     'legalisir' => $legalisir, 
     'status' =>  2
     ])}}" method="post">
-@elseif ($legalisir->verifikasi===2)
-<form action="{{route('admin.legalisir.detail', [ 
+@elseif ($legalisir->verifikasi===2 && auth()->user()->is_admin==3)
+<form action="{{route('dekan.legalisir.detail', [ 
     'legalisir' => $legalisir, 
     'status' =>  3
     ])}}" method="post" enctype="multipart/form-data">
@@ -47,7 +47,7 @@
                             <td class="text-center">{{$item}}</td>
 
                             @if ($loop->first)
-                                @if ($legalisir->verifikasi===1)
+                                @if ($legalisir->verifikasi===1 && auth()->user()->is_admin==2)
                                     <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
                                         <div class="d-flex justify-content-center">
                                             <ol type="number" class="text-left" style="font-size: 13px;">
@@ -58,19 +58,19 @@
                                             </ol>
                                         </div>
                                         <br>
-                                        <a href="{{route('admin.download', [ 
+                                        <a href="{{route('akpk.download', [ 
                                             'filePath' => 'legalisir/'.$legalisir->file
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     </td>
-                                @elseif ($legalisir->verifikasi===2)
+                                @elseif ($legalisir->verifikasi===2 && auth()->user()->is_admin==3)
                                     <td class="align-middle text-center">
                                         <label for="Upload" class="btn-light p-2 rounded" id="upload" name="upload">
                                             <input type="file" name="upload">
                                         </label>
                                     </td>
-                                @elseif ($legalisir->verifikasi===3)
+                                @elseif ($legalisir->verifikasi===3 && auth()->user()->is_admin==3)
                                     <td class="align-middle text-center">
-                                        <a href="{{route('admin.download', [ 
+                                        <a href="{{route('dekan.download', [ 
                                             'filePath' => 'legalisir/selesai/'.$legalisir->final_dokumen
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     </td>

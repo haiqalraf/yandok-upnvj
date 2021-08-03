@@ -2,27 +2,27 @@
 
 @section('content')
 
-@if ($surat->verifikasi===1 && auth()->user()->is_admin==2)
-    <form action="{{route('akpk.surat.detail', [ 
-        'surat' => $surat, 
+@if ($lainnya->verifikasi===1)
+    <form action="{{route('akpk.lainnya.detail', [ 
+        'lainnya' => $lainnya, 
         'status' =>  2
         ])}}" method="post">
-    @elseif ($surat->verifikasi===2 && auth()->user()->is_admin==3)
-    <form action="{{route('dekan.surat.detail', [ 
-        'surat' => $surat, 
+    @elseif ($lainnya->verifikasi===2)
+    <form action="{{route('akpk.lainnya.detail', [ 
+        'lainnya' => $lainnya, 
         'status' =>  3
         ])}}" method="post" enctype="multipart/form-data">
     @endif
     @csrf
     @method("PUT")
     <div class="container mt-3 mb-5">
-        <h4 class="font-weight-bolder mb-5">Pemesanan Surat <span style="border-left: 2px solid #000;"></span> <span
+        <h4 class="font-weight-bolder mb-5">Pemesanan Lainnya <span style="border-left: 2px solid #000;"></span> <span
                 class="font-weight-lighter pl-2 ">
-                @if ($surat->verifikasi===1)
+                @if ($lainnya->verifikasi===1)
                     Belum Diproses
-                @elseif ($surat->verifikasi===2)
+                @elseif ($lainnya->verifikasi===2)
                     Sedang Diproses
-                @elseif ($surat->verifikasi===3)
+                @elseif ($lainnya->verifikasi===3)
                     Sudah Diproses
                 @endif
             </span>
@@ -42,51 +42,28 @@
                         @foreach ($daftar_pesanan as $key => $item)
                         <tr>
                             @if ($loop->first)
-                                <td rowspan="3" class="text-center align-middle">{{$surat->id}}</td>
+                                <td rowspan="3" class="text-center align-middle">{{$lainnya->id}}</td>
                             @endif
                             <td>{{$key}}</td>
                             <td class="text-center">{{$item}}</td>
 
                             @if ($loop->first)
-                                @if ($surat->verifikasi===1 && auth()->user()->is_admin==2)
+                                @if ($lainnya->verifikasi===1)
                                     <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
-                                        <div class="d-flex justify-content-center">
-                                            <ol type="number" class="text-left" style="font-size: 13px;">
-                                                @if (strpos($key, 'Pengganti'))
-                                                <li>Scan FC Transkrip</li>
-                                                <li>Surat permohonan yang ditujukan ke dekan</li>
-                                                <li>Akte kelahiran / Akte Notaris</li>
-                                                <li>Foto 3x4 hitam putih</li>
-                                                @elseif (strpos($key, 'Perubahan')||strpos($key, 'Ralat'))
-                                                <li>Scan FC SKPI</li>
-                                                <li>Surat permohonan yang ditujukan ke dekan</li>
-                                                <li>Surat Keterangan Hilang Dari Polisi</li>
-                                                <li>Foto 3x4 hitam putih</li>
-                                                @elseif (strpos($key, 'Alumni'))
-                                                <li>Scan Ijazah dan Transkrip Nilai</li>
-                                                @endif
-                                                {{-- <li>Scan FC Transkrip</li>
-                                                <li>Surat permohonan yang ditujukan ke dekan</li>
-                                                <li>Akte kelahiran / Akte Notaris</li>
-                                                <li>Foto 3x4 hitam putih</li> --}}
-                                            </ol>
-                                        </div>
-                                        <br>
-            
                                         <a href="{{route('akpk.download', [ 
-                                            'filePath' => 'suket/'.$surat->file
+                                            'filePath' => 'lainnya/'.$lainnya->file
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     </td>
-                                @elseif ($surat->verifikasi===2 && auth()->user()->is_admin==3)
+                                @elseif ($lainnya->verifikasi===2)
                                     <td class="align-middle text-center">
                                         <label for="Upload" class="btn-light p-2 rounded" id="upload" name="upload">
                                             <input type="file" name="upload">
                                         </label>
                                     </td>
-                                @elseif ($surat->verifikasi===3 && auth()->user()->is_admin==3)
+                                @elseif ($lainnya->verifikasi===3)
                                     <td class="align-middle text-center">
-                                        <a href="{{route('dekan.download', [ 
-                                            'filePath' => 'suket/selesai/'.$surat->final_dokumen
+                                        <a href="{{route('akpk.download', [ 
+                                            'filePath' => 'lainnya/selesai/'.$lainnya->final_dokumen
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     </td>
                                 @endif
@@ -104,14 +81,14 @@
                 <h6 class="text-left mt-2">Informasi Tambahan</h6>
                 <hr style="background-color: #06750F;">
                 <ul class="text-justify" style="font-size: 13px;">
-                    <li>Kebutuhan : {{$surat->kebutuhan}}</li>
-                    <li>Permintaan Khusus : {{$surat->keterangan}}</li>
+                    <li>Kebutuhan : {{$lainnya->kebutuhan}}</li>
+                    <li>Permintaan Khusus : {{$lainnya->keterangan}}</li>
                 </ul>
             </div>
         </div> --}}
 
         <hr>
-        @if ($surat->verifikasi!==3)
+        @if ($lainnya->verifikasi!==3)
             <button type="submit" class="btn btn-sm btn-success pull-right">
                 Proses
             </button>
@@ -119,7 +96,7 @@
             
             
     </div>
-@if ($surat->verifikasi!==3)
+@if ($lainnya->verifikasi!==3)
 </form>
 @endif
 <br/>

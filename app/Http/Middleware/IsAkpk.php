@@ -1,10 +1,11 @@
 <?php
-  
+
 namespace App\Http\Middleware;
-  
+
 use Closure;
-   
-class IsAdmin
+use Illuminate\Http\Request;
+
+class IsAkpk
 {
     /**
      * Handle an incoming request.
@@ -13,10 +14,10 @@ class IsAdmin
      * @param  \Closure  $next
      * @return mixed
      */
-    #middleware for superuser
+    #middleware for akpk, admin code = 2
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->is_admin == 1){
+        if(auth()->user()->is_admin == 2){
             return $next($request);
         }
    

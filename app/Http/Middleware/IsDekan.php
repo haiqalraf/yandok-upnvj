@@ -1,10 +1,11 @@
 <?php
-  
+
 namespace App\Http\Middleware;
-  
+
 use Closure;
-   
-class IsAdmin
+use Illuminate\Http\Request;
+
+class IsDekan
 {
     /**
      * Handle an incoming request.
@@ -13,13 +14,13 @@ class IsAdmin
      * @param  \Closure  $next
      * @return mixed
      */
-    #middleware for superuser
+    #middleware for dekan admin code = 3
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->is_admin == 1){
+        if(auth()->user()->is_admin == 3){
             return $next($request);
         }
    
-        return redirect('/')->with('error',"You don't have admin access.");
+        return redirect(‘home’)->with(‘error’,"You don't have admin access.");
     }
 }
