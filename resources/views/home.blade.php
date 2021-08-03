@@ -49,7 +49,7 @@
             <tr>
                <td>Email</td>
                <td>
-                  <input type="email" name="email" class="form-control form-control-sm" value="{{ $user->email }}" placeholder="Email lengkap anda">
+                  <input type="email" name="email" class="form-control form-control-sm" value="{{ $user->email }}" placeholder="Email lengkap anda" required>
                </td>
             </tr>
 
@@ -57,7 +57,7 @@
                <td>Password</td>
                <td>
                   <input type="password" name="password" class="form-control form-control-sm" placeholder="Password"
-                     value="">
+                     value="" required>
                   <p class="text-danger text-right" style="font-size: 13px;">Ketik Minimal 6 karakter untuk mengganti
                      ke sandi baru.</p>
                </td>
@@ -67,7 +67,7 @@
                <td>Telepon Ponsel</td>
                <td id="handphone">
                   <input type="text" name="handphone" class="form-control form-control-sm" value="{{ $user->no_hp }}"
-                     placeholder="No. Telepon Ponsel Anda">
+                     placeholder="No. Telepon Ponsel Anda" pattern="^(^\+62\s?|^0)(\d{3,4}-?){2}\d{3,4}$" required>
                      
                   <div class="invalid-feedback">Please fill out this field.</div>
                </td>
@@ -77,7 +77,7 @@
                <td>Telepon Rumah</td>
                <td id="telepon">
                   <input type="text" name="telepon" class="form-control form-control-sm" value="{{ $user->no_rumah }}"
-                     placeholder="No. Telepon Rumah Anda">
+                     placeholder="No. Telepon Rumah Anda" pattern="^(^\+62\s?|^0)(\d{3,4}-?){2}\d{3,4}$" required>
                      
                   <div class="invalid-feedback">Please fill out this field.</div>
                </td>
@@ -86,7 +86,7 @@
             <tr>
                <td>Ganti Foto</td>
                <td id="foto">
-                  <input type="file" name="foto" class="btn-sm" placeholder="Foto anda">
+                  <input type="file" name="foto" class="btn-sm" placeholder="Foto anda" required>
                      
                   <div class="invalid-feedback">Please fill out this field.</div>
                </td>
@@ -96,7 +96,7 @@
             <tr>
                <td>Pekerjaan</td>
                <td>
-                  <input type="text" name="pekerjaan" class="form-control form-control-sm" readonly value="{{ $user->pekerjaan }}">
+                  <input type="text" name="pekerjaan" class="form-control form-control-sm" readonly value="{{ $user->pekerjaan }}" required>
                </td>
             </tr>
             @endif
@@ -104,7 +104,7 @@
             <tr>
                <td>Alamat</td>
                <td id="alamat">
-                  <textarea name="alamat" class="form-control form-control-sm" placeholder="Alamat" style="height: 250px;">{{ $user->address }}</textarea>
+                  <textarea name="alamat" class="form-control form-control-sm" placeholder="Alamat" style="height: 250px;" required>{{ $user->address }}</textarea>
                      
                   <div class="invalid-feedback">Please fill out this field.</div>
                </td>
