@@ -8,19 +8,15 @@
 @section('content')
 <div class="container p-3 bg-white shadow rounded">
     <ul class="nav nav-tabs nav-fill justify-content-center">
-       @if (auth()->user()->is_admin==2)
        <li class="nav-item">
-          <a class="nav-link @if ($status==='1'||$status===null){{'active'}}@endif" href="{{ route('akpk.surat', ['status' => '1'])}}">Belum Diproses</a>
-       </li>
-       @endif
-       @if (auth()->user()->is_admin==3)
-       <li class="nav-item">
-          <a class="nav-link @if ($status==='1'||$status===null){{'active'}}@endif" href="{{ route('dekan.surat', ['status' => '1'])}}">Sedang Diproses</a>
+          <a class="nav-link @if ($status==='1'||$status===null){{'active'}}@endif" href="{{ route('admin.surat', ['status' => '1'])}}">Belum Diproses</a>
        </li>
        <li class="nav-item">
-          <a class="nav-link @if ($status==='2' ){{'active'}}@endif" href="{{ route('dekan.surat', ['status' => '2'])}}">Sudah Diproses</a>
+          <a class="nav-link @if ($status==='2' ){{'active'}}@endif" href="{{ route('admin.surat', ['status' => '2'])}}">Sedang Diproses</a>
        </li>
-       @endif
+       <li class="nav-item">
+          <a class="nav-link @if ($status==='3' ){{'active'}}@endif" href="{{ route('admin.surat', ['status' => '3'])}}">Sudah Diproses</a>
+       </li>
     </ul>
 
     <div class="tab-content">
@@ -47,11 +43,7 @@
                                 {{auth()->user()->where('nim', $item->nim_pemesan)->first()->name}}
                             </td>
                             <td>
-                              @if (auth()->user()->is_admin==2)
-                              <a href="{{route('akpk.surat.detail', [ 'surat' => $item ])}}" title="Detail" class="btn btn-sm btn-success">Detail</a>
-                              @elseif(auth()->user()->is_admin==3)
-                              <a href="{{route('dekan.surat.detail', [ 'surat' => $item ])}}" title="Detail" class="btn btn-sm btn-success">Detail</a>
-                              @endif
+                               <a href="{{route('admin.surat.detail', [ 'surat' => $item ])}}" title="Detail" class="btn btn-sm btn-success">Detail</a>
                             </td>
                          </tr>
                           @endforeach

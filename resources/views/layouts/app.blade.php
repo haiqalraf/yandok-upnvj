@@ -34,22 +34,11 @@
    <div class="container-fluid mb-5 shadow bg-white">
 	  <div class="col">
 		 <nav class="navbar navbar-expand-md bg-white">
-            @if (in_array(auth()->user()->is_admin, [2,3]))
-               @if (auth()->user()->is_admin==2)
-            <a id="link" class="navbar-brand" href="{{route('akpk.home')}}">
-               <img id="logoku" src="{{asset('img/logoUPNAdmin.png')}}" alt="logo" height="63" width="100%"
+			<a id="link" class="navbar-brand" href="{{route('home')}}">
+            @if (auth()->user()->is_admin===1)
+            <img id="logoku" src="{{asset('img/logoUPNAdmin.png')}}" alt="logo" height="63" width="100%"
                class="d-inline-block align-top">
-               @else
-            <a id="link" class="navbar-brand" href="{{route('dekan.home')}}">
-               <img id="logoku" src="{{asset('img/logoUPNAdmin.png')}}" alt="logo" height="63" width="100%"
-               class="d-inline-block align-top">
-               @endif
-            @elseif(in_array(auth()->user()->is_admin, [1]))
-         <a id="link" class="navbar-brand" href="{{route('superadmin.home')}}">
-            <img id="logoku" src="{{asset('img/logoUPNSuperAdmin.png')}}" alt="logo" height="63" width="100%"
-            class="d-inline-block align-top">
             @else
-         <a id="link" class="navbar-brand" href="{{route('home')}}">
             <img id="logoku" src="{{asset('img/logoUPN.png')}}" alt="logo" height="63" width="243"
 				  class="d-inline-block align-top">
             @endif
@@ -57,26 +46,11 @@
 			</a>
 			<div class="collapse navbar-collapse">
 			   <ul class="navbar-nav ml-auto">
-               @if (in_array(auth()->user()->is_admin, [2,3]))
-                  @if (auth()->user()->is_admin==2)
-               <li class="nav-item">
-                  <a class="nav-link active" href="{{route('akpk.home')}}"><i class="fa fa-home"></i></a>
-               </li>
-                  @else
-               <li class="nav-item">
-                  <a class="nav-link active" href="{{route('dekan.home')}}"><i class="fa fa-home"></i></a>
-               </li>
-                  @endif
-               @elseif(in_array(auth()->user()->is_admin, [1]))
-               <li class="nav-item">
-                  <a class="nav-link active" href="{{route('superadmin.home')}}"><i class="fa fa-home"></i></a>
-               </li>
-               @else
-               <li class="nav-item">
-                  <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
-               </li>
-               @endif
-				  @if (in_array(auth()->user()->is_admin, [2,3]))
+				  <li class="nav-item">
+					 <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
+				  </li>
+              
+				  @if (auth()->user()->is_admin===1)
               <li class="nav-item ml-2">
                <div class="dropdown ml-2">
                    <a class="nav-link dropdown-toggle active" type="button" id="dropdownMenu2"
@@ -84,15 +58,15 @@
                        Daftar Pesanan
                    </a>
                    <div class="dropdown-menu dropdown-menu-sm-right " aria-labelledby="dropdownMenu2">
-                       <a href="@if(auth()->user()->is_admin==2){{route('akpk.legalisir')}}@elseif(auth()->user()->is_admin==3){{route('dekan.legalisir')}}@endif" class="dropdown-item on" type="button"
+                       <a href="{{route('admin.legalisir')}}" class="dropdown-item on" type="button"
                            style="font-size: small; font-weight: 600;">
                            Legalisir
                        </a>
-                       <a href="@if(auth()->user()->is_admin==2){{route('akpk.surat')}}@elseif(auth()->user()->is_admin==3){{route('dekan.surat')}}@endif" class="dropdown-item" type="button"
+                       <a href="{{route('admin.surat')}}" class="dropdown-item" type="button"
                            style="font-size: small; font-weight: 600;">
                            Surat Keterangan
                        </a>
-                       <a href="@if(auth()->user()->is_admin==2){{route('akpk.lainnya')}}@elseif(auth()->user()->is_admin==3){{route('dekan.lainnya')}}@endif" class="dropdown-item" type="button"
+                       <a href="{{route('admin.lainnya')}}" class="dropdown-item" type="button"
                            style="font-size: small; font-weight: 600;">
                            Lainnya
                        </a>
@@ -100,26 +74,6 @@
 
                </div>
            </li>
-              @elseif(in_array(auth()->user()->is_admin, [1]))
-            <li class="nav-item ml-2">
-               <div class="dropdown ml-2">
-                  <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-                     aria-haspopup="true" aria-expanded="false">
-                     Pengolahan Akun
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-sm-right" aria-labelledby="dropdownMenu2">
-                     <a href="{{route('superadmin.akpk')}}" class="dropdown-item" type="button"
-                        style="font-size: small; font-weight: 600;">
-                        AKPK
-                     </a>
-                     <a href="{{route('superadmin.dekan')}}" class="dropdown-item" type="button"
-                        style="font-size: small; font-weight: 600;">
-                        Dekanat
-                     </a>
-                  </div>
-
-               </div>
-            </li>
 				  @else
             <li class="nav-item ml-2">
                <div class="dropdown ml-2">
