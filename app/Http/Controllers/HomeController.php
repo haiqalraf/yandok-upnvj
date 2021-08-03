@@ -33,7 +33,7 @@ class HomeController extends Controller
      */
     public function adminHome()
     {
-        return view('admin.home');
+        return view('superadmin.home');
     }
 
     public function akpkHome()

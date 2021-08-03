@@ -1,13 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
-use App\Http\Controllers\admin\PesananController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SuketController;
 use App\Http\Controllers\LainyaController;
 use App\Http\Controllers\LegalisirController;
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\admin\PesananController;
+use App\Http\Controllers\superadmin\AkpkController;
+use App\Http\Controllers\superadmin\DekanController;
+
 /*
 /*
 |--------------------------------------------------------------------------
@@ -39,8 +42,6 @@ Route::post('apiupn',[ApiController::class,'apiUpn'])->name('apiupn');
 Route::post('storeData',[ApiController::class,'storeData'])->name('storeData');
 Route::post('verifikasi',[ApiController::class,'verifikasi'])->name('verifikasi');
 #
-Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
-#
 
 #akpk
 Route::get('akpk/home', [HomeController::class, 'adminHome'])->name('akpk.home')->middleware('is_akpk');
@@ -71,6 +72,19 @@ Route::put('dekan/surat/{surat:id}', [PesananController::class, 'updateSurat'])-
 Route::get('dekan/lainnya', [PesananController::class, 'lainnya'])->name('dekan.lainnya')->middleware('is_dekan');
 Route::get('dekan/lainnya/{lainnya:id}', [PesananController::class, 'detailLainnya'])->name('dekan.lainnya.detail')->middleware('is_dekan');
 Route::put('dekan/lainnya/{lainnya:id}', [PesananController::class, 'updateLainnya'])->name('dekan.lainnya.detail')->middleware('is_dekan');
+
+#superadmin
+Route::prefix('superadmin')->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('superadmin.home');
+
+    Route::get('/akpk', [AkpkController::class, 'index'])->name('superadmin.akpk');
+    Route::post('/akpk', [AkpkController::class, 'store']);
+    Route::get('/akpk/create', [AkpkController::class, 'create'])->name('superadmin.akpk.create');
+
+    Route::get('/dekan', [DekanController::class, 'index'])->name('superadmin.dekan');
+    Route::post('/dekan', [DekanController::class, 'store']);
+    Route::get('/dekan/create', [DekanController::class, 'create'])->name('superadmin.dekan.create');
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/riwayat', [App\Http\Controllers\RiwayatController::class, 'index'])->name('riwayat');
