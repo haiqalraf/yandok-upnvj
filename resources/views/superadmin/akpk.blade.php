@@ -25,7 +25,7 @@
                         @if(Cache::has('user-is-online-' . $item->id))
                             <span><i class="fa fa-circle" style="color: #06750F;"></i> Online
                         @else
-                            <span><i class="fa fa-circle" style="color: #06750F;"></i> Offline
+                            <span><i class="fa fa-circle" style="color: red;"></i> Offline
                         @endif
                     </td>
                 </tr>

@@ -191,6 +191,7 @@
 				  </div>
 			   </div>
 			   <!-- Notif -->
+            @if (auth()->user()->is_admin!=1)
 			   <div class="dropdown">
 				  <a style="text-decoration: none;" class="text-dark" href="#" data-toggle="dropdown">
 
@@ -210,6 +211,7 @@
                @endforelse
 				  </div>
 			   </div>
+            @endif
 			</div>
 		 </nav>
 	  </div>

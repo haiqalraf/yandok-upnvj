@@ -24,7 +24,7 @@ class AkpkController extends Controller
         $request->validate([
             'name' => 'required',
             'nim' => 'required',
-            'password' => 'required|confirmed|string|min:8',
+            'password' => 'required|confirmed|string',
             'role' => 'required',
         ]);
 
