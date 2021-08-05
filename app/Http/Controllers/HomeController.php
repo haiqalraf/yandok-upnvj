@@ -57,6 +57,9 @@ class HomeController extends Controller
 
     public function tracestudy()
     {
+        if (auth()->user()->tracerstudy) {
+            return abort(404);
+        }
         return view('tracestudy');
     }
 
