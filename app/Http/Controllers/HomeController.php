@@ -65,11 +65,21 @@ class HomeController extends Controller
 
     public function updateTracer(Request $request)
     {
-        if ($request->filled(['tempat_kerja', 'jabatan', 'status_kerja'])) {
+        if ($request->hasAny(['tempat_kerja', 'jabatan', 'status_kerja', 'alamat_kerja', 'tanggal_kerja'])) {
+            $request->validate([
+                'tempat_kerja' => 'required',
+                'jabatan' => 'required',
+                'status_kerja' => 'required',
+                'alamat_kerja' => 'required',
+                'tanggal_kerja' => 'required|date',
+
+            ]);
             $tracer = new TracerStudy([
                 'nim' => auth()->user()->nim,
                 'tempat_kerja' => $request->tempat_kerja,
                 'jabatan' => $request->jabatan,
+                'alamat_kerja' => $request->alamat_kerja,
+                'tanggal_kerja' => $request->tanggal_kerja,
                 'status_kerja' => $request->status_kerja,
                 'waktu_kontrak' => $request->waktu_kontrak,
             ]);

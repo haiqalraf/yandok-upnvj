@@ -12,8 +12,14 @@ class TracerStudy extends Model
         'nim',
         'tempat_kerja',
         'jabatan',
+        'alamat_kerja',
+        'tanggal_kerja',
         'status_kerja',
         'waktu_kontrak',
+    ];
+
+    protected $casts = [
+        'tanggal_kerja'=>'date',
     ];
 
     public function users()

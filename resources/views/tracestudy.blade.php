@@ -73,6 +73,28 @@
                </div>
          </div>
       </div>
+
+      <div class="row">
+         <div class="col bg-white rounded shadow p-3 mb-3">
+               <div class="form-group">
+                  <label for="time" class="font-weight-bold">Kapan Anda awal bekerja</label>
+                  <hr>
+                  <input type="date" class="form-control form-control-sm" id="time" aria-describedby="role"
+                     placeholder="Misal : 31/12/2021" name="tanggal_kerja">
+               </div>
+         </div>
+      </div>
+
+      <div class="row">
+         <div class="col bg-white rounded shadow p-3 mb-3">
+               <div class="form-group">
+                  <label for="address" class="font-weight-bold">Dimana alamat tempat Anda bekerja ?</label>
+                  <hr>
+                  <textarea class="form-control form-control-sm"  name="alamat_kerja" id="address" rows="3"></textarea>
+               </div>
+         </div>
+      </div>
+
       <div class="row">
          <div class="col bg-white rounded shadow p-3 mb-3">
                <div class="form-group">
