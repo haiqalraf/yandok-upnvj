@@ -42,6 +42,8 @@ class LainnyaObserver
             ]));
         } elseif ($lainya->verifikasi==3) {
             $user->notify(new Pesanan(['message'=>'Pesanan '.$lainya->id.' telah diverifikasi/selesai']));
+        } elseif ($lainya->verifikasi==0) {
+            $user->notify(new Pesanan(['message'=>'Pesanan '.$lainya->id.' ditolak']));
         }
     }
 

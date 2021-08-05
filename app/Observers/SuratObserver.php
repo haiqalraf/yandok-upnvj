@@ -42,6 +42,8 @@ class SuratObserver
             ]));
         } elseif ($suket->verifikasi==3) {
             $user->notify(new Pesanan(['message'=>'Pesanan '.$suket->id.' telah diverifikasi/selesai']));
+        } elseif ($suket->verifikasi==0) {
+            $user->notify(new Pesanan(['message'=>'Pesanan '.$suket->id.' ditolak']));
         }
     }
 

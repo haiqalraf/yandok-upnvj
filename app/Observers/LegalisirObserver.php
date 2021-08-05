@@ -42,6 +42,8 @@ class LegalisirObserver
             ]));
         } elseif ($legalisir->verifikasi==3) {
             $user->notify(new Pesanan(['message'=>'Pesanan '.$legalisir->id.' telah diverifikasi/selesai']));
+        } elseif ($legalisir->verifikasi==0) {
+            $user->notify(new Pesanan(['message'=>'Pesanan '.$legalisir->id.' ditolak']));
         }
     }
 
