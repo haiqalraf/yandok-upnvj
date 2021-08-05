@@ -65,6 +65,8 @@
                                     <a href="{{route('riwayat.download', [ 
                                         $data
                                         ])}}" class="btn btn-light p-2 rounded"><i class="fa fa-download"></i> Download</a>
+                                    @elseif ($data->verifikasi < 3)
+                                    <span>-</span>
                                     @endif
                                 </td>
                             </tr>

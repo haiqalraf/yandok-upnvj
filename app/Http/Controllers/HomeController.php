@@ -84,7 +84,6 @@ class HomeController extends Controller
                 'waktu_kontrak' => $request->waktu_kontrak,
             ]);
             auth()->user()->tracerstudy()->save($tracer);
-            auth()->user()->pekerjaan = $request->jabatan;
             auth()->user()->save();
         } else {
             $tracer = new TracerStudy([

@@ -18,6 +18,7 @@ class ActionController extends Controller
             'telepon' => 'required|string',
             'alamat' => 'required|string',
             'email' => 'required|email',
+            'pekerjaan' => 'required|string',
         ]);
             
         try {
@@ -27,6 +28,7 @@ class ActionController extends Controller
                 'no_rumah' => $request->telepon,
                 'address' => $request->alamat,
                 'email' => $request->email,
+                'pekerjaan' => $request->pekerjaan,
             ];
 
             if (!empty($request->password)){
@@ -55,11 +57,12 @@ class ActionController extends Controller
             $User = new User;
             $User = $User->where('nim', $request->nim);
             $User->update($data);
+            auth()->user()->pekerjaan = $request->jabatan;
 
             return response()->json([
         
                 'status' => true,
-                'text' => 'xxxx.',
+                'text' => 'Update User Successfuly.',
     
             ], 200);
             

@@ -86,7 +86,7 @@
             <tr>
                <td>Ganti Foto</td>
                <td id="foto">
-                  <input type="file" name="foto" class="btn-sm" placeholder="Foto anda" required>
+                  <input type="file" name="foto" class="btn-sm" placeholder="Foto anda">
                      
                   <div class="invalid-feedback">Please fill out this field.</div>
                </td>
@@ -94,9 +94,9 @@
 
             @if ($user->is_admin == 0)
             <tr>
-               <td>Pekerjaan</td>
+               <td>Pekerjaan saat ini</td>
                <td>
-                  <input type="text" name="pekerjaan" class="form-control form-control-sm" readonly value="{{ $user->pekerjaan }}" required>
+                  <input type="text" name="pekerjaan" class="form-control form-control-sm" value="{{ $user->pekerjaan }}" required>
                </td>
             </tr>
             @endif
@@ -171,6 +171,7 @@ $(document).ready(function () {
 
                alert(text);
                $(':input[type="submit"]').prop('disabled', false);
+               location.reload();
                   
             } else {
 

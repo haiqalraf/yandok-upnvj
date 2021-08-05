@@ -78,7 +78,7 @@
                </div>
             </form>
 
-            <form method="POST" action="{{ route('storeData') }}">
+            <form class="ajax_action" method="POST" action="{{ route('storeData') }}">
                @csrf
                <div class="col bg-light">
                   <table width="100%" class="table-borderless" cellpadding="5">
@@ -152,9 +152,7 @@
    </div>
 
    <!-- JS -->
-   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-   </script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js">
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
    </script>
@@ -184,6 +182,52 @@
                $('#show_hide_password1 i').removeClass("fa-eye-slash");
                $('#show_hide_password1 i').addClass("fa-eye");
             }
+         });
+         // ALFIO
+         $(".ajax_action").submit(function(event){
+
+         $(':input[type="submit"]').prop('disabled', true);
+
+         event.preventDefault();
+         var post_url = $(this).attr("action"); // Get the form action URL
+         var request_method = $(this).attr("method"); // Get form GET/POST method
+         var form_data = new FormData(this);
+
+         $.ajax({
+            url : post_url,
+            type: request_method,
+            data : form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType: 'json', 
+            success: function(results){
+               
+               var status = results.status;
+               var text = results.text;
+
+               if (status){
+
+                  alert(text);
+                  $(':input[type="submit"]').prop('disabled', false);
+                  window.location.replace("login");
+                     
+               } else {
+
+                  alert(text);
+                  $(':input[type="submit"]').prop('disabled', false);
+               
+               }
+            },
+            error: function (xhr, status, error){
+
+               var text = xhr.responseJSON.message
+
+               alert(text);
+
+               $(':input[type="submit"]').prop('disabled', false);
+            }
+         });
          });
       });
    </script>

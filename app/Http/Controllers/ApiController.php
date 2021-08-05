@@ -55,12 +55,25 @@ class ApiController extends Controller
                 'no_rumah' => $request->no_rumah,
             ]);
 
+            // ALFIO
+            return response()->json([
+        
+                'status' => true,
+                'text' => 'Registration User Successfuly.',
+    
+            ], 200);
+
         } else {
 
 
+            // ALFIO
+            return response()->json([
+        
+                'status' => false,
+                'text' => 'Error',
+    
+            ], 200);
         }
-
-        return redirect()->route('login');
     }
 
     public function verifikasi(Request $request)

@@ -54,7 +54,7 @@
                      <div>
                         <div class="form-row mb-3">
                            <div class="col">
-                              <label for="wa" class="text-sm">Telepon WA</label>
+                              <label for="wa" class="text-sm">Telepon WAAA</label>
                               <input type="text" class="form-control" placeholder="" id="wa">
                            </div>
                            <div class="col">
