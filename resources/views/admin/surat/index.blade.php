@@ -12,6 +12,9 @@
        <li class="nav-item">
           <a class="nav-link @if ($status==='1'||$status===null){{'active'}}@endif" href="{{ route('akpk.surat', ['status' => '1'])}}">Belum Diproses</a>
        </li>
+       <li class="nav-item">
+         <a class="nav-link @if ($status==='0'){{'active'}}@endif" href="{{ route('akpk.surat', ['status' => '0'])}}">Ditolak</a>
+      </li>
        @endif
        @if (auth()->user()->is_admin==3)
        <li class="nav-item">

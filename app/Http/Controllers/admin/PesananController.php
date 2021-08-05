@@ -17,7 +17,7 @@ class PesananController extends Controller
     {
         $legalisir = [];
         if ($request->has('status')) {
-            if (auth()->user()->is_admin==2 && $request->status===1) {
+            if (auth()->user()->is_admin==2 && in_array($request->status, [0,1])) {
                 $legalisir = Legalisir::where('verifikasi', $request->status)->get();
             } elseif(auth()->user()->is_admin==3 && in_array($request->status, [1,2])) {
                 $legalisir = Legalisir::where('verifikasi', $request->status+1)->get();
@@ -117,6 +117,12 @@ class PesananController extends Controller
             } else {
                 return back()->with("message", "You Don't Have Permission");
             }
+        } elseif ($request->status === '0') {
+            if (auth()->user()->is_admin==2) {
+                $legalisir->komentar = $request->komentar;
+            } else {
+                return back()->with("message", "You Don't Have Permission");
+            }
         }
         
         $legalisir->verifikasi = $request->status;
@@ -132,7 +138,7 @@ class PesananController extends Controller
     {
         $surat = [];
         if ($request->has('status')) {
-            if (auth()->user()->is_admin==2 && $request->status===1) {
+            if (auth()->user()->is_admin==2 && in_array($request->status, [0,1])) {
                 $surat = Suket::where('verifikasi', $request->status)->get();
             } elseif(auth()->user()->is_admin==3 && in_array($request->status, [1,2])) {
                 $surat = Suket::where('verifikasi', $request->status+1)->get();
@@ -197,6 +203,12 @@ class PesananController extends Controller
             } else {
                 return back()->with("message", "You Don't Have Permission");
             }
+        } elseif ($request->status === '0') {
+            if (auth()->user()->is_admin==2) {
+                $surat->komentar = $request->komentar;
+            } else {
+                return back()->with("message", "You Don't Have Permission");
+            }
         }
 
         $surat->verifikasi = $request->status;
@@ -213,7 +225,7 @@ class PesananController extends Controller
     {
         $lainnya = [];
         if ($request->has('status')) {
-            if (auth()->user()->is_admin==2 && $request->status===1) {
+            if (auth()->user()->is_admin==2 && in_array($request->status, [0,1])) {
                 $lainnya = Lainya::where('verifikasi', $request->status)->get();
             } elseif(auth()->user()->is_admin==3 && in_array($request->status, ['1','2'])) {
                 $lainnya = Lainya::where('verifikasi', $request->status+1)->get();
@@ -276,7 +288,12 @@ class PesananController extends Controller
             } else {
                 return back()->with("message", "You Don't Have Permission");
             }
-
+        } elseif ($request->status === '0') {
+            if (auth()->user()->is_admin==2) {
+                $lainnya->komentar = $request->komentar;
+            } else {
+                return back()->with("message", "You Don't Have Permission");
+            }
         }
 
         $lainnya->verifikasi = $request->status;

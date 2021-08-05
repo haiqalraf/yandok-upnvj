@@ -63,6 +63,8 @@
                                         <label for="Upload" class="btn-light p-2 rounded" id="upload" name="upload">
                                             <input type="file" name="upload">
                                         </label>
+                                        <p style="font-size: 10px; color: slategray;">Catatan : Harap untuk di kompress dalam bentuk
+                                            RAR/ZIP sebelum di upload</p>
                                     </td>
                                 @elseif ($lainnya->verifikasi===3 && auth()->user()->is_admin==3)
                                     <td class="align-middle text-center">
@@ -93,15 +95,52 @@
 
         <hr>
         @if ($lainnya->verifikasi!==3)
+        <div class="d-flex justify-content-end">
+            @if (auth()->user()->is_admin==3)
+            <button type="submit" class="btn btn-sm btn-success pull-right">
+                Proses
+            </button>
+            @else
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#exampleModal">
+                Tolak
+            </button>
             <button type="submit" class="btn btn-sm btn-success pull-right">
                 Proses
             </button>
             @endif
-            
-            
+        </div>
+        @endif
     </div>
 @if ($lainnya->verifikasi!==3)
 </form>
+@endif
+@if (auth()->user()->is_admin==2)
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="{{route('akpk.lainnya.detail', ['lainnya' => $lainnya, 'status' => 0])}}" method="post" class="modal-dialog">
+        @csrf
+        @method('PUT')
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Batalkan Pesanan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="formtolak">Berikan Alasan Penolakan</label>
+                    <textarea class="form-control" id="formtolak" rows="3" name="komentar"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Yakin</button>
+            </div>
+        </div>
+    </form>
+</div>
 @endif
 <br/>
 <br/>
