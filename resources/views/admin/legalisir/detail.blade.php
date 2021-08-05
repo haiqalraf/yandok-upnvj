@@ -34,7 +34,11 @@
                             <th>Kode Pesanan</th>
                             <th>Daftar Pesanan</th>
                             <th>Jumlah </th>
+                            @if (in_array($legalisir->verifikasi, [2,3]))
+                            <th>Dokumen Selesai</th>
+                            @else
                             <th>Persyaratan</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
