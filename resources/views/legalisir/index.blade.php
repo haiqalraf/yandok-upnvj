@@ -34,6 +34,9 @@
                            yang
                            dipilih
                         </span>
+                        
+                        <p style="font-size: 10px; color: slategray;">Catatan : Harap untuk di kompress dalam bentuk
+                           RAR/ZIP sebelum di upload</p>
 
                         <script>
                            const actualBtn = document.getElementById('upload');
