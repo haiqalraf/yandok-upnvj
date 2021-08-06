@@ -15,6 +15,9 @@
        <li class="nav-item">
           <a class="nav-link @if ($status==='0'){{'active'}}@endif" href="{{ route('akpk.legalisir', ['status' => '0'])}}">Ditolak</a>
        </li>
+       <li class="nav-item">
+          <a class="nav-link @if ($status==='2'){{'active'}}@endif" href="{{ route('akpk.legalisir', ['status' => '2'])}}">Telah Diverifikasi</a>
+       </li>
        @endif
        @if (auth()->user()->is_admin==3)
        <li class="nav-item">

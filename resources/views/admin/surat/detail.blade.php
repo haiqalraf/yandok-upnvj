@@ -117,13 +117,14 @@
         </div> --}}
 
         <hr>
-        @if ($surat->verifikasi!==3)
+        @if (!in_array($legalisir->verifikasi, [3,0]))
         <div class="d-flex justify-content-end">
             @if (auth()->user()->is_admin==3)
             <button type="submit" class="btn btn-sm btn-success pull-right">
                 Proses
             </button>
             @else
+            @if ($legalisir->verifikasi!==2)    
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#exampleModal">
                 Tolak
@@ -132,13 +133,14 @@
                 Proses
             </button>
             @endif
+            @endif
         </div>
         @endif
     </div>
-@if ($surat->verifikasi!==3)
+@if (!in_array($legalisir->verifikasi, [3,0]))
 </form>
 @endif
-@if (auth()->user()->is_admin==2)
+@if (auth()->user()->is_admin==2 && !in_array($legalisir->verifikasi, [2,0]))
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <form action="{{route('akpk.surat.detail', ['surat' => $surat, 'status' => 0])}}" method="post" class="modal-dialog">

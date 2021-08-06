@@ -17,7 +17,7 @@ class PesananController extends Controller
     {
         $legalisir = [];
         if ($request->has('status')) {
-            if (auth()->user()->is_admin==2 && in_array($request->status, [0,1])) {
+            if (auth()->user()->is_admin==2 && in_array($request->status, [0,1,2])) {
                 $legalisir = Legalisir::where('verifikasi', $request->status)->get();
             } elseif(auth()->user()->is_admin==3 && in_array($request->status, [1,2])) {
                 $legalisir = Legalisir::where('verifikasi', $request->status+1)->get();
@@ -38,7 +38,7 @@ class PesananController extends Controller
 
     public function detailLegalisir(Legalisir $legalisir)
     {
-        if (($legalisir->verifikasi===1 && auth()->user()->is_admin==3) || (in_array($legalisir->verifikasi, [2,3]) && auth()->user()->is_admin==2)) {
+        if ((in_array($legalisir->verifikasi, [0,1]) && auth()->user()->is_admin==3) || (in_array($legalisir->verifikasi, [3]) && auth()->user()->is_admin==2)) {
             return abort('404'); 
         }
         $daftar_pesanan = collect([]);
@@ -138,7 +138,7 @@ class PesananController extends Controller
     {
         $surat = [];
         if ($request->has('status')) {
-            if (auth()->user()->is_admin==2 && in_array($request->status, [0,1])) {
+            if (auth()->user()->is_admin==2 && in_array($request->status, [0,1,2])) {
                 $surat = Suket::where('verifikasi', $request->status)->get();
             } elseif(auth()->user()->is_admin==3 && in_array($request->status, [1,2])) {
                 $surat = Suket::where('verifikasi', $request->status+1)->get();
@@ -159,7 +159,7 @@ class PesananController extends Controller
 
     public function detailSurat(Suket $surat)
     {
-        if (($surat->verifikasi===1 && auth()->user()->is_admin==3) || (in_array($surat->verifikasi, [2,3]) && auth()->user()->is_admin==2)) {
+        if ((in_array($suart->verifikasi, [0,1]) && auth()->user()->is_admin==3) || (in_array($surat->verifikasi, [3]) && auth()->user()->is_admin==2)) {
             return abort('404'); 
         }
         $daftar_pesanan = collect([]);
@@ -225,7 +225,7 @@ class PesananController extends Controller
     {
         $lainnya = [];
         if ($request->has('status')) {
-            if (auth()->user()->is_admin==2 && in_array($request->status, [0,1])) {
+            if (auth()->user()->is_admin==2 && in_array($request->status, [0,1,2])) {
                 $lainnya = Lainya::where('verifikasi', $request->status)->get();
             } elseif(auth()->user()->is_admin==3 && in_array($request->status, ['1','2'])) {
                 $lainnya = Lainya::where('verifikasi', $request->status+1)->get();
@@ -246,7 +246,7 @@ class PesananController extends Controller
 
     public function detailLainnya(Lainya $lainnya)
     {
-        if (($lainnya->verifikasi===1 && auth()->user()->is_admin==3) || (in_array($lainnya->verifikasi, [2,3]) && auth()->user()->is_admin==2)) {
+        if ((in_array($lainnya->verifikasi, [0,1]) && auth()->user()->is_admin==3) || (in_array($lainnya->verifikasi, [3]) && auth()->user()->is_admin==2)) {
             return abort('404'); 
         }
         $daftar_pesanan = collect([]);
