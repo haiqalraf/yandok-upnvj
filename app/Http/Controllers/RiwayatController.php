@@ -37,7 +37,13 @@ class RiwayatController extends Controller
                     $result->verifikasi = 'Sedang Verifikasi';
                     $result->pesanan = false;
 
-                } else {
+                } elseif ($result->verifikasi == 0){
+
+                    $result->badge = 'badge-danger';
+                    $result->verifikasi = 'Ditolak';
+                    $result->pesanan = false;
+
+                }  else {
 
                     $result->badge = 'badge-success';
                     $result->verifikasi = 'Selesai';
