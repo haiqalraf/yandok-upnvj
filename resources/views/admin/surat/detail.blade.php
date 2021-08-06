@@ -20,6 +20,8 @@
                 class="font-weight-lighter pl-2 ">
                 @if ($surat->verifikasi===1)
                     Belum Diproses
+                @elseif ($surat->verifikasi===0)
+                    Ditolak
                 @elseif ($surat->verifikasi===2)
                     Sedang Diproses
                 @elseif ($surat->verifikasi===3)
@@ -52,8 +54,10 @@
                             <td class="text-center">{{$item}}</td>
 
                             @if ($loop->first)
-                                @if ($surat->verifikasi===1 && auth()->user()->is_admin==2)
-                                    <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
+                            @if ($surat->verifikasi===0 && auth()->user()->is_admin==2)
+                            <td>{{$surat->komentar?$surat->komentar : "Tidak ada Catatan"}}</td>
+                            @elseif ($surat->verifikasi===1 && auth()->user()->is_admin==2)
+                                <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
                                         <div class="d-flex justify-content-center">
                                             <ol type="number" class="text-left" style="font-size: 13px;">
                                                 @if (strpos($key, 'Pengganti'))
@@ -117,14 +121,14 @@
         </div> --}}
 
         <hr>
-        @if (!in_array($legalisir->verifikasi, [3,0]))
+        @if (!in_array($surat->verifikasi, [3,0]))
         <div class="d-flex justify-content-end">
             @if (auth()->user()->is_admin==3)
             <button type="submit" class="btn btn-sm btn-success pull-right">
                 Proses
             </button>
             @else
-            @if ($legalisir->verifikasi!==2)    
+            @if ($surat->verifikasi!==2)    
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#exampleModal">
                 Tolak
@@ -137,10 +141,10 @@
         </div>
         @endif
     </div>
-@if (!in_array($legalisir->verifikasi, [3,0]))
+@if (!in_array($surat->verifikasi, [3,0]))
 </form>
 @endif
-@if (auth()->user()->is_admin==2 && !in_array($legalisir->verifikasi, [2,0]))
+@if (auth()->user()->is_admin==2 && !in_array($surat->verifikasi, [2,0]))
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <form action="{{route('akpk.surat.detail', ['surat' => $surat, 'status' => 0])}}" method="post" class="modal-dialog">

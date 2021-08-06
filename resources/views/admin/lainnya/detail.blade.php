@@ -20,6 +20,8 @@
                 class="font-weight-lighter pl-2 ">
                 @if ($lainnya->verifikasi===1)
                     Belum Diproses
+                @elseif ($lainnya->verifikasi===0)
+                    Ditolak
                 @elseif ($lainnya->verifikasi===2)
                     Sedang Diproses
                 @elseif ($lainnya->verifikasi===3)
@@ -52,7 +54,9 @@
                             <td class="text-center">{{$item}}</td>
 
                             @if ($loop->first)
-                                @if ($lainnya->verifikasi===1 && auth()->user()->is_admin==2)
+                            @if ($lainnya->verifikasi===0 && auth()->user()->is_admin==2)
+                            <td>{{$lainnya->komentar?$lainnya->komentar : "Tidak ada Catatan"}}</td>
+                            @elseif ($lainnya->verifikasi===1 && auth()->user()->is_admin==2)
                                     <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
                                         <a href="{{route('akpk.download', [ 
                                             'filePath' => 'lainnya/'.$lainnya->file
@@ -94,14 +98,14 @@
         </div> --}}
 
         <hr>
-        @if (!in_array($legalisir->verifikasi, [3,0]))
+        @if (!in_array($lainnya->verifikasi, [3,0]))
         <div class="d-flex justify-content-end">
             @if (auth()->user()->is_admin==3)
             <button type="submit" class="btn btn-sm btn-success pull-right">
                 Proses
             </button>
             @else
-            @if ($legalisir->verifikasi!==2)    
+            @if ($lainnya->verifikasi!==2)    
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#exampleModal">
                 Tolak
@@ -114,10 +118,10 @@
         </div>
         @endif
     </div>
-@if (!in_array($legalisir->verifikasi, [3,0]))
+@if (!in_array($lainnya->verifikasi, [3,0]))
 </form>
 @endif
-@if (auth()->user()->is_admin==2 && !in_array($legalisir->verifikasi, [2,0]))
+@if (auth()->user()->is_admin==2 && !in_array($lainnya->verifikasi, [2,0]))
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <form action="{{route('akpk.lainnya.detail', ['lainnya' => $lainnya, 'status' => 0])}}" method="post" class="modal-dialog">

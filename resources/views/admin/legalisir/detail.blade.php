@@ -19,6 +19,8 @@
                 class="font-weight-lighter pl-2 ">
                 @if ($legalisir->verifikasi===1)
                     Belum Diproses
+                @elseif ($legalisir->verifikasi===0)
+                    Ditolak
                 @elseif ($legalisir->verifikasi===2)
                     Sedang Diproses
                 @elseif ($legalisir->verifikasi===3)
@@ -36,6 +38,8 @@
                             <th>Jumlah </th>
                             @if (in_array($legalisir->verifikasi, [2,3]))
                             <th>Dokumen Selesai</th>
+                            @elseif (in_array($legalisir->verifikasi, [0]))
+                            <th>Catatan Penolakan</th>
                             @else
                             <th>Persyaratan</th>
                             @endif
@@ -51,7 +55,9 @@
                             <td class="text-center">{{$item}}</td>
 
                             @if ($loop->first)
-                                @if ($legalisir->verifikasi===1 && auth()->user()->is_admin==2)
+                                @if ($legalisir->verifikasi===0 && auth()->user()->is_admin==2)
+                                <td>{{$legalisir->komentar?$legalisir->komentar : "Tidak ada Catatan"}}</td>
+                                @elseif ($legalisir->verifikasi===1 && auth()->user()->is_admin==2)
                                     <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
                                         <div class="d-flex justify-content-center">
                                             <ol type="number" class="text-left" style="font-size: 13px;">
