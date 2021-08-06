@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Fakultas;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Models\User;
@@ -44,10 +45,10 @@ class ApiController extends Controller
 
     public function storeData(Request $request){
         if ($request){
-
             $User = new User;
             $User->insert([
                 'nim' => $request->nim_verified,
+                'fakultas' => $User->encodeFakultas($request->fakultas),
                 'name' => $request->name,
                 'password' => bcrypt($request->password),
                 'thn_lulus' => substr($request->tahun_lulus, strpos($request->tahun_lulus, "/") + 1),
