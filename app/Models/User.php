@@ -86,8 +86,8 @@ class User extends Authenticatable
             default:
                 $output = '';
                 break;
-            return $output;
         }
+        return $output;
     }
 
     // public function encodeFakultasByNim($nim)
@@ -131,5 +131,10 @@ class User extends Authenticatable
     public function tracerstudy()
     {
         return $this->hasOne(TracerStudy::class);
+    }
+
+    public function faculty()
+    {
+        return $this->belongsTo(Fakultas::class, 'fakultas');
     }
 }

@@ -91,6 +91,10 @@
                         <td>:<input name="name" style="border:none" type="text" value="{{$responseBody->result->nama}}" readonly></td>
                      </tr>
                      <tr>
+                        <td class="font-weight-bold">Fakultas</td>
+                        <td>:<input name="fakultas" style="border:none" type="text" value="{{$responseBody->result->fakultas}}" readonly></td>
+                     </tr>
+                     <tr>
                         <td class="font-weight-bold">Program Studi</td>
                         <td>:<input name="prodi" style="border:none" type="text" value="{{$responseBody->result->program_studi}}" readonly> </td>
                      </tr>
