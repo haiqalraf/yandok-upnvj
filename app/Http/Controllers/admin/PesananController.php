@@ -19,6 +19,10 @@ class PesananController extends Controller
         if ($request->has('status')) {
             if (auth()->user()->is_admin==2 && in_array($request->status, [0,1,2])) {
                 $legalisir = Legalisir::where('verifikasi', $request->status)->get();
+                if (in_array($request->status,[2])) {
+                    $legalisir = Legalisir::where('verifikasi', $request->status)
+                        ->orWhere('verifikasi', $request->status+1)->get();
+                }
             } elseif(auth()->user()->is_admin==3 && in_array($request->status, [1,2])) {
                 $legalisir = Legalisir::where('verifikasi', $request->status+1)->get();
             }
@@ -140,6 +144,10 @@ class PesananController extends Controller
         if ($request->has('status')) {
             if (auth()->user()->is_admin==2 && in_array($request->status, [0,1,2])) {
                 $surat = Suket::where('verifikasi', $request->status)->get();
+                if (in_array($request->status,[2])) {
+                    $surat = Suket::where('verifikasi', $request->status)
+                        ->orWhere('verifikasi', $request->status+1)->get();
+                }
             } elseif(auth()->user()->is_admin==3 && in_array($request->status, [1,2])) {
                 $surat = Suket::where('verifikasi', $request->status+1)->get();
             }
@@ -227,6 +235,10 @@ class PesananController extends Controller
         if ($request->has('status')) {
             if (auth()->user()->is_admin==2 && in_array($request->status, [0,1,2])) {
                 $lainnya = Lainya::where('verifikasi', $request->status)->get();
+                if (in_array($request->status,[2])) {
+                    $lainnya = Lainya::where('verifikasi', $request->status)
+                        ->orWhere('verifikasi', $request->status+1)->get();
+                }
             } elseif(auth()->user()->is_admin==3 && in_array($request->status, ['1','2'])) {
                 $lainnya = Lainya::where('verifikasi', $request->status+1)->get();
             }
