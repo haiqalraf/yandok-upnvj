@@ -16,6 +16,7 @@ class Suket extends Model
         'nim_pemesan',
         'dokumen_dipesan',
         'verifikasi',
+        'komentar',
         'file',
     ];
 

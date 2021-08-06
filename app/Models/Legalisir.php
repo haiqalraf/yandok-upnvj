@@ -43,6 +43,7 @@ class Legalisir extends Model
         'dok_11',
         'dok_12',
         'file',
+        'komentar',
         'kebutuhan',
         'keterangan',
         'verifikasi',

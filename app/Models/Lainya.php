@@ -14,6 +14,7 @@ class Lainya extends Model
 
     protected $fillable = [
         'nim_pemesan',
+        'komentar',
         'dokumen_dipesan',
         'verifikasi',
         'jumlah_dokumen',
