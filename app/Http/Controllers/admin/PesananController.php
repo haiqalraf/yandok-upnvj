@@ -217,7 +217,7 @@ class PesananController extends Controller
         if (auth()->user()->is_admin==2) {
             return redirect()->route('akpk.surat', ['status' => $request->status]);
         } elseif (auth()->user()->is_admin==3) {
-            return redirect()->route('dekan.surat', ['status' => $request->status]);
+            return redirect()->route('dekan.surat', ['status' => $request->status-1]);
         }
     }
 
@@ -302,7 +302,7 @@ class PesananController extends Controller
         if (auth()->user()->is_admin==2) {
             return redirect()->route('akpk.lainnya', ['status' => $request->status]);
         } elseif (auth()->user()->is_admin==3) {
-            return redirect()->route('dekan.lainnya', ['status' => $request->status]);
+            return redirect()->route('dekan.lainnya', ['status' => $request->status-1]);
         }
     }
 
