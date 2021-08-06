@@ -38,7 +38,7 @@ class PesananController extends Controller
 
     public function detailLegalisir(Legalisir $legalisir)
     {
-        if ((in_array($legalisir->verifikasi, [0,1]) && auth()->user()->is_admin==3) || (in_array($legalisir->verifikasi, [3]) && auth()->user()->is_admin==2)) {
+        if ((in_array($legalisir->verifikasi, [0,1]) && auth()->user()->is_admin==3)) {
             return abort('404'); 
         }
         $daftar_pesanan = collect([]);
@@ -159,7 +159,7 @@ class PesananController extends Controller
 
     public function detailSurat(Suket $surat)
     {
-        if ((in_array($suart->verifikasi, [0,1]) && auth()->user()->is_admin==3) || (in_array($surat->verifikasi, [3]) && auth()->user()->is_admin==2)) {
+        if ((in_array($surat->verifikasi, [0,1]) && auth()->user()->is_admin==3)) {
             return abort('404'); 
         }
         $daftar_pesanan = collect([]);
@@ -246,7 +246,7 @@ class PesananController extends Controller
 
     public function detailLainnya(Lainya $lainnya)
     {
-        if ((in_array($lainnya->verifikasi, [0,1]) && auth()->user()->is_admin==3) || (in_array($lainnya->verifikasi, [3]) && auth()->user()->is_admin==2)) {
+        if ((in_array($lainnya->verifikasi, [0,1]) && auth()->user()->is_admin==3)) {
             return abort('404'); 
         }
         $daftar_pesanan = collect([]);

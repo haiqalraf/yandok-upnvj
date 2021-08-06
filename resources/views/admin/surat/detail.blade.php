@@ -93,7 +93,7 @@
                                         <p style="font-size: 10px; color: slategray;">Catatan : Harap untuk di kompress dalam bentuk
                                             RAR/ZIP sebelum di upload</p>
                                     </td>
-                                @elseif ($surat->verifikasi===3 && auth()->user()->is_admin==3)
+                                @elseif ($surat->verifikasi===3)
                                     <td class="align-middle text-center">
                                         <a href="{{route('dekan.download', [ 
                                             'filePath' => 'suket/selesai/'.$surat->final_dokumen
