@@ -71,14 +71,14 @@ class HomeController extends Controller
             $request->filled('alamat_kerja') || 
             $request->filled('tanggal_kerja')) {
             
-            dd($request->validate([
+            $request->validate([
                 'tempat_kerja' => 'required',
                 'jabatan' => 'required',
                 'status_kerja' => 'required',
                 'alamat_kerja' => 'required',
                 'tanggal_kerja' => 'required|date',
 
-            ]));
+            ]);
             $tracer = new TracerStudy([
                 'nim' => auth()->user()->nim,
                 'tempat_kerja' => $request->tempat_kerja,

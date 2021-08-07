@@ -22,7 +22,14 @@
                         </tr>
                         <tr>
                             <td>Detail Status</td>
-                            @if ($data->verifikasi == 1)
+                            @if ($data->verifikasi == 0)
+                                @if ($data->getCommentIfExists($data))
+                                <td>{{$data->getCommentIfExists($data)}}</td>
+                                @else
+                                <td>Dokumen yang Anda unggah tidak sesuai persyaratan. Harap di cek lagi dengan teliti dan lakukan pesanan ulang</td>
+                                @endif
+
+                            @elseif ($data->verifikasi == 1)
 
                                 <td>Pesanan akan ditinjau oleh bagian AKPK</td>
                             
