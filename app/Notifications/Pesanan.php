@@ -56,6 +56,8 @@ class Pesanan extends Notification
     public function toArray($notifiable)
     {
         return [
+            'id_pesanan' => $this->pesananData['id_pesanan'],
+            'model_pesanan' => $this->pesananData['model_pesanan'],
             'message' => $this->pesananData['message'],
         ];
     }

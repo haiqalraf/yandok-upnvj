@@ -10,12 +10,28 @@
     </a>
     <div wire:ignore.self class="dropdown-menu dropdown-menu-sm-right pre-scrollable">
     @forelse (auth()->user()->notifications as $notification)
-        <a href="{{route('alur')}}" class="dropdown-item" type="button" style="font-size: small;">
-            <p wire:ignore.self class="@if($notification->read_at === null){{'font-weight-bold'}}@endif"> 
-                {{$notification->data['message']}}
-                <span class="text-right">
-            </p>
-        </a>
+    @if(in_array(auth()->user()->is_admin, [0,null]))
+    <a href="{{ url('/riwayat/detail') }}/{{$notification->data['id_pesanan']}}" class="dropdown-item" type="button" style="font-size: small;">
+        <p wire:ignore.self class="@if($notification->read_at === null){{'font-weight-bold'}}@endif"> 
+            {{$notification->data['message']}}
+            <span class="text-right">
+        </p>
+    </a>
+    @elseif(in_array(auth()->user()->is_admin, [2]))
+    <a href="{{ route('akpk.'.$notification->data['model_pesanan'].'.detail', [$notification->data['model_pesanan'] => $notification->data['id_pesanan']])}}" class="dropdown-item" type="button" style="font-size: small;">
+        <p wire:ignore.self class="@if($notification->read_at === null){{'font-weight-bold'}}@endif"> 
+            {{$notification->data['message']}}
+            <span class="text-right">
+        </p>
+    </a>
+    @elseif(in_array(auth()->user()->is_admin, [3]))
+    <a href="{{ route('dekan.'.$notification->data['model_pesanan'].'.detail', [$notification->data['model_pesanan'] => $notification->data['id_pesanan']])}}" class="dropdown-item" type="button" style="font-size: small;">
+        <p wire:ignore.self class="@if($notification->read_at === null){{'font-weight-bold'}}@endif"> 
+            {{$notification->data['message']}}
+            <span class="text-right">
+        </p>
+    </a>
+    @endif
     @empty
         {{"Empty"}}
     @endforelse

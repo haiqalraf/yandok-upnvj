@@ -18,10 +18,10 @@ class LegalisirObserver
     public function created(Legalisir $legalisir)
     {
         $user = User::where('nim', $legalisir->nim_pemesan)->first();
-        $user->notify(new Pesanan(['message'=>'Pesanan '.$legalisir->id.' telah dibuat']));
+        $user->notify(new Pesanan(['model_pesanan' => 'legalisir', 'id_pesanan'  => $legalisir->id, 'message'=>'Pesanan '.$legalisir->id.' telah dibuat']));
         $akpk = User::where('is_admin', 2)->get();
         Notification::send($akpk, new Pesanan([
-            'message'=>'Pesanan '.$legalisir->id.' telah dibuat',
+            'model_pesanan' => 'legalisir', 'id_pesanan'  => $legalisir->id, 'message'=>'Pesanan '.$legalisir->id.' telah dibuat',
         ]));
     }
 
@@ -35,15 +35,15 @@ class LegalisirObserver
     {
         $user = User::where('nim', $legalisir->nim_pemesan)->first();
         if ($legalisir->verifikasi==2) {
-            $user->notify(new Pesanan(['message'=>'Pesanan '.$legalisir->id.' sedang diverifikasi/dibuat']));
+            $user->notify(new Pesanan(['model_pesanan' => 'legalisir', 'id_pesanan'  => $legalisir->id, 'message'=>'Pesanan '.$legalisir->id.' sedang diverifikasi/dibuat']));
             $dekan = User::where('is_admin', 3)->get();
             Notification::send($dekan, new Pesanan([
-                'message'=>'Pesanan '.$legalisir->id.' telah diverifikasi',
+                'model_pesanan' => 'legalisir', 'id_pesanan'  => $legalisir->id, 'message'=>'Pesanan '.$legalisir->id.' telah diverifikasi',
             ]));
         } elseif ($legalisir->verifikasi==3) {
-            $user->notify(new Pesanan(['message'=>'Pesanan '.$legalisir->id.' telah diverifikasi/selesai']));
+            $user->notify(new Pesanan(['model_pesanan' => 'legalisir', 'id_pesanan'  => $legalisir->id, 'message'=>'Pesanan '.$legalisir->id.' telah diverifikasi/selesai']));
         } elseif ($legalisir->verifikasi==0) {
-            $user->notify(new Pesanan(['message'=>'Pesanan '.$legalisir->id.' ditolak']));
+            $user->notify(new Pesanan(['model_pesanan' => 'legalisir', 'id_pesanan'  => $legalisir->id, 'message'=>'Pesanan '.$legalisir->id.' ditolak']));
         }
     }
 

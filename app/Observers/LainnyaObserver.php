@@ -18,10 +18,10 @@ class LainnyaObserver
     public function created(Lainya $lainya)
     {
         $user = User::where('nim', $lainya->nim_pemesan)->first();
-        $user->notify(new Pesanan(['message'=>'Pesanan '.$lainya->id.' telah dibuat']));
+        $user->notify(new Pesanan(['model_pesanan' => 'lainnya', 'id_pesanan'  => $lainya->id, 'message'=>'Pesanan '.$lainya->id.' telah dibuat']));
         $akpk = User::where('is_admin', 2)->get();
         Notification::send($akpk, new Pesanan([
-            'message'=>'Pesanan '.$lainya->id.' telah dibuat',
+            'model_pesanan' => 'lainnya', 'id_pesanan'  => $lainya->id, 'message'=>'Pesanan '.$lainya->id.' telah dibuat',
         ]));
     }
 
@@ -35,15 +35,15 @@ class LainnyaObserver
     {
         $user = User::where('nim', $lainya->nim_pemesan)->first();
         if ($lainya->verifikasi==2) {
-            $user->notify(new Pesanan(['message'=>'Pesanan '.$lainya->id.' sedang diverifikasi/dibuat']));
+            $user->notify(new Pesanan(['model_pesanan' => 'lainnya', 'id_pesanan'  => $lainya->id, 'message'=>'Pesanan '.$lainya->id.' sedang diverifikasi/dibuat']));
             $dekan = User::where('is_admin', 3)->get();
             Notification::send($dekan, new Pesanan([
-                'message'=>'Pesanan '.$lainya->id.' telah diverifikasi',
+                'model_pesanan' => 'lainnya', 'id_pesanan'  => $lainya->id, 'message'=>'Pesanan '.$lainya->id.' telah diverifikasi',
             ]));
         } elseif ($lainya->verifikasi==3) {
-            $user->notify(new Pesanan(['message'=>'Pesanan '.$lainya->id.' telah diverifikasi/selesai']));
+            $user->notify(new Pesanan(['model_pesanan' => 'lainnya', 'id_pesanan'  => $lainya->id, 'message'=>'Pesanan '.$lainya->id.' telah diverifikasi/selesai']));
         } elseif ($lainya->verifikasi==0) {
-            $user->notify(new Pesanan(['message'=>'Pesanan '.$lainya->id.' ditolak']));
+            $user->notify(new Pesanan(['model_pesanan' => 'lainnya', 'id_pesanan'  => $lainya->id, 'message'=>'Pesanan '.$lainya->id.' ditolak']));
         }
     }
 

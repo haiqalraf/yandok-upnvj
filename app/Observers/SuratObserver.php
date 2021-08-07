@@ -18,10 +18,10 @@ class SuratObserver
     public function created(Suket $suket)
     {
         $user = User::where('nim', $suket->nim_pemesan)->first();
-        $user->notify(new Pesanan(['message'=>'Pesanan '.$suket->id.' telah dibuat']));
+        $user->notify(new Pesanan(['model_pesanan' => 'surat', 'id_pesanan'  => $suket->id, 'message'=>'Pesanan '.$suket->id.' telah dibuat']));
         $akpk = User::where('is_admin', 2)->get();
         Notification::send($akpk, new Pesanan([
-            'message'=>'Pesanan '.$suket->id.' telah dibuat',
+            'model_pesanan' => 'surat', 'id_pesanan'  => $suket->id, 'message'=>'Pesanan '.$suket->id.' telah dibuat',
         ]));
     }
 
@@ -35,15 +35,15 @@ class SuratObserver
     {
         $user = User::where('nim', $suket->nim_pemesan)->first();
         if ($suket->verifikasi==2) {
-            $user->notify(new Pesanan(['message'=>'Pesanan '.$suket->id.' sedang diverifikasi/dibuat']));
+            $user->notify(new Pesanan(['model_pesanan' => 'surat', 'id_pesanan'  => $suket->id, 'message'=>'Pesanan '.$suket->id.' sedang diverifikasi/dibuat']));
             $dekan = User::where('is_admin', 3)->get();
             Notification::send($dekan, new Pesanan([
-                'message'=>'Pesanan '.$suket->id.' telah diverifikasi',
+                'model_pesanan' => 'surat', 'id_pesanan'  => $suket->id, 'message'=>'Pesanan '.$suket->id.' telah diverifikasi',
             ]));
         } elseif ($suket->verifikasi==3) {
-            $user->notify(new Pesanan(['message'=>'Pesanan '.$suket->id.' telah diverifikasi/selesai']));
+            $user->notify(new Pesanan(['model_pesanan' => 'surat', 'id_pesanan'  => $suket->id, 'message'=>'Pesanan '.$suket->id.' telah diverifikasi/selesai']));
         } elseif ($suket->verifikasi==0) {
-            $user->notify(new Pesanan(['message'=>'Pesanan '.$suket->id.' ditolak']));
+            $user->notify(new Pesanan(['model_pesanan' => 'surat', 'id_pesanan'  => $suket->id, 'message'=>'Pesanan '.$suket->id.' ditolak']));
         }
     }
 
