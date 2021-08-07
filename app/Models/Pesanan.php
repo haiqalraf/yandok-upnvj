@@ -42,11 +42,11 @@ class Pesanan extends Model
     public function getCommentIfExists($model)
     {
         if ($model->source_table==0) {
-            return Legalisir::where('nim_pemesan', $model->nim_pemesan)->first()->komentar;
+            return Legalisir::find($model->id)->komentar;
         } elseif ($model->source_table==1) {
-            return Suket::where('nim_pemesan', $model->nim_pemesan)->komentar;
+            return Suket::find($model->id)->komentar;
         } elseif ($model->source_table==2) {
-            return Lainya::where('nim_pemesan', $model->nim_pemesan)->komentar;
+            return Lainya::find($model->id)->komentar;
         }
     }
 }

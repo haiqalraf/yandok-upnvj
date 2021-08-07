@@ -38,7 +38,13 @@
                             <th>Daftar Pesanan</th>
                             <th>Jumlah </th>
                             @if (in_array($lainnya->verifikasi, [2,3]))
-                            <th>Dokumen Selesai</th>
+                                @if (auth()->user()->is_admin==2)
+                                <th>Persyaratan</th>
+                                @else
+                                <th>Dokumen Selesai</th>
+                                @endif
+                            @elseif (in_array($lainnya->verifikasi, [0]))
+                            <th>Catatan Penolakan</th>
                             @else
                             <th>Persyaratan</th>
                             @endif
@@ -69,6 +75,12 @@
                                         </label>
                                         <p style="font-size: 10px; color: slategray;">Catatan : Harap untuk di kompress dalam bentuk
                                             RAR/ZIP sebelum di upload</p>
+                                    </td>
+                                @elseif ($lainnya->verifikasi===3 && auth()->user()->is_admin==2)
+                                    <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
+                                        <a href="{{route('akpk.download', [ 
+                                            'filePath' => 'lainnya/'.$lainnya->file
+                                            ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     </td>
                                 @elseif ($lainnya->verifikasi===3)
                                     <td class="align-middle text-center">

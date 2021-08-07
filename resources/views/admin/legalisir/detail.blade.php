@@ -37,7 +37,11 @@
                             <th>Daftar Pesanan</th>
                             <th>Jumlah </th>
                             @if (in_array($legalisir->verifikasi, [2,3]))
-                            <th>Dokumen Selesai</th>
+                                @if (auth()->user()->is_admin==2)
+                                <th>Persyaratan</th>
+                                @else
+                                <th>Dokumen Selesai</th>
+                                @endif
                             @elseif (in_array($legalisir->verifikasi, [0]))
                             <th>Catatan Penolakan</th>
                             @else
@@ -79,6 +83,21 @@
                                         </label>
                                         <p style="font-size: 10px; color: slategray;">Catatan : Harap untuk di kompress dalam bentuk
                                             RAR/ZIP sebelum di upload</p>
+                                    </td>
+                                @elseif ($legalisir->verifikasi===3 && auth()->user()->is_admin==2)
+                                    <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
+                                        <div class="d-flex justify-content-center">
+                                            <ol type="number" class="text-left" style="font-size: 13px;">
+                                                <li>Scan FC Transkrip</li>
+                                                <li>Surat permohonan yang ditujukan ke dekan</li>
+                                                <li>Akte kelahiran / Akte Notaris</li>
+                                                <li>Foto 3x4 hitam putih</li>
+                                            </ol>
+                                        </div>
+                                        <br>
+                                        <a href="{{route('akpk.download', [ 
+                                            'filePath' => 'legalisir/'.$legalisir->file
+                                            ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     </td>
                                 @elseif ($legalisir->verifikasi===3)
                                     <td class="align-middle text-center">

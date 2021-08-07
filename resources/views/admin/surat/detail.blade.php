@@ -43,6 +43,8 @@
                                 @else
                                 <th>Dokumen Selesai</th>
                                 @endif
+                            @elseif (in_array($surat->verifikasi, [0]))
+                            <th>Catatan Penolakan</th>
                             @else
                             <th>Persyaratan</th>
                             @endif
