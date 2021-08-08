@@ -108,7 +108,7 @@ class PesananController extends Controller
                     $username = User::where('nim', $legalisir->nim_pemesan)->first()->name;
                     $date = now("Asia/Jakarta")->format('YmdHis');
     
-                    $newName = $date . '_' . 'legalisir' . '_' . $username . '.' . $extension;
+                    $newName = $date . '_dok_dipesan_' . 'legalisir' . '_' . $username . '.' . $extension;
     
                     if (!Storage::disk('local')->exists('legalisir/selesai/' . $newName)) {
                         Storage::disk('local')->put('legalisir/selesai/' . $newName, $file->get());
@@ -198,7 +198,7 @@ class PesananController extends Controller
                     $username = User::where('nim', $surat->nim_pemesan)->first()->name;
                     $date = now("Asia/Jakarta")->format('YmdHis');
     
-                    $newName = $date . '_' . Str::slug($surat->dokumen_dipesan, '') . '_' . $username . '.' . $extension;
+                    $newName = $date . '_dok_dipesan_' . Str::slug($surat->dokumen_dipesan, '') . '_' . $username . '.' . $extension;
     
                     if (!Storage::disk('local')->exists('suket/selesai/' . $newName)) {
                         Storage::disk('local')->put('suket/selesai/' . $newName, $file->get());
@@ -287,7 +287,7 @@ class PesananController extends Controller
                     $username = User::where('nim', $lainnya->nim_pemesan)->first()->name;
                     $date = now("Asia/Jakarta")->format('YmdHis');
     
-                    $newName = $date . '_' . Str::slug($lainnya->dokumen_dipesan, '') . '_' . $username . '.' . $extension;
+                    $newName = $date . '_dok_dipesan_' . Str::slug($lainnya->dokumen_dipesan, '') . '_' . $username . '.' . $extension;
     
                     if (!Storage::disk('local')->exists('lainnya/selesai/' . $newName)) {
                         Storage::disk('local')->put('lainnya/selesai/' . $newName, $file->get());

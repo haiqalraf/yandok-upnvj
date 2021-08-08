@@ -67,7 +67,7 @@ class LegalisirController extends Controller
             $username = auth()->user()->name;
             $date = now("Asia/Jakarta")->format('YmdHis');
 
-            $newName = $date . '_ijazah_' . $username . '.' . $extension;
+            $newName = $date . '_persyaratan_ijazah_' . $username . '.' . $extension;
 
             if (!Storage::disk('local')->exists('legalisir/' . $newName)) {
                 Storage::disk('local')->put('legalisir/' . $newName, $file->get());

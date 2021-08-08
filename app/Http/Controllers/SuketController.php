@@ -60,7 +60,7 @@ class SuketController extends Controller
                 $username = auth()->user()->name;
                 $date = now("Asia/Jakarta")->format('YmdHis');
     
-                $file_pengganti = $date . '_'.Str::slug($request->jenis_pengganti,'').'_' . $username . '.' . $extension;
+                $file_pengganti = $date . '_persyaratan_'.Str::slug($request->jenis_pengganti,'').'_' . $username . '.' . $extension;
 
                 $suket_pengganti->nim_pemesan = auth()->user()->nim;
                 $suket_pengganti->dokumen_dipesan = $request->jenis_pengganti;

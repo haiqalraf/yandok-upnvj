@@ -52,7 +52,7 @@ class LainyaController extends Controller
             $username = auth()->user()->name;
             $date = now("Asia/Jakarta")->format('YmdHis');
 
-            $newName = $date . '_'.Str::slug($request->dokumen_dipesan, '').'_' . $username . '.' . $extension;
+            $newName = $date . '_persyaratan_'.Str::slug($request->dokumen_dipesan, '').'_' . $username . '.' . $extension;
 
             if (!Storage::disk('local')->exists('lainnya/' . $newName)) {
                 Storage::disk('local')->put('lainnya/' . $newName, $file->get());
