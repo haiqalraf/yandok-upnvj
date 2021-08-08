@@ -76,7 +76,7 @@
                                         <p style="font-size: 10px; color: slategray;">Catatan : Harap untuk di kompress dalam bentuk
                                             RAR/ZIP sebelum di upload</p>
                                     </td>
-                                @elseif ($lainnya->verifikasi===3 && auth()->user()->is_admin==2)
+                                @elseif ($lainnya->verifikasi===2 && auth()->user()->is_admin==2)
                                     <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
                                         <a href="{{route('akpk.download', [ 
                                             'filePath' => 'lainnya/'.$lainnya->file

@@ -99,7 +99,7 @@
                                         <p style="font-size: 10px; color: slategray;">Catatan : Harap untuk di kompress dalam bentuk
                                             RAR/ZIP sebelum di upload</p>
                                     </td>
-                                @elseif ($surat->verifikasi===3 && auth()->user()->is_admin==2)
+                                @elseif ($surat->verifikasi===2 && auth()->user()->is_admin==2)
                                     <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
                                         <div class="d-flex justify-content-center">
                                             <ol type="number" class="text-left" style="font-size: 13px;">
