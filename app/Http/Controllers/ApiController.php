@@ -83,7 +83,7 @@ class ApiController extends Controller
         $url = "https://api.upnvj.ac.id/mahasiswa/getAlumni";
 
         $headers = [
-            'Authorization' => 'Basic c2lha2FkOlMxNGs0ZA=='
+            'Authorization' => env('UPN_API_KEY', '')
         ];
 
         $mybody = [
