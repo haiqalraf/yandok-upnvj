@@ -40,6 +40,7 @@
                                 @if (auth()->user()->is_admin==2)
                                 <th>Persyaratan</th>
                                 @else
+                                <th>Persyaratan</th>
                                 <th>Dokumen Selesai</th>
                                 @endif
                             @elseif (in_array($legalisir->verifikasi, [0]))
@@ -53,7 +54,7 @@
                         @foreach ($daftar_pesanan as $key => $item)
                         <tr>
                             @if ($loop->first)
-                                <td rowspan="3" class="text-center align-middle">{{$legalisir->id}}</td>
+                                <td rowspan="12" class="text-center align-middle">{{$legalisir->id}}</td>
                             @endif
                             <td>{{$key}}</td>
                             <td class="text-center">{{$item}}</td>
@@ -62,7 +63,7 @@
                                 @if ($legalisir->verifikasi===0 && auth()->user()->is_admin==2)
                                 <td>{{$legalisir->komentar?$legalisir->komentar : "Tidak ada Catatan"}}</td>
                                 @elseif ($legalisir->verifikasi===1 && auth()->user()->is_admin==2)
-                                    <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
+                                    <td rowspan="12" class="align-middle text-center" style="font-size: 15px;">
                                         <div class="d-flex justify-content-center">
                                             <ol type="number" class="text-left" style="font-size: 13px;">
                                                 <li>Scan FC Transkrip</li>
@@ -77,7 +78,21 @@
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     </td>
                                 @elseif ($legalisir->verifikasi===2 && auth()->user()->is_admin==3)
-                                    <td class="align-middle text-center">
+                                    <td rowspan="12" class="align-middle text-center" style="font-size: 15px;">
+                                        <div class="d-flex justify-content-center">
+                                            <ol type="number" class="text-left" style="font-size: 13px;">
+                                                <li>Scan FC Transkrip</li>
+                                                <li>Surat permohonan yang ditujukan ke dekan</li>
+                                                <li>Akte kelahiran / Akte Notaris</li>
+                                                <li>Foto 3x4 hitam putih</li>
+                                            </ol>
+                                        </div>
+                                        <br>
+                                        <a href="{{route('dekan.download', [ 
+                                            'filePath' => 'legalisir/'.$legalisir->file
+                                            ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
+                                    </td>
+                                    <td rowspan="12" class="align-middle text-center">
                                         <label for="Upload" class="btn-light p-2 rounded" id="upload" name="upload">
                                             <input type="file" name="upload">
                                         </label>
@@ -85,7 +100,7 @@
                                             RAR/ZIP sebelum di upload</p>
                                     </td>
                                 @elseif ($legalisir->verifikasi===2 && auth()->user()->is_admin==2)
-                                    <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
+                                    <td rowspan="12" class="align-middle text-center" style="font-size: 15px;">
                                         <div class="d-flex justify-content-center">
                                             <ol type="number" class="text-left" style="font-size: 13px;">
                                                 <li>Scan FC Transkrip</li>
@@ -99,15 +114,43 @@
                                             'filePath' => 'legalisir/'.$legalisir->file
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     </td>
-                                @elseif ($legalisir->verifikasi===3)
-                                    <td class="align-middle text-center">
+                                @elseif ($legalisir->verifikasi===3 && auth()->user()->is_admin==3)
+                                    <td rowspan="12" class="align-middle text-center" style="font-size: 15px;">
+                                        <div class="d-flex justify-content-center">
+                                            <ol type="number" class="text-left" style="font-size: 13px;">
+                                                <li>Scan FC Transkrip</li>
+                                                <li>Surat permohonan yang ditujukan ke dekan</li>
+                                                <li>Akte kelahiran / Akte Notaris</li>
+                                                <li>Foto 3x4 hitam putih</li>
+                                            </ol>
+                                        </div>
+                                        <br>
+                                        <a href="{{route('dekan.download', [ 
+                                            'filePath' => 'legalisir/'.$legalisir->file
+                                            ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
+                                    </td>
+                                    <td rowspan="12" class="align-middle text-center">
                                         <a href="{{route('dekan.download', [ 
                                             'filePath' => 'legalisir/selesai/'.$legalisir->final_dokumen
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     </td>
                                 @endif
-                                
-                            @endif
+                                @elseif ($legalisir->verifikasi===3 && auth()->user()->is_admin==2)
+                                    <td rowspan="12" class="align-middle text-center" style="font-size: 15px;">
+                                        <div class="d-flex justify-content-center">
+                                            <ol type="number" class="text-left" style="font-size: 13px;">
+                                                <li>Scan FC Transkrip</li>
+                                                <li>Surat permohonan yang ditujukan ke dekan</li>
+                                                <li>Akte kelahiran / Akte Notaris</li>
+                                                <li>Foto 3x4 hitam putih</li>
+                                            </ol>
+                                        </div>
+                                        <br>
+                                        <a href="{{route('akpk.download', [ 
+                                            'filePath' => 'legalisir/'.$legalisir->file
+                                            ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
+                                    </td>
+                                @endif
                         </tr>
                         @endforeach
                     </tbody>
