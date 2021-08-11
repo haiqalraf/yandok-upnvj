@@ -37,7 +37,11 @@ class CreatePesananSeeder extends Seeder
             [
                 'id'=>'124',
                 'nim_pemesan'=>'18105',
-                'dokumen_dipesan'=>'Surat Keterangan Ralat Ijazah',
+                'dokumen_dipesan'=>[
+                    'jenis_ralat' => [
+                        1 => 'Surat Keterangan Ralat Ijazah'
+                    ]
+                ],
                 'verifikasi'=>'1',
                 'created_at'=>'2021-07-31 16:46:47',
             ]
