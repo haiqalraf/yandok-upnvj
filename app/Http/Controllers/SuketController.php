@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Suket;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class SuketController extends Controller
 {
@@ -37,124 +39,71 @@ class SuketController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'upload.1' => [
+                Rule::requiredIf(
+                    $request->filled('pesan.jenis_pengganti')
+                ),
+                'file',
+                'mimes:rar,zip'
+            ],
+            'upload.2' => [
+                Rule::requiredIf(
+                    ($request->filled('pesan.jenis_perubahan'))
+                    || ($request->filled('pesan.jenis_ralat'))
+                ), 
+                'file',
+                'mimes:zip,rar'
+            ],
+            'upload.3' => [
+                Rule::requiredIf($request->filled('pesan.jenis_alumni')), 
+                'file',
+                'mimes:zip,rar'
+            ],
+        ]);
 
-        $suket_pengganti = new Suket;
-        $suket_perubahan = new Suket;
-        $suket_ralat = new Suket;
-        $suket_alumni = new Suket;
-
-        $file_pengganti = "";
-        $file_perubahan = "";
-        $file_ralat = "";
-        $file_alumni = "";
-
-        if (!empty($request->jenis_pengganti)) {
-            $request->validate([
-                'upload_pengganti' => 'required|file|mimes:zip,rar'
-            ]);
-
-            if ($request->hasFile('upload_pengganti')) {
-                $file = $request->file("upload_pengganti");
-    
-                $extension = $file->getClientOriginalExtension();
-                $username = auth()->user()->name;
-                $date = now("Asia/Jakarta")->format('YmdHis');
-    
-                $file_pengganti = $date . '_persyaratan_'.Str::slug($request->jenis_pengganti,'').'_' . $username . '.' . $extension;
-
-                $suket_pengganti->nim_pemesan = auth()->user()->nim;
-                $suket_pengganti->dokumen_dipesan = $request->jenis_pengganti;
-                $suket_pengganti->file = $file_pengganti;
-            } else {
-                return back()->with("message", "File Not Found");
-            }
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
         }
 
-        if (!empty($request->jenis_perubahan)) {
-            $request->validate([
-                'upload_perubahan_ralat' => 'required|file|mimes:zip,rar'
-            ]);
+        $suket = new Suket;
+        $suket->nim_pemesan = auth()->user()->nim;
+        $dokumen = $suket->dokumen_dipesan;
+        $files = $suket->file;
+        foreach ($request->pesan as $keys => $values) {
+            foreach ($values as $key => $value) {
+                $dokumen[$keys][$key] = $value;
+                $key_file = 0;
+                $filename = '';
+                if ($keys == 'jenis_pengganti') {
+                    $key_file = 1;
+                } else if ($keys == 'jenis_perubahan' || $keys == 'jenis_ralat') {
+                    $key_file = 2;
+                } else if ($keys == 'jenis_alumni') {
+                    $key_file = 3;
+                }
 
-            if ($request->hasFile('upload_perubahan_ralat')) {
-                $file = $request->file("upload_perubahan_ralat");
-    
-                $extension = $file->getClientOriginalExtension();
-                $username = auth()->user()->name;
-                $date = now("Asia/Jakarta")->format('YmdHis');
-    
-                $file_perubahan = $date . '_'.Str::slug($request->jenis_perubahan,'').'_' . $username . '.' . $extension;
-
-                $suket_perubahan->nim_pemesan = auth()->user()->nim;
-                $suket_perubahan->dokumen_dipesan = $request->jenis_perubahan;
-                $suket_perubahan->file = $file_perubahan;
-            } else {
-                return back()->with("message", "File Not Found");
-            }
-        }
-
-        if (!empty($request->jenis_ralat)) {
-            $request->validate([
-                'upload_perubahan_ralat' => 'required|file|mimes:zip,rar'
-            ]);
-
-            if ($request->hasFile('upload_perubahan_ralat')) {
-                $file = $request->file("upload_perubahan_ralat");
-    
-                $extension = $file->getClientOriginalExtension();
-                $username = auth()->user()->name;
-                $date = now("Asia/Jakarta")->format('YmdHis');
-    
-                $file_ralat = $date . '_'.Str::slug($request->jenis_ralat,'').'_' . $username . '.' . $extension;
-
-                $suket_ralat->nim_pemesan = auth()->user()->nim;
-                $suket_ralat->dokumen_dipesan = $request->jenis_ralat;
-                $suket_ralat->file = $file_ralat;
-            } else {
-                return back()->with("message", "File Not Found");
-            }
-        }
+                if ($request->hasFile('upload.'.$key_file)) {
+                    $file = $request->file("upload.".$key_file);
         
-        if (!empty($request->jenis_alumni)) {
-            $request->validate([
-                'upload_alumni' => 'required|file|mimes:zip,rar'
-            ]);
-
-            if ($request->hasFile('upload_alumni')) {
-                $file = $request->file("upload_alumni");
+                    $extension = $file->getClientOriginalExtension();
+                    $username = auth()->user()->name;
+                    $date = now("Asia/Jakarta")->format('YmdHis');
+        
+                    $filename = $date . '_persyaratan_'.Str::slug($value,'').'_' . $username . '.' . $extension;
+                    $files[$key_file] = $filename;
+                } else {
+                    return back()->with("message", "File Not Found");
+                }
     
-                $extension = $file->getClientOriginalExtension();
-                $username = auth()->user()->name;
-                $date = now("Asia/Jakarta")->format('YmdHis');
-    
-                $file_alumni = $date . '_'.Str::slug($request->jenis_alumni,'').'_' . $username . '.' . $extension;
-
-                $suket_alumni->nim_pemesan = auth()->user()->nim;
-                $suket_alumni->dokumen_dipesan = $request->jenis_alumni;
-                $suket_alumni->file = $file_alumni;
-            } else {
-                return back()->with("message", "File Not Found");
+                if (!Storage::disk('local')->exists('suket/' .$filename ) && !empty($filename)) {
+                    Storage::disk('local')->put('suket/' . $filename, $request->file('upload.'.$key_file)->get());
+                }
             }
         }
-
-        if (!Storage::disk('local')->exists('suket/' . $file_pengganti) && !empty($file_pengganti)) {
-            Storage::disk('local')->put('suket/' . $file_pengganti, $request->file('upload_pengganti')->get());
-            $suket_pengganti->save();
-        }
-
-        if (!Storage::disk('local')->exists('suket/' . $file_perubahan) && !empty($file_perubahan)) {
-            Storage::disk('local')->put('suket/' . $file_perubahan, $request->file('upload_perubahan_ralat')->get());
-            $suket_perubahan->save();
-        }
-
-        if (!Storage::disk('local')->exists('suket/' . $file_ralat) && !empty($file_ralat)) {
-            Storage::disk('local')->put('suket/' . $file_ralat, $request->file('upload_perubahan_ralat')->get());
-            $suket_ralat->save();
-        }
-        
-        if (!Storage::disk('local')->exists('suket/' . $file_alumni) && !empty($file_alumni)) {
-            Storage::disk('local')->put('suket/' . $file_alumni, $request->file('upload_alumni')->get());
-            $suket_alumni->save();
-        }
+        $suket->dokumen_dipesan = $dokumen;
+        $suket->file = $files;
+        $suket->save();
         
         return redirect('/home');
     }

@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
    <div class="container mb-5">
       <form action="{{url('surat')}}" method="POST" class="row" enctype="multipart/form-data">
          @csrf
@@ -27,15 +36,15 @@
                               <div class="bordered">
                                  <div class="control-group after-add-more pl-3">
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_pengganti[1]" id="jenisPengganti1" value="Surat Keterangan Pengganti Ijazah">
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_pengganti][1]" id="jenisPengganti1" value="Surat Keterangan Pengganti Ijazah">
                                        <label class="form-check-label" for="jenisPengganti1">Surat Keterangan Pengganti Ijazah</label>
                                     </div>
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_pengganti[2]" id="jenisPengganti2" value="Surat Keterangan Pengganti Transkrip">
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_pengganti][2]" id="jenisPengganti2" value="Surat Keterangan Pengganti Transkrip">
                                        <label class="form-check-label" for="jenisPengganti2">Surat Keterangan Pengganti Transkrip</label>
                                     </div>
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_pengganti[3]" id="jenisPengganti3" value="Surat Keterangan Pengganti SKPI">
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_pengganti][3]" id="jenisPengganti3" value="Surat Keterangan Pengganti SKPI">
                                        <label class="form-check-label" for="jenisPengganti3">Surat Keterangan Pengganti SKPI</label>
                                     </div>
                                     <br><br>
@@ -57,7 +66,7 @@
                         </div>
                         <br>
 
-                        <input type="file" id="upload" name="upload_pengganti" hidden>
+                        <input type="file" id="upload" name="upload[1]" hidden>
                         <label for="upload" class="btn-light p-2 rounded">Upload <i class="fa fa-upload"></i></label>
                         <span id="file-chosen" style="font-size: 12px; font-weight: 400; color:cadetblue;">
                            Tidak ada file yang dipilih.
@@ -86,11 +95,11 @@
                               <div class="bordered">
                                  <div class="control-group after-add-more pl-3">
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_perubahan[1]" id="jenisPerubahan1" value="Surat Keterangan Perubahan Ijazah">
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_perubahan][1]" id="jenisPerubahan1" value="Surat Keterangan Perubahan Ijazah">
                                        <label class="form-check-label" for="jenisPerubahan1">Surat Keterangan Perubahan Ijazah</label>
                                     </div>
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_perubahan[2]" id="jenisPerubahan2" value="Surat Keterangan Perubahan Transkrip">
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_perubahan][2]" id="jenisPerubahan2" value="Surat Keterangan Perubahan Transkrip">
                                        <label class="form-check-label" for="jenisPerubahan2">Surat Keterangan Perubahan Transkrip</label>
                                     </div>
                                     <br><br>
@@ -111,7 +120,7 @@
                         </div>
                         <br>
 
-                        <input type="file" id="upload2" name="upload_perubahan_ralat" hidden>
+                        <input type="file" id="upload2" name="upload[2]" hidden>
                         <label for="upload2" class="btn-light p-2 rounded">Upload <i class="fa fa-upload"></i></label>
                         <span id="file-chosen2" style="font-size: 12px; font-weight: 400; color:cadetblue;">
                            Tidak ada file yang dipilih.
@@ -140,11 +149,11 @@
                               <div class="bordered">
                                  <div class="control-group after-add-more pl-3">
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_ralat[1]" id="jenisRalat1" value="Surat Keterangan Ralat Ijazah">
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_ralat][1]" id="jenisRalat1" value="Surat Keterangan Ralat Ijazah">
                                        <label class="form-check-label" for="jenisRalat1">Surat Keterangan Ralat Ijazah</label>
                                     </div>
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_ralat[2]" id="jenisRalat2" value="Surat Keterangan Ralat Transkrip">
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_ralat][2]" id="jenisRalat2" value="Surat Keterangan Ralat Transkrip">
                                        <label class="form-check-label" for="jenisRalat2">Surat Keterangan Perubahan Transkrip</label>
                                     </div>
                                     <br><br>
@@ -164,8 +173,8 @@
                               <div class="bordered">
                                  <div class="control-group after-add-more pl-3">
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_alumni[1]" id="jenisAlumni1" value="Surat Keterangan Alumni">
-                                       <label class="form-check-label" for="jenisRalat1">Surat Keterangan Alumni</label>
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_alumni][1]" id="jenisAlumni1" value="Surat Keterangan Alumni">
+                                       <label class="form-check-label" for="jenisAlumni1">Surat Keterangan Alumni</label>
                                     </div>
                                     <br><br>
                                  </div>
@@ -181,7 +190,7 @@
                         </div>
                         <br>
 
-                        <input type="file" id="upload3" name="upload_alumni" hidden>
+                        <input type="file" id="upload3" name="upload[3]" hidden>
                         <label for="upload3" class="btn-light p-2 rounded">Upload <i class="fa fa-upload"></i></label>
                         <span id="file-chosen3" style="font-size: 12px; font-weight: 400; color:cadetblue;">
                            Tidak ada file yang dipilih.

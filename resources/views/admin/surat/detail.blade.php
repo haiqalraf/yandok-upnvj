@@ -54,30 +54,33 @@
                         @foreach ($daftar_pesanan as $key => $item)
                         <tr>
                             @if ($loop->first)
-                                <td rowspan="3" class="text-center align-middle">{{$surat->id}}</td>
+                                <td rowspan="{{$daftar_pesanan->count()}}" class="text-center align-middle">{{$surat->id}}</td>
                             @endif
                             <td>{{$key}}</td>
                             <td class="text-center">{{$item}}</td>
 
-                            @if ($loop->first)
+                            
                             @if ($surat->verifikasi===0 && auth()->user()->is_admin==2)
                             <td>{{$surat->komentar?$surat->komentar : "Tidak ada Catatan"}}</td>
                             @elseif ($surat->verifikasi===1 && auth()->user()->is_admin==2)
-                                <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
+                                <td class="align-middle text-center" style="font-size: 15px;">
                                         <div class="d-flex justify-content-center">
                                             <ol type="number" class="text-left" style="font-size: 13px;">
                                                 @if (strpos($key, 'Pengganti'))
-                                                <li>Scan FC Transkrip</li>
+                                                <li>Scan FC Ijazah (Bagi yang memesan Pengganti Ijazah)</li>
+                                                <li>Scan FC Transkrip (Bagi yang memesan Pengganti Transkrip)</li>
+                                                <li>Scan FC SKPI (Bagi yang memesan Pengganti SKPI)</li>
                                                 <li>Surat permohonan yang ditujukan ke dekan</li>
                                                 <li>Akte kelahiran / Akte Notaris</li>
                                                 <li>Foto 3x4 hitam putih</li>
                                                 @elseif (strpos($key, 'Perubahan')||strpos($key, 'Ralat'))
-                                                <li>Scan FC SKPI</li>
+                                                <li>Scan FC Ijazah (Bagi yang memesan Perubahan/Ralat Ijazah)</li>
+                                                <li>Scan FC Transkrip (Bagi yang memesan Perubahan/Ralat Transkrip)</li>
                                                 <li>Surat permohonan yang ditujukan ke dekan</li>
                                                 <li>Surat Keterangan Hilang Dari Polisi</li>
                                                 <li>Foto 3x4 hitam putih</li>
                                                 @elseif (strpos($key, 'Alumni'))
-                                                <li>Scan Ijazah dan Transkrip Nilai</li>
+                                                <li>Scan Ijazah / Transkrip Nilai</li>
                                                 @endif
                                                 {{-- <li>Scan FC Transkrip</li>
                                                 <li>Surat permohonan yang ditujukan ke dekan</li>
@@ -86,35 +89,55 @@
                                             </ol>
                                         </div>
                                         <br>
-            
+                                        @if (strpos($key, 'Pengganti'))
+                                        @isset($surat->file[1])
                                         <a href="{{route('akpk.download', [ 
-                                            'filePath' => 'suket/'.$surat->file
+                                            'filePath' => 'suket/'.$surat->file[1]
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
+                                        @endisset
+                                        @elseif (strpos($key, 'Perubahan')||strpos($key, 'Ralat'))
+                                        @isset($surat->file[2])
+                                        <a href="{{route('akpk.download', [ 
+                                            'filePath' => 'suket/'.$surat->file[2]
+                                            ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
+                                        @endisset
+                                        @elseif (strpos($key, 'Alumni'))
+                                        @isset($surat->file[3])
+                                        <a href="{{route('akpk.download', [ 
+                                            'filePath' => 'suket/'.$surat->file[3]
+                                            ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
+                                        @endisset
+                                        @endif
                                     </td>
                                 @elseif ($surat->verifikasi===2 && auth()->user()->is_admin==3)
-                                    <td class="align-middle text-center">
+                                    @if ($loop->first)
+                                    <td rowspan="{{$daftar_pesanan->count()}}" class="align-middle text-center">
                                         <label for="Upload" class="btn-light p-2 rounded" id="upload" name="upload">
                                             <input type="file" name="upload">
                                         </label>
                                         <p style="font-size: 10px; color: slategray;">Catatan : Harap untuk di kompress dalam bentuk
                                             RAR/ZIP sebelum di upload</p>
                                     </td>
+                                    @endif
                                 @elseif ($surat->verifikasi===2 && auth()->user()->is_admin==2)
-                                    <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
+                                    <td class="align-middle text-center" style="font-size: 15px;">
                                         <div class="d-flex justify-content-center">
                                             <ol type="number" class="text-left" style="font-size: 13px;">
                                                 @if (strpos($key, 'Pengganti'))
-                                                <li>Scan FC Transkrip</li>
+                                                <li>Scan FC Ijazah (Bagi yang memesan Pengganti Ijazah)</li>
+                                                <li>Scan FC Transkrip (Bagi yang memesan Pengganti Transkrip)</li>
+                                                <li>Scan FC SKPI (Bagi yang memesan Pengganti SKPI)</li>
                                                 <li>Surat permohonan yang ditujukan ke dekan</li>
                                                 <li>Akte kelahiran / Akte Notaris</li>
                                                 <li>Foto 3x4 hitam putih</li>
                                                 @elseif (strpos($key, 'Perubahan')||strpos($key, 'Ralat'))
-                                                <li>Scan FC SKPI</li>
+                                                <li>Scan FC Ijazah (Bagi yang memesan Perubahan/Ralat Ijazah)</li>
+                                                <li>Scan FC Transkrip (Bagi yang memesan Perubahan/Ralat Transkrip)</li>
                                                 <li>Surat permohonan yang ditujukan ke dekan</li>
                                                 <li>Surat Keterangan Hilang Dari Polisi</li>
                                                 <li>Foto 3x4 hitam putih</li>
                                                 @elseif (strpos($key, 'Alumni'))
-                                                <li>Scan Ijazah dan Transkrip Nilai</li>
+                                                <li>Scan Ijazah / Transkrip Nilai</li>
                                                 @endif
                                                 {{-- <li>Scan FC Transkrip</li>
                                                 <li>Surat permohonan yang ditujukan ke dekan</li>
@@ -124,19 +147,39 @@
                                         </div>
                                         <br>
             
+                                        @if (strpos($key, 'Pengganti'))
+                                        @isset($surat->file[1])
                                         <a href="{{route('akpk.download', [ 
-                                            'filePath' => 'suket/'.$surat->file
+                                            'filePath' => 'suket/'.$surat->file[1]
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
+                                        @endisset
+                                        @elseif (strpos($key, 'Perubahan')||strpos($key, 'Ralat'))
+                                        @isset($surat->file[2])
+                                        <a href="{{route('akpk.download', [ 
+                                            'filePath' => 'suket/'.$surat->file[2]
+                                            ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
+                                        @endisset
+                                        @elseif (strpos($key, 'Alumni'))
+                                        @isset($surat->file[3])
+                                        <a href="{{route('akpk.download', [ 
+                                            'filePath' => 'suket/'.$surat->file[3]
+                                            ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
+                                        @endisset
+                                        @endif
                                     </td>
                                 @elseif ($surat->verifikasi===3)
-                                    <td class="align-middle text-center">
-                                        <a href="{{route('dekan.download', [ 
-                                            'filePath' => 'suket/selesai/'.$surat->final_dokumen
-                                            ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
-                                    </td>
+                                @if ($loop->first)
+                                <td rowspan="{{$daftar_pesanan->count()}}" class="align-middle text-center">
+                                    
+                                    <a href="{{route('dekan.download', [ 
+                                        'filePath' => 'suket/selesai/'.$surat->final_dokumen
+                                        ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
+                                </td>
                                 @endif
                                 
-                            @endif
+                                @endif
+                                
+                            
                         </tr>
                         @endforeach
                     </tbody>
