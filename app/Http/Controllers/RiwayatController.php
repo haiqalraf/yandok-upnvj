@@ -101,13 +101,16 @@ class RiwayatController extends Controller
                 $Suket = new Suket();
                 $res = $Suket->getData($nim, $id_pesanan, 'single');
 
-                $temp = [
-                    'jenis' => $res->dokumen_dipesan,
-                    'jumlah' => 1
-                ];
+                foreach ($res->dokumen_dipesan as $values) {
+                    foreach ($values as $key => $value) {
+                        $temp = [
+                            'jenis' => $value,
+                            'jumlah' => 1
+                        ];
     
-                array_push($arr, $temp);
-    
+                        array_push($arr, $temp);
+                    }
+                }
                 $results->table = $arr;
 
             } else if ($results->source_table == 2){

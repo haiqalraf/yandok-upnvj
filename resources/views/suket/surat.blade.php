@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
    <div class="container mb-5">
       <form action="{{url('surat')}}" method="POST" class="row" enctype="multipart/form-data">
          @csrf
@@ -25,13 +34,19 @@
                            <div class="panel-body">
                               <!-- membuat form  -->
                               <div class="bordered">
-                                 <div class="control-group after-add-more">
-                                    <select class="form-control" name="jenis_pengganti">
-                                       <option value="" selected>-- Pilih Jenis Dokumen Di Sini --</option>
-                                       <option value="Surat Keterangan Pengganti Ijazah">Surat Keterangan Pengganti Ijazah</option>
-                                       <option value="Surat Keterangan Pengganti Transkrip">Surat Keterangan Pengganti Transkrip</option>
-                                       <option value="Surat Keterangan Pengganti SKPI">Surat Keterangan Pengganti SKPI</option>
-                                    </select>
+                                 <div class="control-group after-add-more pl-3">
+                                    <div class="form-check">
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_pengganti][1]" id="jenisPengganti1" value="Surat Keterangan Pengganti Ijazah">
+                                       <label class="form-check-label" for="jenisPengganti1">Surat Keterangan Pengganti Ijazah</label>
+                                    </div>
+                                    <div class="form-check">
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_pengganti][2]" id="jenisPengganti2" value="Surat Keterangan Pengganti Transkrip">
+                                       <label class="form-check-label" for="jenisPengganti2">Surat Keterangan Pengganti Transkrip</label>
+                                    </div>
+                                    <div class="form-check">
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_pengganti][3]" id="jenisPengganti3" value="Surat Keterangan Pengganti SKPI">
+                                       <label class="form-check-label" for="jenisPengganti3">Surat Keterangan Pengganti SKPI</label>
+                                    </div>
                                     <br><br>
                                  </div>
                               </div>
@@ -41,7 +56,9 @@
                      <td class="align-middle text-center" style="font-size: 15px;">
                         <div class="d-flex justify-content-center">
                            <ol type="number" class="text-left" style="font-size: 13px;">
-                              <li>Scan FC Transkrip</li>
+                              <li>Scan FC Ijazah (Bagi yang memesan Pengganti Ijazah)</li>
+                              <li>Scan FC Transkrip (Bagi yang memesan Pengganti Transkrip)</li>
+                              <li>Scan FC SKPI (Bagi yang memesan Pengganti SKPI)</li>
                               <li>Surat permohonan yang ditujukan ke dekan</li>
                               <li>Akte kelahiran / Akte Notaris</li>
                               <li>Foto 3x4 hitam putih</li>
@@ -49,7 +66,7 @@
                         </div>
                         <br>
 
-                        <input type="file" id="upload" name="upload_pengganti" hidden>
+                        <input type="file" id="upload" name="upload[1]" hidden>
                         <label for="upload" class="btn-light p-2 rounded">Upload <i class="fa fa-upload"></i></label>
                         <span id="file-chosen" style="font-size: 12px; font-weight: 400; color:cadetblue;">
                            Tidak ada file yang dipilih.
@@ -76,13 +93,15 @@
                            <div class="panel-body">
                               <!-- membuat form  -->
                               <div class="bordered">
-                                 <div class="control-group after-add-more">
-                                    <select class="form-control" name="jenis_perubahan">
-                                       <option value="" selected>-- Pilih Jenis Dokumen Di Sini --</option>
-                                       <option value="Surat Keterangan Perubahan Ijazah">Surat Keterangan Perubahan Ijazah</option>
-                                       <option value="Surat Keterangan Perubahan Transkrip">Surat Keterangan Perubahan Transkrip</option>
-                                       <option value="Surat Keterangan Perubahan SKPI">Surat Keterangan Perubahan SKPI</option>
-                                    </select>
+                                 <div class="control-group after-add-more pl-3">
+                                    <div class="form-check">
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_perubahan][1]" id="jenisPerubahan1" value="Surat Keterangan Perubahan Ijazah">
+                                       <label class="form-check-label" for="jenisPerubahan1">Surat Keterangan Perubahan Ijazah</label>
+                                    </div>
+                                    <div class="form-check">
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_perubahan][2]" id="jenisPerubahan2" value="Surat Keterangan Perubahan Transkrip">
+                                       <label class="form-check-label" for="jenisPerubahan2">Surat Keterangan Perubahan Transkrip</label>
+                                    </div>
                                     <br><br>
                                  </div>
                               </div>
@@ -92,7 +111,8 @@
                      <td rowspan="2" class="align-middle text-center" style="font-size: 15px;">
                         <div class="d-flex justify-content-center">
                            <ol type="number" class="text-left" style="font-size: 13px;">
-                              <li>Scan FC SKPI</li>
+                              <li>Scan FC Ijazah (Bagi yang memesan Perubahan/Ralat Ijazah)</li>
+                              <li>Scan FC Transkrip (Bagi yang memesan Perubahan/Ralat Transkrip)</li>
                               <li>Surat permohonan yang ditujukan ke dekan</li>
                               <li>Surat Keterangan Hilang Dari Polisi</li>
                               <li>Foto 3x4 hitam putih</li>
@@ -100,7 +120,7 @@
                         </div>
                         <br>
 
-                        <input type="file" id="upload2" name="upload_perubahan_ralat" hidden>
+                        <input type="file" id="upload2" name="upload[2]" hidden>
                         <label for="upload2" class="btn-light p-2 rounded">Upload <i class="fa fa-upload"></i></label>
                         <span id="file-chosen2" style="font-size: 12px; font-weight: 400; color:cadetblue;">
                            Tidak ada file yang dipilih.
@@ -127,13 +147,15 @@
                            <div class="panel-body">
                               <!-- membuat form  -->
                               <div class="bordered">
-                                 <div class="control-group after-add-more">
-                                    <select class="form-control" name="jenis_ralat">
-                                       <option value="" selected>-- Pilih Jenis Dokumen Di Sini --</option>
-                                       <option value="Surat Keterangan Ralat Ijazah">Surat Keterangan Ralat Ijazah</option>
-                                       <option value="Surat Keterangan Ralat Transkrip">Surat Keterangan Ralat Transkrip</option>
-                                       <option value="Surat Keterangan Ralat SKPI">Surat Keterangan Ralat SKPI</option>
-                                    </select>
+                                 <div class="control-group after-add-more pl-3">
+                                    <div class="form-check">
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_ralat][1]" id="jenisRalat1" value="Surat Keterangan Ralat Ijazah">
+                                       <label class="form-check-label" for="jenisRalat1">Surat Keterangan Ralat Ijazah</label>
+                                    </div>
+                                    <div class="form-check">
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_ralat][2]" id="jenisRalat2" value="Surat Keterangan Ralat Transkrip">
+                                       <label class="form-check-label" for="jenisRalat2">Surat Keterangan Perubahan Transkrip</label>
+                                    </div>
                                     <br><br>
                                  </div>
                               </div>
@@ -149,11 +171,11 @@
                            <div class="panel-body">
                               <!-- membuat form  -->
                               <div class="bordered">
-                                 <div class="control-group after-add-more">
-                                    <select class="form-control" name="jenis_alumni">
-                                       <option value="" selected>-- Pilih Jenis Dokumen Di Sini --</option>
-                                       <option value="Surat Keterangan Alumni">Surat Keterangan Alumni</option>
-                                    </select>
+                                 <div class="control-group after-add-more pl-3">
+                                    <div class="form-check">
+                                       <input class="form-check-input" type="checkbox" name="pesan[jenis_alumni][1]" id="jenisAlumni1" value="Surat Keterangan Alumni">
+                                       <label class="form-check-label" for="jenisAlumni1">Surat Keterangan Alumni</label>
+                                    </div>
                                     <br><br>
                                  </div>
                               </div>
@@ -163,12 +185,12 @@
                      <td rowspan="2" class="align-middle text-center" style="font-size: 15px;">
                         <div class="d-flex justify-content-center">
                            <ol type="" class="text-left" style="font-size: 13px; list-style: none;">
-                              <li>Scan Ijazah dan Transkrip Nilai</li>
+                              <li>Scan Ijazah / Transkrip Nilai</li>
                            </ol>
                         </div>
                         <br>
 
-                        <input type="file" id="upload3" name="upload_alumni" hidden>
+                        <input type="file" id="upload3" name="upload[3]" hidden>
                         <label for="upload3" class="btn-light p-2 rounded">Upload <i class="fa fa-upload"></i></label>
                         <span id="file-chosen3" style="font-size: 12px; font-weight: 400; color:cadetblue;">
                            Tidak ada file yang dipilih.

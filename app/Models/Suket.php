@@ -18,6 +18,12 @@ class Suket extends Model
         'verifikasi',
         'komentar',
         'file',
+        'final_dokumen'
+    ];
+
+    protected $casts = [
+        'dokumen_dipesan' => 'array',
+        'file' => 'array',
     ];
 
     public function getData($nim = null, $id = null, $type = 'all'){

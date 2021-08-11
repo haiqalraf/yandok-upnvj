@@ -16,10 +16,10 @@ class CreateSuketTable extends Migration
         Schema::create('suket', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string ('nim_pemesan')->nullable();
-            $table->string ('dokumen_dipesan')->nullable();
+            $table->text ('dokumen_dipesan')->nullable();
             $table->integer('verifikasi')->default(1);
-            $table->string('file')->nullable();
-            $table->string('final_dokumen')->nullable();
+            $table->text('file')->nullable();
+            $table->text('final_dokumen')->nullable();
             $table->timestamps();
         });
     }

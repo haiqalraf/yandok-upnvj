@@ -171,8 +171,12 @@ class PesananController extends Controller
             return abort('404'); 
         }
         $daftar_pesanan = collect([]);
-        $daftar_pesanan->put($surat->dokumen_dipesan, 1);
-
+        foreach ($surat->dokumen_dipesan as $keys => $values) {
+            foreach ($values as $key => $value) {
+                $daftar_pesanan->put($value, 1);
+            }
+        }
+        
         return view('admin.surat.detail', [
             'surat' => $surat,
             'daftar_pesanan' => $daftar_pesanan
@@ -198,7 +202,7 @@ class PesananController extends Controller
                     $username = User::where('nim', $surat->nim_pemesan)->first()->name;
                     $date = now("Asia/Jakarta")->format('YmdHis');
     
-                    $newName = $date . '_dok_dipesan_' . Str::slug($surat->dokumen_dipesan, '') . '_' . $username . '.' . $extension;
+                    $newName = $date . '_dok_dipesan_' . 'suratketerangan' . '_' . $username . '.' . $extension;
     
                     if (!Storage::disk('local')->exists('suket/selesai/' . $newName)) {
                         Storage::disk('local')->put('suket/selesai/' . $newName, $file->get());

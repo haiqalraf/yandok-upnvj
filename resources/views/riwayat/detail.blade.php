@@ -67,15 +67,19 @@
                                 <td>{{$x}}</td>
                                 <td>{{$table['jenis']}}</td>
                                 <td>{{intval($table['jumlah'])}}</td>
-                                <td>
+                                @if ($loop->first)
+                                <td rowspan="{{count($data->table)}}">
                                     @if ($data->verifikasi == 3)
-                                    <a href="{{route('riwayat.download', [ 
-                                        $data
-                                        ])}}" class="btn btn-light p-2 rounded"><i class="fa fa-download"></i> Download</a>
-                                    @elseif ($data->verifikasi < 3)
-                                    <span>-</span>
+                                    <div class="d-flex w-100 h-100 justify-content-center align-items-center">
+                                        <a href="{{route('riwayat.download', [ 
+                                            $data
+                                            ])}}" class="btn btn-light p-2 rounded"><i class="fa fa-download"></i> Download</a>
+                                        @elseif ($data->verifikasi < 3)
+                                        <span>-</span>
+                                    </div>
                                     @endif
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>
