@@ -27,15 +27,15 @@
                               <div class="bordered">
                                  <div class="control-group after-add-more pl-3">
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_pengganti[1]" id="jenisPengganti1" value="Surat Keterangan Pengganti Ijazah" checked>
+                                       <input class="form-check-input" type="checkbox" name="jenis_pengganti[1]" id="jenisPengganti1" value="Surat Keterangan Pengganti Ijazah">
                                        <label class="form-check-label" for="jenisPengganti1">Surat Keterangan Pengganti Ijazah</label>
                                     </div>
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_pengganti[2]" id="jenisPengganti2" value="Surat Keterangan Pengganti Transkrip" checked>
+                                       <input class="form-check-input" type="checkbox" name="jenis_pengganti[2]" id="jenisPengganti2" value="Surat Keterangan Pengganti Transkrip">
                                        <label class="form-check-label" for="jenisPengganti2">Surat Keterangan Pengganti Transkrip</label>
                                     </div>
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_pengganti[3]" id="jenisPengganti3" value="Surat Keterangan Pengganti SKPI" checked>
+                                       <input class="form-check-input" type="checkbox" name="jenis_pengganti[3]" id="jenisPengganti3" value="Surat Keterangan Pengganti SKPI">
                                        <label class="form-check-label" for="jenisPengganti3">Surat Keterangan Pengganti SKPI</label>
                                     </div>
                                     <br><br>
@@ -86,11 +86,11 @@
                               <div class="bordered">
                                  <div class="control-group after-add-more pl-3">
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_perubahan[1]" id="jenisPerubahan1" value="Surat Keterangan Perubahan Ijazah" checked>
+                                       <input class="form-check-input" type="checkbox" name="jenis_perubahan[1]" id="jenisPerubahan1" value="Surat Keterangan Perubahan Ijazah">
                                        <label class="form-check-label" for="jenisPerubahan1">Surat Keterangan Perubahan Ijazah</label>
                                     </div>
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_perubahan[2]" id="jenisPerubahan2" value="Surat Keterangan Perubahan Transkrip" checked>
+                                       <input class="form-check-input" type="checkbox" name="jenis_perubahan[2]" id="jenisPerubahan2" value="Surat Keterangan Perubahan Transkrip">
                                        <label class="form-check-label" for="jenisPerubahan2">Surat Keterangan Perubahan Transkrip</label>
                                     </div>
                                     <br><br>
@@ -140,11 +140,11 @@
                               <div class="bordered">
                                  <div class="control-group after-add-more pl-3">
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_ralat[1]" id="jenisRalat1" value="Surat Keterangan Ralat Ijazah" checked>
+                                       <input class="form-check-input" type="checkbox" name="jenis_ralat[1]" id="jenisRalat1" value="Surat Keterangan Ralat Ijazah">
                                        <label class="form-check-label" for="jenisRalat1">Surat Keterangan Ralat Ijazah</label>
                                     </div>
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_ralat[2]" id="jenisRalat2" value="Surat Keterangan Ralat Transkrip" checked>
+                                       <input class="form-check-input" type="checkbox" name="jenis_ralat[2]" id="jenisRalat2" value="Surat Keterangan Ralat Transkrip">
                                        <label class="form-check-label" for="jenisRalat2">Surat Keterangan Perubahan Transkrip</label>
                                     </div>
                                     <br><br>
@@ -164,7 +164,7 @@
                               <div class="bordered">
                                  <div class="control-group after-add-more pl-3">
                                     <div class="form-check">
-                                       <input class="form-check-input" type="checkbox" name="jenis_alumni[1]" id="jenisAlumni1" value="Surat Keterangan Alumni" checked>
+                                       <input class="form-check-input" type="checkbox" name="jenis_alumni[1]" id="jenisAlumni1" value="Surat Keterangan Alumni">
                                        <label class="form-check-label" for="jenisRalat1">Surat Keterangan Alumni</label>
                                     </div>
                                     <br><br>
