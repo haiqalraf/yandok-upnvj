@@ -41,6 +41,7 @@
                                 @if (auth()->user()->is_admin==2)
                                 <th>Persyaratan</th>
                                 @else
+                                <th>Persyaratan</th>
                                 <th>Dokumen Selesai</th>
                                 @endif
                             @elseif (in_array($lainnya->verifikasi, [0]))
@@ -54,7 +55,7 @@
                         @foreach ($daftar_pesanan as $key => $item)
                         <tr>
                             @if ($loop->first)
-                                <td rowspan="3" class="text-center align-middle">{{$lainnya->id}}</td>
+                                <td rowspan="12" class="text-center align-middle">{{$lainnya->id}}</td>
                             @endif
                             <td>{{$key}}</td>
                             <td class="text-center">{{$item}}</td>
@@ -63,12 +64,17 @@
                             @if ($lainnya->verifikasi===0 && auth()->user()->is_admin==2)
                             <td>{{$lainnya->komentar?$lainnya->komentar : "Tidak ada Catatan"}}</td>
                             @elseif ($lainnya->verifikasi===1 && auth()->user()->is_admin==2)
-                                    <td rowspan="3" class="align-middle text-center" style="font-size: 15px;">
+                                    <td rowspan="12" class="align-middle text-center" style="font-size: 15px;">
                                         <a href="{{route('akpk.download', [ 
                                             'filePath' => 'lainnya/'.$lainnya->file
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     </td>
                                 @elseif ($lainnya->verifikasi===2 && auth()->user()->is_admin==3)
+                                    <td class="align-middle text-center">
+                                        <a href="{{route('dekan.download', [ 
+                                            'filePath' => 'lainnya/'.$lainnya->file
+                                            ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
+                                    </td>
                                     <td class="align-middle text-center">
                                         <label for="Upload" class="btn-light p-2 rounded" id="upload" name="upload">
                                             <input type="file" name="upload">
@@ -82,12 +88,23 @@
                                             'filePath' => 'lainnya/'.$lainnya->file
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     </td>
-                                @elseif ($lainnya->verifikasi===3)
+                                @elseif ($lainnya->verifikasi===3 && auth()->user()->is_admin==3)
+                                    <td class="align-middle text-center">
+                                        <a href="{{route('dekan.download', [ 
+                                            'filePath' => 'lainnya/'.$lainnya->file
+                                            ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
+                                    </td>
                                     <td class="align-middle text-center">
                                         <a href="{{route('dekan.download', [ 
                                             'filePath' => 'lainnya/selesai/'.$lainnya->final_dokumen
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     </td>
+                                @elseif ($lainnya->verifikasi===3 && auth()->user()->is_admin==2)
+                                <td rowspan="12" class="align-middle text-center" style="font-size: 15px;">
+                                    <a href="{{route('akpk.download', [ 
+                                        'filePath' => 'lainnya/'.$lainnya->file
+                                        ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
+                                </td>
                                 @endif
                                 
                             @endif
