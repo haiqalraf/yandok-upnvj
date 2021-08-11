@@ -91,7 +91,7 @@ class LegalisirController extends Controller
                 'kebutuhan' => $request->kebutuhan,
                 'keterangan' => $request->keterangan
             ]);
-            return redirect('/home');
+            return redirect('/riwayat');
         } else {
             return back()->with("message", "File Not Found");
         }

@@ -105,7 +105,7 @@ class SuketController extends Controller
         $suket->file = $files;
         $suket->save();
         
-        return redirect('/home');
+        return redirect('/riwayat');
     }
 
     /**
