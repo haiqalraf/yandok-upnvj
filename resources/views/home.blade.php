@@ -141,8 +141,10 @@
    </div>
    @endif
 </div>
+<div class="alert"></div>
 @endsection
 @section('script')
+<script src="{{asset('js/alert.js')}}"></script>
 <script>
 $(document).ready(function () {
    $(".ajax_action").submit(function(event){
@@ -169,13 +171,14 @@ $(document).ready(function () {
 
             if (status){
 
-               alert(text);
+               showAlert('Berhasil', text, function (e) {
+                  location.reload();
+               })
                $(':input[type="submit"]').prop('disabled', false);
-               location.reload();
                   
             } else {
 
-               alert(text);
+               showAlert('Gagal', text);
                $(':input[type="submit"]').prop('disabled', false);
             
             }
@@ -184,7 +187,7 @@ $(document).ready(function () {
 
             var text = xhr.responseJSON.message
 
-            alert(text);
+            showAlert('Gagal', text);
 
             $(':input[type="submit"]').prop('disabled', false);
          }
