@@ -154,12 +154,14 @@
          </div>
       </div>
    </div>
+   <div class="alert"></div>
 
    <!-- JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js">
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
    </script>
+   <script src="{{asset('js/alert.js')}}"></script>
    <!-- local script -->
    <script>
       $(document).ready(function () {
@@ -211,14 +213,15 @@
                var text = results.text;
 
                if (status){
-
-                  alert(text);
+                  showAlert("Berhasil", text, function (e) {
+                     window.location.replace("login");
+                  });
                   $(':input[type="submit"]').prop('disabled', false);
-                  window.location.replace("login");
+                  // window.location.replace("login");
                      
                } else {
 
-                  alert(text);
+                  showAlert("Gagal", text);
                   $(':input[type="submit"]').prop('disabled', false);
                
                }
@@ -227,7 +230,7 @@
 
                var text = xhr.responseJSON.message
 
-               alert(text);
+               showAlert("Gagal", text);
 
                $(':input[type="submit"]').prop('disabled', false);
             }
