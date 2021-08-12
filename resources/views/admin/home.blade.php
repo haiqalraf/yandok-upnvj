@@ -6,7 +6,7 @@
     <!-- Palet Sambutan -->
     <div class="row bg-white rounded shadow mb-5">
        <div class="col p-3">
-          <h5 class="text-left" style="font-family: 'Lora', serif;">Selamat Datang,<span style="color: #0c5012;">
+          <h5 class="text-left" >Selamat Datang,<span style="color: #0c5012;">
                 @if (auth()->user()->is_admin==1){{auth()->user()->name}}@endif</span> di Sistem Layanan Dokumen Alumni UPN Veteran Jakarta</h5>
        </div>
        <img src="{{asset('img/greeting.png')}}" alt="aksesoris" style="float: right; margin-bottom: 5px; opacity: 45%;"
