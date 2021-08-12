@@ -97,6 +97,6 @@ class HomeController extends Controller
             auth()->user()->tracerstudy()->save($tracer);
         }
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('status', 'Tracer Study berhasil diisi!');
     }
 }

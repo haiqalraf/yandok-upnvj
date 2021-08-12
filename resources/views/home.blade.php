@@ -203,7 +203,11 @@ $(document).ready(function () {
    });
 });
 </script>
-
+@if (session('status'))
+<script>
+   showAlert("Berhasil", "{{session('status')}}");
+</script>
+@endif
 @if (!auth()->user()->tracerstudy)
 <script>
    $('#tracestudy').modal('show');
