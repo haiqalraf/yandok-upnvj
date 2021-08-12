@@ -42,6 +42,14 @@
                   <input type="number" name="thn_lulus" class="form-control form-control-sm" placeholder="Tahun Lulus" value="{{ date('Y', strtotime($user->thn_lulus)) }}" readonly>
                </td>
             </tr>
+            <tr>
+               <td>Tanggal Lahir</td>
+               <td id="tgl">
+                  <input type="text" class="form-control form-control-sm" value="{{ $user->tanggal_lahir }}" readonly>
+                     
+                  <div class="invalid-feedback">Please fill out this field.</div>
+               </td>
+            </tr>
             @else
                   <input type="hidden" name="nim" class="form-control form-control-sm" placeholder="NIM" value="{{ $user->nim }}" readonly>
             @endif

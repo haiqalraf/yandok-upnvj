@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use App\Models\User;
+use GuzzleHttp\Client;
 use App\Models\Fakultas;
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
-use App\Models\User;
+use App\Http\Controllers\Controller;
 
 class ApiController extends Controller
 {
@@ -51,9 +52,12 @@ class ApiController extends Controller
                 'fakultas' => $User->encodeFakultas($request->fakultas),
                 'name' => $request->name,
                 'password' => bcrypt($request->password),
+                'tanggal_lahir' => $request->tanggal_lahir,
                 'thn_lulus' => substr($request->tahun_lulus, strpos($request->tahun_lulus, "/") + 1),
                 'no_hp' => $request->no_hp,
                 'no_rumah' => $request->no_rumah,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
 
             // ALFIO

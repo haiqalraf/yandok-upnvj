@@ -61,7 +61,7 @@
                         </div>
                         <div class="form-group">
                            <label for="tgl" class="text-sm">Tanggal Lahir</label>
-                           <input name="tgl" type="text" class="form-control form-control-sm" id="tgl" value="{{$responseBody->result->tanggal_lahir}}">
+                           <input name="tanggal_lahir" type="text" class="form-control form-control-sm" id="tgl" value="{{$responseBody->result->tanggal_lahir}}">
                         </div>
 
                   </div>
@@ -80,6 +80,7 @@
 
             <form class="ajax_action" method="POST" action="{{ route('storeData') }}">
                @csrf
+               <input name="tanggal_lahir" type="text" class="form-control form-control-sm" id="tgl" value="{{$responseBody->result->tanggal_lahir}}" hidden>
                <div class="col bg-light">
                   <table width="100%" class="table-borderless" cellpadding="5">
                      <tr>
