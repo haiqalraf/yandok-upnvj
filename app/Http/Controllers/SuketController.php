@@ -39,6 +39,7 @@ class SuketController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'upload.1' => [
                 Rule::requiredIf(
@@ -91,7 +92,7 @@ class SuketController extends Controller
                     $date = now("Asia/Jakarta")->format('YmdHis');
         
                     $filename = $date . '_persyaratan_'.Str::slug($value,'').'_' . $username . '.' . $extension;
-                    $files[$key_file] = $filename;
+                    $files[$key_file][Str::slug($value,'')] = $filename;
                 } else {
                     return back()->with("message", "File Not Found");
                 }

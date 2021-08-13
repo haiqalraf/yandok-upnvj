@@ -91,21 +91,21 @@
                                         </div>
                                         <br>
                                         @if (strpos($key, 'Pengganti'))
-                                        @isset($surat->file[1])
+                                        @isset($surat->file[1][Str::slug($key,'')])
                                         <a href="{{route('akpk.download', [ 
-                                            'filePath' => 'suket/'.$surat->file[1]
+                                            'filePath' => 'suket/'.$surat->file[1][Str::slug($key,'')]
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                         @endisset
                                         @elseif (strpos($key, 'Perubahan')||strpos($key, 'Ralat'))
-                                        @isset($surat->file[2])
+                                        @isset($surat->file[2][Str::slug($key,'')])
                                         <a href="{{route('akpk.download', [ 
-                                            'filePath' => 'suket/'.$surat->file[2]
+                                            'filePath' => 'suket/'.$surat->file[2][Str::slug($key,'')]
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                         @endisset
                                         @elseif (strpos($key, 'Alumni'))
-                                        @isset($surat->file[3])
+                                        @isset($surat->file[3][Str::slug($key,'')])
                                         <a href="{{route('akpk.download', [ 
-                                            'filePath' => 'suket/'.$surat->file[3]
+                                            'filePath' => 'suket/'.$surat->file[3][Str::slug($key,'')]
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                         @endisset
                                         @endif
@@ -139,21 +139,21 @@
                                     <br>
         
                                     @if (strpos($key, 'Pengganti'))
-                                    @isset($surat->file[1])
+                                    @isset($surat->file[1][Str::slug($key,'')])
                                     <a href="{{route('dekan.download', [ 
-                                        'filePath' => 'suket/'.$surat->file[1]
+                                        'filePath' => 'suket/'.$surat->file[1][Str::slug($key,'')]
                                         ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     @endisset
                                     @elseif (strpos($key, 'Perubahan')||strpos($key, 'Ralat'))
-                                    @isset($surat->file[2])
+                                    @isset($surat->file[2][Str::slug($key,'')])
                                     <a href="{{route('dekan.download', [ 
-                                        'filePath' => 'suket/'.$surat->file[2]
+                                        'filePath' => 'suket/'.$surat->file[2][Str::slug($key,'')]
                                         ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     @endisset
                                     @elseif (strpos($key, 'Alumni'))
-                                    @isset($surat->file[3])
+                                    @isset($surat->file[3][Str::slug($key,'')])
                                     <a href="{{route('dekan.download', [ 
-                                        'filePath' => 'suket/'.$surat->file[3]
+                                        'filePath' => 'suket/'.$surat->file[3][Str::slug($key,'')]
                                         ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     @endisset
                                     @endif
@@ -196,21 +196,21 @@
                                         <br>
             
                                         @if (strpos($key, 'Pengganti'))
-                                        @isset($surat->file[1])
+                                        @isset($surat->file[1][Str::slug($key,'')])
                                         <a href="{{route('akpk.download', [ 
-                                            'filePath' => 'suket/'.$surat->file[1]
+                                            'filePath' => 'suket/'.$surat->file[1][Str::slug($key,'')]
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                         @endisset
                                         @elseif (strpos($key, 'Perubahan')||strpos($key, 'Ralat'))
-                                        @isset($surat->file[2])
+                                        @isset($surat->file[2][Str::slug($key,'')])
                                         <a href="{{route('akpk.download', [ 
-                                            'filePath' => 'suket/'.$surat->file[2]
+                                            'filePath' => 'suket/'.$surat->file[2][Str::slug($key,'')]
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                         @endisset
                                         @elseif (strpos($key, 'Alumni'))
-                                        @isset($surat->file[3])
+                                        @isset($surat->file[3][Str::slug($key,'')])
                                         <a href="{{route('akpk.download', [ 
-                                            'filePath' => 'suket/'.$surat->file[3]
+                                            'filePath' => 'suket/'.$surat->file[3][Str::slug($key,'')]
                                             ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                         @endisset
                                         @endif
@@ -244,21 +244,21 @@
                                     <br>
         
                                     @if (strpos($key, 'Pengganti'))
-                                    @isset($surat->file[1])
+                                    @isset($surat->file[1][Str::slug($key,'')])
                                     <a href="{{route('dekan.download', [ 
-                                        'filePath' => 'suket/'.$surat->file[1]
+                                        'filePath' => 'suket/'.$surat->file[1][Str::slug($key,'')]
                                         ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     @endisset
                                     @elseif (strpos($key, 'Perubahan')||strpos($key, 'Ralat'))
-                                    @isset($surat->file[2])
+                                    @isset($surat->file[2][Str::slug($key,'')])
                                     <a href="{{route('dekan.download', [ 
-                                        'filePath' => 'suket/'.$surat->file[2]
+                                        'filePath' => 'suket/'.$surat->file[2][Str::slug($key,'')]
                                         ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     @endisset
                                     @elseif (strpos($key, 'Alumni'))
-                                    @isset($surat->file[3])
+                                    @isset($surat->file[3][Str::slug($key,'')])
                                     <a href="{{route('dekan.download', [ 
-                                        'filePath' => 'suket/'.$surat->file[3]
+                                        'filePath' => 'suket/'.$surat->file[3][Str::slug($key,'')]
                                         ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     @endisset
                                     @endif
@@ -300,21 +300,21 @@
                                     <br>
         
                                     @if (strpos($key, 'Pengganti'))
-                                    @isset($surat->file[1])
+                                    @isset($surat->file[1][Str::slug($key,'')])
                                     <a href="{{route('akpk.download', [ 
-                                        'filePath' => 'suket/'.$surat->file[1]
+                                        'filePath' => 'suket/'.$surat->file[1][Str::slug($key,'')]
                                         ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     @endisset
                                     @elseif (strpos($key, 'Perubahan')||strpos($key, 'Ralat'))
-                                    @isset($surat->file[2])
+                                    @isset($surat->file[2][Str::slug($key,'')])
                                     <a href="{{route('akpk.download', [ 
-                                        'filePath' => 'suket/'.$surat->file[2]
+                                        'filePath' => 'suket/'.$surat->file[2][Str::slug($key,'')]
                                         ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     @endisset
                                     @elseif (strpos($key, 'Alumni'))
-                                    @isset($surat->file[3])
+                                    @isset($surat->file[3][Str::slug($key,'')])
                                     <a href="{{route('akpk.download', [ 
-                                        'filePath' => 'suket/'.$surat->file[3]
+                                        'filePath' => 'suket/'.$surat->file[3][Str::slug($key,'')]
                                         ])}}" class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
                                     @endisset
                                     @endif
