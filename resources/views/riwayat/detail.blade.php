@@ -3,10 +3,14 @@
 
 @section('content')
     <div class="row">
+         <div class="col-2">
+            <a class="btn btn-sm text-left aktif p-2" href="{{ url()->previous() }}"><i
+                  class="fa fa-arrow-left"></i>&nbsp;Kembali</a>
+         </div>
         <div class="col bg-white rounded shadow p-3">
             <h3>Riwayat Pesanan Anda</h3>
             <hr>
-            <div class="mb-4" style="font-size: 15px;">Berikut daftar riwayat pesanan anda</div>
+            <div class="mb-4" style="font-size: 1rem;">Berikut daftar riwayat pesanan anda</div>
 
                 <table class="table table-bordered table-md table-responsive-sm">
                     <thead class="thead-light">
@@ -75,7 +79,10 @@
                                             $data
                                             ])}}" class="btn btn-light p-2 rounded"><i class="fa fa-download"></i> Download</a>
                                         @elseif ($data->verifikasi < 3)
-                                        <span>-</span>
+                                        <span style="justify-content: center;
+                                            display: flex;
+                                            width: 100%;
+                                            font-weight: 600">-</span>
                                     </div>
                                     @endif
                                 </td>

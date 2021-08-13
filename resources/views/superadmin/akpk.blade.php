@@ -5,7 +5,7 @@
     <div class="col bg-white rounded shadow p-3">
         <h3>Pengolahan Akun AKPK</h3>
         <hr>
-        <div class="mb-4" style="font-size: 15px;">Berikut daftar user AKPK</div>
+        <div class="mb-4" style="font-size: 1rem;">Berikut daftar user AKPK</div>
         <table class="table table-striped table-bordered mydatatable" style="width: 100%;">
             <thead class="text-white" style="background-color: #06750F;">
                 <tr>

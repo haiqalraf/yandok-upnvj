@@ -3,7 +3,11 @@
 
 @section('content')
     <div class="row d-flex justify-content-center mb-5">
-        <div class="col-11 bg-white rounded shadow p-3">
+         <div class="col-2">
+            <a class="btn btn-sm text-left aktif p-2" href="{{ url()->previous() }}"><i
+                  class="fa fa-arrow-left"></i>&nbsp;Kembali</a>
+         </div>
+        <div class="col-10 bg-white rounded shadow p-3">
         <h6 class="text-center">Selamat pesanan kamu selesai dibuat, pengambilan dokumen hanya berjangka <span
                 class="text-danger">14 hari</span> dari waktu diubahnya status.</h6>
         </div>

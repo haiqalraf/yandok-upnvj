@@ -6,7 +6,7 @@
       <div class="col bg-white rounded shadow p-3">
          <h3>Riwayat Pesanan Anda</h3>
          <hr>
-         <div class="mb-4" style="font-size: 15px;">Berikut daftar riwayat pesanan anda</div>
+         <div class="mb-4" style="font-size: 1rem;">Berikut daftar riwayat pesanan anda</div>
          <table class="table table-striped table-bordered mydatatable" style="width: 100%;">
             <thead class="text-white" style="background-color: #06750F;">
                <tr>

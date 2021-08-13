@@ -31,9 +31,7 @@
    <section class=" container-fluid mb-5"
       style="background-color: #06750F; box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.226);">
       <div class=" row">
-         <div class="col-1 d-flex justify-content-start align-self-center">
-            <a class="btn btn-sm text-left aktif p-2" href="{{route('lainnya')}}"><i class="fa fa-arrow-left"></i> Kembali</a>
-         </div>
+      
          <div class="col p-3 d-flex justify-content-center" style="margin-right: 150px;">
             <a href="{{route('home')}}"><img src="img/logoUPN2.png" alt="logo"></a>
          </div>
@@ -44,7 +42,11 @@
       @csrf
 
       <div class="row">
-         <div class="col bg-white rounded shadow p-3 mb-3">
+         <div class="col-2">
+            <a class="btn btn-sm text-left aktif p-2" href="{{ url()->previous() }}"><i
+                  class="fa fa-arrow-left"></i>&nbsp;Kembali</a>
+         </div>
+         <div class="col-10 bg-white rounded shadow p-3 mb-3">
             <h4>Pemesanan Dokumen</h4>
             <hr>
             <span style="font-size: small;">Harap lengkapi kolom dibawah ini untuk dapat mengajukan dokumen</span>
@@ -52,7 +54,7 @@
       </div>
 
       <div class="row">
-         <div class="col bg-white rounded shadow p-3 mb-3">
+         <div class="col-10 offset-2 bg-white rounded shadow p-3 mb-3">
             {{-- <form action=""> --}}
                <div class="form-group">
                   <label for="labeljudulsurat" class="font-weight-bold">Nama Dokumen</label>
@@ -65,7 +67,7 @@
       </div>
 
       <div class="row">
-         <div class="col bg-white rounded shadow p-3 mb-3">
+         <div class="col-10 offset-2 bg-white rounded shadow p-3 mb-3">
             {{-- <form action=""> --}}
                <div class="form-group">
                   <label for="opsi" class="font-weight-bold">Jumlah Dokumen</label>
@@ -88,7 +90,7 @@
       </div>
 
       <div class="row">
-         <div class="col bg-white rounded shadow p-3 mb-3">
+         <div class="col-10 offset-2 bg-white rounded shadow p-3 mb-3">
             {{-- <form action=""> --}}
                <div class="form-group">
                   <label for="upload" class="font-weight-bold">Persyaratan</label><br>
@@ -116,7 +118,7 @@
       </div>
 
       <div class="row mb-5">
-         <button type="submit" class="btn btn-sm btn-block btn-success mt-2"">Selesai</a>
+         <button type="submit" class="col-10 offset-2 btn btn-sm btn-block btn-success mt-2"">Selesai</a>
       </div>
    </form>
 

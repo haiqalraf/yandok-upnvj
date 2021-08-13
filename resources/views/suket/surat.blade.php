@@ -16,7 +16,7 @@
          <div class="col bg-white rounded shadow p-3">
             <h3>Pemesanan Surat Keterangan</h3>
             <hr>
-            <div class="mb-4" style="font-size: 15px;">Berikut daftar produk yang tersedia bagi anda.</div>
+            <div class="mb-4" style="font-size: 1rem;">Berikut daftar produk yang tersedia bagi anda.</div>
 
             <table class="table table-bordered table-striped table-responsive-md">
                <thead class="text-white" style="background-color: #06750F;">

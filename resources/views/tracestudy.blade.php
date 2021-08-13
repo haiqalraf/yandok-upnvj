@@ -45,8 +45,8 @@
             <h4>Tracer Study</h4>
             <hr>
             <ul>
-               <li>Anda diharapkan mengisi Tracer Study setelah anda lulus dari dari UPN Veteran Jakarta selama 6 bulan.
-               </li>
+               <li>Anda diharapkan mengisi Tracer Study setelah anda lulus dari dari UPN Veteran Jakarta selama 6 bulan.</li>
+               <li>Pertanyaan dengan tanda <span style="color: red">*</span> wajib diisi.</li>
                <li>Apabila anda belum memiliki pengalaman pekerjaan, anda dapat melewati form ini.</li>
             </ul>
          </div>
@@ -55,7 +55,7 @@
       <div class="row">
          <div class="col bg-white rounded shadow p-3 mb-3">
                <div class="form-group">
-                  <label for="job" class="font-weight-bold">Tempat pekerjaan pertama setelah lulus</label>
+                  <label for="job" class="font-weight-bold"><span style="color: red">*</span> Tempat pekerjaan pertama setelah lulus</label>
                   <hr>
                   <input type="text" class="form-control form-control-sm" id="job" aria-describedby="job"
                      placeholder="Misal : PT. Yasagama" name="tempat_kerja">
@@ -66,7 +66,7 @@
       <div class="row">
          <div class="col bg-white rounded shadow p-3 mb-3">
                <div class="form-group">
-                  <label for="role" class="font-weight-bold">Jabatan dalam perkejaan</label>
+                  <label for="role" class="font-weight-bold"><span style="color: red">*</span> Jabatan dalam perkejaan</label>
                   <hr>
                   <input type="text" class="form-control form-control-sm" id="job" aria-describedby="role"
                      placeholder="Misal : Designer UI/UX" name="jabatan">
@@ -77,7 +77,7 @@
       <div class="row">
          <div class="col bg-white rounded shadow p-3 mb-3">
                <div class="form-group">
-                  <label for="time" class="font-weight-bold">Kapan Anda awal bekerja</label>
+                  <label for="time" class="font-weight-bold"><span style="color: red">*</span> Kapan Anda awal bekerja</label>
                   <hr>
                   <input type="date" class="form-control form-control-sm" id="time" aria-describedby="role"
                      placeholder="Misal : 31/12/2021" name="tanggal_kerja">
@@ -88,7 +88,7 @@
       <div class="row">
          <div class="col bg-white rounded shadow p-3 mb-3">
                <div class="form-group">
-                  <label for="address" class="font-weight-bold">Dimana alamat tempat Anda bekerja ?</label>
+                  <label for="address" class="font-weight-bold"><span style="color: red">*</span> Dimana alamat tempat Anda bekerja ?</label>
                   <hr>
                   <textarea class="form-control form-control-sm"  name="alamat_kerja" id="address" rows="3"></textarea>
                </div>
@@ -98,7 +98,7 @@
       <div class="row">
          <div class="col bg-white rounded shadow p-3 mb-3">
                <div class="form-group">
-                  <label for="MOU" class="font-weight-bold">Anda sebagai karyawan tetap atau sistem kontrak ?</label>
+                  <label for="MOU" class="font-weight-bold"><span style="color: red">*</span> Anda sebagai karyawan tetap atau sistem kontrak ?</label>
                   <hr>
                   <input type="text" class="form-control form-control-sm" id="job" aria-describedby="MOU"
                      placeholder="Misal : Sistem Kontrak" name="status_kerja">

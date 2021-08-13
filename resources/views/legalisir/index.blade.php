@@ -7,7 +7,7 @@
             @csrf
             <h3>Pemesanan Legalisir</h3>
             <hr>
-            <div class="mb-4" style="font-size: 15px;">Berikut Daftar Produk yang tersedia bagi anda.</div>
+            <div class="mb-4" style="font-size: 1rem;">Berikut Daftar Produk yang tersedia bagi anda.</div>
 
             <table class="table table-bordered">
                <thead class="text-white" style="background-color: #06750F;">

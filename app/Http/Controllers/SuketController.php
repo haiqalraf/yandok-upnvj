@@ -39,7 +39,6 @@ class SuketController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'upload.1' => [
                 Rule::requiredIf(

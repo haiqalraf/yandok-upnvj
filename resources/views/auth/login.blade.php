@@ -31,12 +31,8 @@
    <section class=" container-fluid mb-5"
       style="background-color: #06750F; box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.226);">
       <div class=" row">
-         <div class="col-1 d-flex justify-content-start align-self-center">
-            <a class="btn btn-sm text-left aktif p-2" href="{{route('home')}}"><i
-                  class="fa fa-arrow-left"></i>&nbsp;Kembali</a>
-         </div>
          <div class="col p-3 d-flex justify-content-center" style="margin-right: 150px;">
-            <a href="{{route('home')}}"><img src="img/logoUPN2.png" alt="logo"></a>
+            <a href="{{route('index')}}"><img src="img/logoUPN2.png" alt="logo"></a>
          </div>
       </div>
    </section>
@@ -44,6 +40,10 @@
    <div class="container">
 
       <div class="row">
+         <div class="col-2">
+            <a class="btn btn-sm text-left aktif p-2" href="{{ url()->previous() }}"><i
+                  class="fa fa-arrow-left"></i>&nbsp;Kembali</a>
+         </div>
          <div class="col-4 bg-white p-3 shadow" style="border-top: 20px solid #06750F; border-radius: 8px;">
             <div style="height: 20px; width: 100%; color: black;"></div>
             <h4 class="text-center mt-2">Log In</h4>

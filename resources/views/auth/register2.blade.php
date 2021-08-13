@@ -31,9 +31,6 @@
    <section class=" container-fluid mb-5"
       style="background-color: #06750F; box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.226);">
       <div class=" row">
-         <div class="col-1 d-flex justify-content-start align-self-center">
-            <a class="btn btn-sm text-left aktif p-2" href="{{route('index')}}"><i class="fa fa-arrow-left"></i> Kembali</a>
-         </div>
          <div class="col p-3 d-flex justify-content-center" style="margin-right: 150px;">
             <a href="{{route('index')}}"><img src="img/logoUPN2.png" alt="logo"></a>
          </div>
@@ -43,6 +40,10 @@
    <div class="container">
 
       <div class="row">
+         <div class="col-2">
+            <a class="btn btn-sm text-left aktif p-2" href="{{ url()->previous() }}"><i
+                  class="fa fa-arrow-left"></i>&nbsp;Kembali</a>
+         </div>
          <div class="col table-bordered bg-white p-3"
             style="border-top: 18px solid #06750F; border-radius: 8px 8px 8px 8px;">
             <div style="height: 20px; width: 100%; color: black;"></div>
