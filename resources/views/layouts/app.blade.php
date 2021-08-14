@@ -38,11 +38,11 @@
             @if (in_array(auth()->user()->is_admin, [2,3]))
                @if (auth()->user()->is_admin==2)
             <a id="link" class="navbar-brand" href="{{route('home')}}">
-               <img id="logoku" src="{{asset('img/logoUPNAdmin.png')}}" alt="logo" height="63" width="100%"
+               <img id="logoku" src="{{asset('img/logoUPNAdminAkpk.png')}}" alt="logo" height="63" width="100%"
                class="d-inline-block align-top">
                @else
             <a id="link" class="navbar-brand" href="{{route('home')}}">
-               <img id="logoku" src="{{asset('img/logoUPNAdmin.png')}}" alt="logo" height="63" width="100%"
+               <img id="logoku" src="{{asset('img/logoUPNAdminDekanat.png')}}" alt="logo" height="63" width="100%"
                class="d-inline-block align-top">
                @endif
             @elseif(in_array(auth()->user()->is_admin, [1]))
