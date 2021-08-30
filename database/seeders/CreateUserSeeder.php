@@ -30,7 +30,7 @@ class CreateUserSeeder extends Seeder
                 'password'=> bcrypt('123456'),
              ],
              [
-                'name'=>'Dekan',
+                'name'=>'Dekanat',
                 'nim'=>'18108',
                  'is_admin'=>'3',
                 'password'=> bcrypt('123456'),
