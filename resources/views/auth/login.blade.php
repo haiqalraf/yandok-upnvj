@@ -41,7 +41,6 @@
 
       <div class="row">
          <div class="col-4 bg-white p-3 shadow" style="border-top: 20px solid #06750F; border-radius: 8px;">
-            <div style="height: 20px; width: 100%; color: black;"></div>
             <div class="d-flex justify-content-end">
                <a href="{{url()->previous()}}" class="btn btn-sm btn-outline-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
             </div>

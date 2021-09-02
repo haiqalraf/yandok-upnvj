@@ -18,7 +18,7 @@
         </div>
 
         <div class="col-sm bg-white p-3 shadow ml-5 text-sm d-flex" style="border-left: 20px solid #06750F; border-radius: 8px;">
-            <div class="m-auto">
+            <div class="mb-auto">
                 <div class="d-flex justify-content-end">
                     <a href="{{route('riwayat')}}" class="btn btn-sm btn-outline-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
                 </div>

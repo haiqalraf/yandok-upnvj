@@ -42,10 +42,10 @@
       <div class="row">
          <div class="col table-bordered bg-white p-3"
             style="border-top: 18px solid #06750F; border-radius: 8px 8px 0px 0px;">
-            <div style="height: 20px; width: 100%; color: black;"></div>
             <div class="d-flex justify-content-end">
                <a href="{{route('index')}}" class="btn btn-sm btn-outline-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
             </div>
+            <div style="height: 20px; width: 100%; color: black;"></div>
             <h2 class="text-center mt-2">Registrasi</h2><br>
             <h5>Verifikasi Data</h5>
             <hr>
