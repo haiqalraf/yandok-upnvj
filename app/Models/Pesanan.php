@@ -31,12 +31,12 @@ class Pesanan extends Model
         }
 
         if ($type == 'all'){
-            $data = $query->get();
+            $data = $query->get()->sortByDesc('updated_at');
         } else {
             $data = $query->first();
         }
 
-        return $data->sortByDesc('updated_at');
+        return $data;
     }
 
     public function getCommentIfExists($model)
