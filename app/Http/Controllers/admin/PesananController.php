@@ -35,7 +35,7 @@ class PesananController extends Controller
         }
 
         return view('admin.legalisir.index', [
-            'legalisir' => $legalisir,
+            'legalisir' => $legalisir->sortByDesc('updated_at'),
             'status' => $request->status
         ]);
     }
@@ -160,7 +160,7 @@ class PesananController extends Controller
         }
         
         return view('admin.surat.index', [
-            'surat' => $surat,
+            'surat' => $surat->sortByDesc('updated_at'),
             'status' => $request->status
         ]);
     }
@@ -255,7 +255,7 @@ class PesananController extends Controller
         }
         
         return view('admin.lainnya.index', [
-            'lainnya' => $lainnya,
+            'lainnya' => $lainnya->sortByDesc('updated_at'),
             'status' => $request->status
         ]);
     }

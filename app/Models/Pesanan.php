@@ -36,7 +36,7 @@ class Pesanan extends Model
             $data = $query->first();
         }
 
-        return $data;
+        return $data->sortByDesc('updated_at');
     }
 
     public function getCommentIfExists($model)
