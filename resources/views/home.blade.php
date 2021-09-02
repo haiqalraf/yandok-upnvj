@@ -37,6 +37,13 @@
             </tr>
 
             <tr>
+               <td>Fakultas</td>
+               <td>
+                  <input type="text" name="fakultas" class="form-control form-control-sm" placeholder="Fakultas" value="{{ $user->fakultas }}" readonly>
+               </td>
+            </tr>
+
+            <tr>
                <td>Tahun Lulus</td>
                <td>
                   <input type="number" name="thn_lulus" class="form-control form-control-sm" placeholder="Tahun Lulus" value="{{ date('Y', strtotime($user->thn_lulus)) }}" readonly>
@@ -65,7 +72,7 @@
                <td>Password</td>
                <td>
                   <input type="password" name="password" class="form-control form-control-sm" placeholder="Password"
-                     value="">
+                     value="********">
                   <p class="text-danger text-right" style="font-size: 13px;">Ketik Minimal 6 karakter untuk mengganti
                      ke sandi baru.</p>
                </td>
