@@ -7,6 +7,7 @@
 
 @section('content')
 <div class="container p-3 bg-white shadow rounded">
+    <h3>Daftar Pesanan Surat Keterangan</h3><hr>
     <ul class="nav nav-tabs nav-fill justify-content-center">
        @if (auth()->user()->is_admin==2)
        <li class="nav-item">

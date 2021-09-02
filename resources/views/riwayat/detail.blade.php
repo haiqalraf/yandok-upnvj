@@ -3,11 +3,10 @@
 
 @section('content')
     <div class="row">
-         <div class="col-2">
-            <a class="btn btn-sm text-left aktif p-2" href="{{ url()->previous() }}"><i
-                  class="fa fa-arrow-left"></i>&nbsp;Kembali</a>
-         </div>
         <div class="col bg-white rounded shadow p-3">
+            <div class="d-flex justify-content-end">
+               <a href="{{route('riwayat')}}" class="btn btn-sm btn-outline-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
+            </div>
             <h3>Riwayat Pesanan Anda</h3>
             <hr>
             <div class="mb-4" style="font-size: 1rem;">Berikut daftar riwayat pesanan anda</div>
