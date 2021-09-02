@@ -8,7 +8,7 @@
 @section('content')
 <div class="container p-3 bg-white shadow rounded">
     <h3>Daftar Pesanan Lainnya</h3><hr>
-    <ul class="nav nav-tabs nav-fill justify-content-center">
+    <ul class="nav nav-fill justify-content-center">
         @if (auth()->user()->is_admin==2)
         <li class="nav-item">
             <a class="nav-link @if ($status==='1'||$status===null){{'active'}}@endif" href="{{ route('akpk.lainnya', ['status' => '1'])}}">Belum Diproses</a>
