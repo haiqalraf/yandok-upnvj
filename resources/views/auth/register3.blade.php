@@ -112,6 +112,7 @@
    <!-- local script -->
    <script>
       $(document).ready(function () {
+         // ALFIO
          $("#show_hide_password a").on('click', function (event) {
             event.preventDefault();
             if ($('#show_hide_password input').attr("type") == "text") {
@@ -136,6 +137,7 @@
                $('#show_hide_password1 i').addClass("fa-eye");
             }
          });
+         // a
       });
    </script>
 </body> 

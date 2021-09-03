@@ -80,10 +80,12 @@ Route::prefix('superadmin')->group(function () {
     Route::get('/akpk', [AkpkController::class, 'index'])->name('superadmin.akpk');
     Route::post('/akpk', [AkpkController::class, 'store']);
     Route::get('/akpk/create', [AkpkController::class, 'create'])->name('superadmin.akpk.create');
+    Route::post('/akpk/delete', [AkpkController::class, 'delete'])->name('superadmin.akpk.delete');
 
     Route::get('/dekan', [DekanController::class, 'index'])->name('superadmin.dekan');
     Route::post('/dekan', [DekanController::class, 'store']);
     Route::get('/dekan/create', [DekanController::class, 'create'])->name('superadmin.dekan.create');
+    Route::post('/dekan/delete', [DekanController::class, 'delete'])->name('superadmin.dekan.delete');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

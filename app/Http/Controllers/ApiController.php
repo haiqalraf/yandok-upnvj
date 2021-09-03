@@ -17,30 +17,61 @@ class ApiController extends Controller
             'nim' => 'required',
             'tgl' => 'required|date_format:Y-m-d'
         ]);
-        $client = new Client();
-        $url = "https://api.upnvj.ac.id/mahasiswa/getAlumni";
 
-        $headers = [
-            'Authorization' => env('UPN_API_KEY', '')
-        ];
+        $check = User::where('nim', $request->nim)->get();
 
-        $mybody = [
-            'nim' => $request->input('nim'),
-            #'nim' =>'1720622083',
-            'tanggal_lahir'=> $request->input('tgl')
-            #'tanggal_lahir'=>'1988-07-23'
-        ];
 
-        // $request = $client->post($url,['headers'=>$headers, 'form_params'=>$mybody]);
-        $response = $client->request('POST', $url, [
-            'headers' => $headers,
-            'form_params' => $mybody
-        ]);
-        $responseBody = json_decode($response->getBody()->getContents());
-        if ($responseBody->message == null) {
-            return view('auth.register2', compact('responseBody'));
+        if (count($check) == 0){
+
+            $client = new Client();
+            $url = "https://api.upnvj.ac.id/mahasiswa/getAlumni";
+    
+            $headers = [
+                'Authorization' => env('UPN_API_KEY', '')
+            ];
+    
+            $mybody = [
+                'nim' => $request->input('nim'),
+                #'nim' =>'1720622083',
+                'tanggal_lahir'=> $request->input('tgl')
+                #'tanggal_lahir'=>'1988-07-23'
+            ];
+    
+            // $request = $client->post($url,['headers'=>$headers, 'form_params'=>$mybody]);
+            $response = $client->request('POST', $url, [
+                'headers' => $headers,
+                'form_params' => $mybody
+            ]);
+            $responseBody = json_decode($response->getBody()->getContents());
+            if ($responseBody->message == null) {
+
+                return response()->json([
+            
+                    'status' => true,
+                    'data' => $responseBody->result,
+                    'type' => 0,
+        
+                ], 200);
+
+            } else {
+
+                // ALFIO
+                return response()->json([
+            
+                    'status' => false,
+                    'text' => $responseBody->message,
+        
+                ], 200);
+            }
         } else {
-            return back()->with('message', $responseBody->message);
+
+            // ALFIO
+            return response()->json([
+        
+                'status' => false,
+                'text' => 'Akun dengan NIM tersebut telah terdaftar  sebelumnya.',
+    
+            ], 200);
         }
     }
 
@@ -65,6 +96,7 @@ class ApiController extends Controller
         
                 'status' => true,
                 'text' => 'Registration User Successfuly.',
+                'type' => 1
     
             ], 200);
 

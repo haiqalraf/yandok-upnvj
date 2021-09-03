@@ -43,16 +43,16 @@
          <div class="col table-bordered bg-white p-3"
             style="border-top: 18px solid #06750F; border-radius: 8px 8px 0px 0px;">
             <div class="d-flex justify-content-end">
-               <a href="{{route('index')}}" class="btn btn-sm btn-outline-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
+               <a href="{{route('index')}}" class="btn btn-sm btn-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
             </div>
             <div style="height: 20px; width: 100%; color: black;"></div>
             <h2 class="text-center mt-2">Registrasi</h2><br>
             <h5>Verifikasi Data</h5>
             <hr>
-            <div class="row">
-               <div class="col">
-                  <form method="POST" action="{{route('apiupn')}}">
-                  @csrf
+            <form method="POST" class="ajax_action" action="{{route('apiupn')}}">
+               @csrf
+               <div class="row">
+                  <div class="col">
                      <div class="form-group">
                         <label for="NIM" class="text-sm">NIM</label>
                         <input name="nim" type="text" class="form-control form-control-sm" id="NIM"
@@ -78,17 +78,189 @@
                   <input type="submit" class="btn btn-sm btn-success" value="verifikasi">
                </div>
             </form>
+
+            <div id="biodata">
+               <form class="ajax_action" method="POST" action="{{ route('storeData') }}">
+                  @csrf
+                  <input name="tanggal_lahir" type="text" class="form-control form-control-sm" id="tgl" hidden>
+                  <div class="col bg-light">
+                     <table width="100%" class="table-borderless" cellpadding="5">
+                        <tr>
+                           <td class="font-weight-bold">Nim</td>
+                           <td>:<input name="nim_verified" style="border:none" type="text" readonly ></td>
+                        </tr>
+                        <tr>
+                           <td class="font-weight-bold">Nama</td>
+                           <td>:<input name="name" style="border:none" type="text" readonly></td>
+                        </tr>
+                        <tr>
+                           <td class="font-weight-bold">Fakultas</td>
+                           <td>:<input name="fakultas" style="border:none" type="text" readonly></td>
+                        </tr>
+                        <tr>
+                           <td class="font-weight-bold">Program Studi</td>
+                           <td>:<input name="prodi" style="border:none" type="text" readonly> </td>
+                        </tr>
+                        <tr>
+                           <td class="font-weight-bold">Tahun Lulus</td>
+                           <td>:<input name="tahun_lulus" style="border:none" type="text" readonly> </td>
+                        </tr>
+                        <tr>
+                           <td class="font-weight-bold">Angkatan</td>
+                           <td>:<input name="angkatan" style="border:none" type="text" readonly> </td>
+                        </tr>
+                     </table>
+                  </div>
+                  <div>
+                     <div class="form-row mb-3">
+                        <div class="col">
+                           <label for="wa" class="text-sm">Telepon WA</label>
+                           <input name="no_hp" type="tel" class="form-control" placeholder="" id="wa" pattern="^(^\+62\s?|^0)(\d{3,4}-?){2}\d{3,4}$">
+                        </div>
+                        <div class="col">
+                           <label for="rumah" class="text-sm">Telepon Rumah</label>
+                           <input name="no_rumah" type="tel" class="form-control" placeholder="" id="rumah" pattern="^(^\+62\s?|^0)(\d{3,4}-?){2}\d{3,4}$">
+                        </div>
+                     </div>
+
+                     <div class="form-row">
+                        <div class="col">
+                           <label for="pass1" class="text-sm">Password</label>
+                           <div class="input-group" id="show_hide_password">
+                              <input name="password" type="password" class="form-control form-control-sm" placeholder="Password"
+                                 aria-label="Password" aria-describedby="basic-addon2" id="pass1">
+                              <div class="input-group-append">
+                                 <a class="input-group-text" id="basic-addon2"><i class="fa fa-eye-slash"
+                                       aria-hidden="true"></i></a>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col">
+                           <label for="pass2" class="text-sm">Verfikasi Password</label>
+                           <div class="input-group" id="show_hide_password1">
+                              <input name="password_confirmation" type="password" class="form-control form-control-sm"
+                                 placeholder="Ulangi Password" aria-label="Password" aria-describedby="basic-addon2"
+                                 id="pass2">
+                              <div class="input-group-append">
+                                 <a class="input-group-text" id="basic-addon2"><i class="fa fa-eye-slash"
+                                       aria-hidden="true"></i>
+                                 </a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mt-3 d-flex justify-content-end mb-3">
+                     <button type="submit" class="btn btn-primary">Register</button>
+                  </div>
+               </form>
+            </div>
          </div>
       </div>
    </div>
    <div class="alert"></div>
-   
 
    <!-- JS -->
-   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-   </script>
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+   </script>
+   <script src="{{asset('js/alert.js')}}"></script>
+   <!-- local script -->
+   <script>
+   
+      $('#biodata').hide()
+      $(document).ready(function () {
+         // ALFIO
+         $("#show_hide_password a").on('click', function (event) {
+            event.preventDefault();
+            if ($('#show_hide_password input').attr("type") == "text") {
+               $('#show_hide_password input').attr('type', 'password');
+               $('#show_hide_password i').addClass("fa-eye-slash");
+               $('#show_hide_password i').removeClass("fa-eye");
+            } else if ($('#show_hide_password input').attr("type") == "password") {
+               $('#show_hide_password input').attr('type', 'text');
+               $('#show_hide_password i').removeClass("fa-eye-slash");
+               $('#show_hide_password i').addClass("fa-eye");
+            }
+         });
+         $("#show_hide_password1 a").on('click', function (event) {
+            event.preventDefault();
+            if ($('#show_hide_password1 input').attr("type") == "text") {
+               $('#show_hide_password1 input').attr('type', 'password');
+               $('#show_hide_password1 i').addClass("fa-eye-slash");
+               $('#show_hide_password1 i').removeClass("fa-eye");
+            } else if ($('#show_hide_password1 input').attr("type") == "password") {
+               $('#show_hide_password1 input').attr('type', 'text');
+               $('#show_hide_password1 i').removeClass("fa-eye-slash");
+               $('#show_hide_password1 i').addClass("fa-eye");
+            }
+         });
+         // ALFIO
+         $(".ajax_action").submit(function(event){
+
+         $(':input[type="submit"]').prop('disabled', true);
+
+         event.preventDefault();
+         var post_url = $(this).attr("action"); // Get the form action URL
+         var request_method = $(this).attr("method"); // Get form GET/POST method
+         var form_data = new FormData(this);
+
+         $.ajax({
+            url : post_url,
+            type: request_method,
+            data : form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType: 'json', 
+            success: function(results){
+               
+               var status = results.status;
+               var text = results.text;
+               var type = results.type;
+               var data = results.data;
+
+               if (status){
+
+                  if (data != null && type == 0){
+
+                     console.log(data)
+
+                     $('#biodata input[name="tanggal_lahir"]').val(data.tanggal_lahir)
+                     $('#biodata input[name="nim_verified"]').val(data.nim)
+                     $('#biodata input[name="name"]').val(data.nama)
+                     $('#biodata input[name="fakultas"]').val(data.fakultas)
+                     $('#biodata input[name="prodi"]').val(data.program_studi)
+                     $('#biodata input[name="tahun_lulus"]').val(data.tahun_akademik_lulus)
+                     $('#biodata input[name="angkatan"]').val(data.angkatan)
+
+                     $('#biodata').show()
+                     
+                  } else {
+
+                     showAlert("Berhasil", text, function (e) {
+                        window.location.replace("login");
+                     });
+                  }
+                     
+               } else {
+
+                  showAlert("Gagal", text);
+               
+               }
+               $(':input[type="submit"]').prop('disabled', false);
+            },
+            error: function (xhr, status, error){
+
+               var text = xhr.responseJSON
+
+               showAlert("Gagal", text);
+
+               $(':input[type="submit"]').prop('disabled', false);
+            }
+         });
+         });
+      });
    </script>
 </body>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pesanan;
+use App\Models\User;
 use App\Models\Legalisir;
 use App\Models\Suket;
 use App\Models\Lainya;
@@ -128,6 +129,11 @@ class RiwayatController extends Controller
                 $results->table = $arr;
 
             }
+
+            $UserData = User::where('nim', $results->nim_pemesan)->first();
+
+            $results->name = $UserData->name;
+            $results->FAK = $UserData->fakultas;
 
         } catch (Exception $err) {
             $results = 'Error: '.$err;

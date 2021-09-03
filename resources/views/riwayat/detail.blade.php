@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col bg-white rounded shadow p-3">
             <div class="d-flex justify-content-end">
-               <a href="{{route('riwayat')}}" class="btn btn-sm btn-outline-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
+               <a href="{{route('riwayat')}}" class="btn btn-sm btn-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
             </div>
             <h3>Riwayat Pesanan Anda</h3>
             <hr>
@@ -20,8 +20,16 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td>Nama Pemesan</td>
+                            <td>{{$data->name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Fakultas</td>
+                            <td>{{$data->FAK}}</td>
+                        </tr>
+                        <tr>
                             <td>Tanggal Pemesanan</td>
-                            <td>{{date('d-m-y', strtotime($data->created_at))}}</td>
+                            <td>{{date('d-m-Y', strtotime($data->created_at))}}</td>
                         </tr>
                         <tr>
                             <td>Detail Status</td>

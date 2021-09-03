@@ -46,7 +46,7 @@
             <tr>
                <td>Tahun Lulus</td>
                <td>
-                  <input type="number" name="thn_lulus" class="form-control form-control-sm" placeholder="Tahun Lulus" value="{{ date('Y', strtotime($user->thn_lulus)) }}" readonly>
+                  <input type="number" name="thn_lulus" class="form-control form-control-sm" placeholder="Tahun Lulus" value="{{$user->thn_lulus}}" readonly>
                </td>
             </tr>
             <tr>
