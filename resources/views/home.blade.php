@@ -25,40 +25,40 @@
             <tr>
                <td>Nama</td>
                <td>
-                  <input type="text" name="nama_alumni" class="form-control form-control-sm" placeholder="Nama anda" value="{{ $user->name }}" readonly>
+                  <input type="text" name="nama_alumni" class="form-control form-control-sm" placeholder="Nama anda" value="{{ empty($user->name) ? "-" : $user->name }}" readonly>
                </td>
             </tr>
             @if ($user->is_admin == 0)
             <tr>
                <td>NIM</td>
                <td>
-                  <input type="text" name="nim" class="form-control form-control-sm" placeholder="NIM" value="{{ $user->nim }}" readonly>
+                  <input type="text" name="nim" class="form-control form-control-sm" placeholder="NIM" value="{{ empty($user->nim) ? "-" : $user->nim }}" readonly>
                </td>
             </tr>
 
             <tr>
                <td>Fakultas</td>
                <td>
-                  <input type="text" name="fakultas" class="form-control form-control-sm" placeholder="Fakultas" value="{{ $user->faculty->nama }}" readonly>
+                  <input type="text" name="fakultas" class="form-control form-control-sm" placeholder="Fakultas" value="{{ empty($user->faculty) ? "-" : $user->faculty->nama }}" readonly>
                </td>
             </tr>
 
             <tr>
                <td>Tahun Lulus</td>
                <td>
-                  <input type="number" name="thn_lulus" class="form-control form-control-sm" placeholder="Tahun Lulus" value="{{$user->thn_lulus}}" readonly>
+                  <input type="text" name="thn_lulus" class="form-control form-control-sm" placeholder="Tahun Lulus" value="{{empty($user->thn_lulus) ? "-" : $user->thn_lulus}}" readonly>
                </td>
             </tr>
             <tr>
                <td>Tanggal Lahir</td>
                <td id="tgl">
-                  <input type="text" class="form-control form-control-sm" value="{{ $user->tanggal_lahir }}" readonly>
+                  <input type="text" class="form-control form-control-sm" value="{{ empty($user->tanggal_lahir) ? "-" : $user->tanggal_lahir }}" readonly>
                      
                   <div class="invalid-feedback">Please fill out this field.</div>
                </td>
             </tr>
             @else
-                  <input type="hidden" name="nim" class="form-control form-control-sm" placeholder="NIM" value="{{ $user->nim }}" readonly>
+                  <input type="hidden" name="nim" class="form-control form-control-sm" placeholder="NIM" value="{{ empty($user->nim) ? "-" : $user->nim }}" readonly>
             @endif
 
             <tr>
