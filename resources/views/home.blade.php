@@ -39,7 +39,7 @@
             <tr>
                <td>Fakultas</td>
                <td>
-                  <input type="text" name="fakultas" class="form-control form-control-sm" placeholder="Fakultas" value="{{ $user->fakultas }}" readonly>
+                  <input type="text" name="fakultas" class="form-control form-control-sm" placeholder="Fakultas" value="{{ $user->faculty->nama }}" readonly>
                </td>
             </tr>
 

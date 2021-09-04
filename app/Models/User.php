@@ -49,7 +49,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'thn_lulus'=>'datetime',
     ];
 
     public function encodeFakultas($fakultas)
