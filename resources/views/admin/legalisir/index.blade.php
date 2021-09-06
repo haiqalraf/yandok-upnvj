@@ -83,6 +83,8 @@
 
    <!-- custom script -->
    <script>
-      $('.mydatatable').DataTable();
+      $('.mydatatable').DataTable({
+         "order": []
+      } );
    </script>
 @endsection
