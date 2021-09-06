@@ -133,7 +133,7 @@ class RiwayatController extends Controller
             $UserData = User::where('nim', $results->nim_pemesan)->first();
 
             $results->name = $UserData->name;
-            $results->FAK = $UserData->fakultas;
+            $results->FAK = $UserData->faculty->nama;
 
         } catch (Exception $err) {
             $results = 'Error: '.$err;
