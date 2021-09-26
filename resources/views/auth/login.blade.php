@@ -58,6 +58,7 @@
                   <i class="fa fa-key mr-1"></i> <label for="pass" class="text-sm"> Sandi</label>
                   <input type="password" name="password" class="form-control form-control-sm" id="pass"
                      placeholder="Harap masukan sandi anda disini">
+                     <a href="{{route('password.request')}}"><small>Lupa Sandi Anda?</small></a>
                </div>
                <div class="form-group">
                   <input type="submit" value="Submit"> 

@@ -32,173 +32,176 @@
 
 <body>
    <!-- header -->
+   
    <div class="container-fluid mb-5 shadow bg-white">
 	  <div class="col">
-		 <nav class="navbar navbar-expand-md bg-white">
-            @if (in_array(auth()->user()->is_admin, [2,3]))
-               @if (auth()->user()->is_admin==2)
-            <a id="link" class="navbar-brand" href="{{route('home')}}">
-               <img id="logoku" src="{{asset('img/logoUPNAdminAkpk.png')}}" alt="logo" height="63" width="100%"
+        <nav class="navbar navbar-expand-md bg-white">
+           @auth
+             @if (in_array(auth()->user()->is_admin, [2,3]))
+                @if (auth()->user()->is_admin==2)
+             <a id="link" class="navbar-brand" href="{{route('home')}}">
+                <img id="logoku" src="{{asset('img/logoUPNAdminAkpk.png')}}" alt="logo" height="63" width="100%"
+                class="d-inline-block align-top">
+                @else
+             <a id="link" class="navbar-brand" href="{{route('home')}}">
+                <img id="logoku" src="{{asset('img/logoUPNAdminDekanat.png')}}" alt="logo" height="63" width="100%"
+                class="d-inline-block align-top">
+                @endif
+             @elseif(in_array(auth()->user()->is_admin, [1]))
+          <a id="link" class="navbar-brand" href="{{route('home')}}">
+             <img id="logoku" src="{{asset('img/logoUPNSuperAdmin.png')}}" alt="logo" height="63" width="100%"
+             class="d-inline-block align-top">
+             @else
+          <a id="link" class="navbar-brand" href="{{route('home')}}">
+             <img id="logoku" src="{{asset('img/logoUPN.png')}}" alt="logo" height="63" width="243"
                class="d-inline-block align-top">
-               @else
-            <a id="link" class="navbar-brand" href="{{route('home')}}">
-               <img id="logoku" src="{{asset('img/logoUPNAdminDekanat.png')}}" alt="logo" height="63" width="100%"
-               class="d-inline-block align-top">
-               @endif
-            @elseif(in_array(auth()->user()->is_admin, [1]))
-         <a id="link" class="navbar-brand" href="{{route('home')}}">
-            <img id="logoku" src="{{asset('img/logoUPNSuperAdmin.png')}}" alt="logo" height="63" width="100%"
-            class="d-inline-block align-top">
-            @else
-         <a id="link" class="navbar-brand" href="{{route('home')}}">
-            <img id="logoku" src="{{asset('img/logoUPN.png')}}" alt="logo" height="63" width="243"
-				  class="d-inline-block align-top">
-            @endif
-			   
-			</a>
-			<div class="collapse navbar-collapse">
-			   <ul class="navbar-nav ml-auto">
+             @endif
+             
+          </a>
+          <div class="collapse navbar-collapse">
+             <ul class="navbar-nav ml-auto">
+                @if (in_array(auth()->user()->is_admin, [2,3]))
+                   @if (auth()->user()->is_admin==2)
+                <li class="nav-item">
+                   <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
+                </li>
+                   @else
+                <li class="nav-item">
+                   <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
+                </li>
+                   @endif
+                @elseif(in_array(auth()->user()->is_admin, [1]))
+                <li class="nav-item">
+                   <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
+                </li>
+                @else
+                <li class="nav-item">
+                   <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
+                </li>
+                @endif
                @if (in_array(auth()->user()->is_admin, [2,3]))
-                  @if (auth()->user()->is_admin==2)
-               <li class="nav-item">
-                  <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
-               </li>
-                  @else
-               <li class="nav-item">
-                  <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
-               </li>
-                  @endif
+               <li class="nav-item ml-2">
+                <div class="dropdown ml-2">
+                    <a class="nav-link dropdown-toggle active" type="button" id="dropdownMenu2"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Daftar Pesanan
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-sm-right " aria-labelledby="dropdownMenu2">
+                        <a href="@if(auth()->user()->is_admin==2){{route('akpk.legalisir')}}@elseif(auth()->user()->is_admin==3){{route('dekan.legalisir')}}@endif" class="dropdown-item on" type="button"
+                            style="font-size: small; font-weight: 600;">
+                            Legalisir
+                        </a>
+                        <a href="@if(auth()->user()->is_admin==2){{route('akpk.surat')}}@elseif(auth()->user()->is_admin==3){{route('dekan.surat')}}@endif" class="dropdown-item" type="button"
+                            style="font-size: small; font-weight: 600;">
+                            Surat Keterangan
+                        </a>
+                        <a href="@if(auth()->user()->is_admin==2){{route('akpk.lainnya')}}@elseif(auth()->user()->is_admin==3){{route('dekan.lainnya')}}@endif" class="dropdown-item" type="button"
+                            style="font-size: small; font-weight: 600;">
+                            Lainnya
+                        </a>
+                    </div>
+ 
+                </div>
+            </li>
                @elseif(in_array(auth()->user()->is_admin, [1]))
-               <li class="nav-item">
-                  <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
-               </li>
-               @else
-               <li class="nav-item">
-                  <a class="nav-link active" href="{{route('home')}}"><i class="fa fa-home"></i></a>
-               </li>
-               @endif
-				  @if (in_array(auth()->user()->is_admin, [2,3]))
-              <li class="nav-item ml-2">
-               <div class="dropdown ml-2">
-                   <a class="nav-link dropdown-toggle active" type="button" id="dropdownMenu2"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                       Daftar Pesanan
+             <li class="nav-item ml-2">
+                <div class="dropdown ml-2">
+                   <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      Pengolahan Akun
                    </a>
-                   <div class="dropdown-menu dropdown-menu-sm-right " aria-labelledby="dropdownMenu2">
-                       <a href="@if(auth()->user()->is_admin==2){{route('akpk.legalisir')}}@elseif(auth()->user()->is_admin==3){{route('dekan.legalisir')}}@endif" class="dropdown-item on" type="button"
-                           style="font-size: small; font-weight: 600;">
-                           Legalisir
-                       </a>
-                       <a href="@if(auth()->user()->is_admin==2){{route('akpk.surat')}}@elseif(auth()->user()->is_admin==3){{route('dekan.surat')}}@endif" class="dropdown-item" type="button"
-                           style="font-size: small; font-weight: 600;">
-                           Surat Keterangan
-                       </a>
-                       <a href="@if(auth()->user()->is_admin==2){{route('akpk.lainnya')}}@elseif(auth()->user()->is_admin==3){{route('dekan.lainnya')}}@endif" class="dropdown-item" type="button"
-                           style="font-size: small; font-weight: 600;">
-                           Lainnya
-                       </a>
+                   <div class="dropdown-menu dropdown-menu-sm-right" aria-labelledby="dropdownMenu2">
+                      <a href="{{route('superadmin.akpk')}}" class="dropdown-item" type="button"
+                         style="font-size: small; font-weight: 600;">
+                         AKPK
+                      </a>
+                      <a href="{{route('superadmin.dekan')}}" class="dropdown-item" type="button"
+                         style="font-size: small; font-weight: 600;">
+                         Dekanat
+                      </a>
                    </div>
-
-               </div>
-           </li>
-              @elseif(in_array(auth()->user()->is_admin, [1]))
-            <li class="nav-item ml-2">
-               <div class="dropdown ml-2">
-                  <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-                     aria-haspopup="true" aria-expanded="false">
-                     Pengolahan Akun
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-sm-right" aria-labelledby="dropdownMenu2">
-                     <a href="{{route('superadmin.akpk')}}" class="dropdown-item" type="button"
-                        style="font-size: small; font-weight: 600;">
-                        AKPK
-                     </a>
-                     <a href="{{route('superadmin.dekan')}}" class="dropdown-item" type="button"
-                        style="font-size: small; font-weight: 600;">
-                        Dekanat
-                     </a>
-                  </div>
-
-               </div>
-            </li>
-				  @else
-            <li class="nav-item ml-2">
-               <div class="dropdown ml-2">
-               <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-                  Pesan
-               </a>
-               <div class="dropdown-menu dropdown-menu-sm-right" aria-labelledby="dropdownMenu2">
-                  <a href="{{url('legalisir')}}" class="dropdown-item" type="button"
-                     style="font-size: small; font-weight: 600;">
-                     Legalisir
-                  </a>
-                  <a href="{{url('surat')}}" class="dropdown-item" type="button"
-                     style="font-size: small; font-weight: 600;">
-                     Surat Keterangan
-                  </a>
-                  <a href="{{url('lainnya')}}" class="dropdown-item" type="button"
-                     style="font-size: small; font-weight: 600;">
-                     Lain-lainya
-                  </a>
-               </div>
-
-               </div>
-            </li>
-            <li class="nav-item ml-2">
-              <a class="nav-link" href="{{route('riwayat')}}">Riwayat Pemesanan</a>
-            </li>
-          </ul>
-          <div class="dropdown ml-2">
-            <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Bantuan
-            </a>
-				  @endif
-
-				  
-				  <div class="dropdown-menu dropdown-menu-sm-right" aria-labelledby="dropdownMenu2">
-					 <a href="{{route('alur')}}" class="dropdown-item" type="button" style="font-size: small;">Alur Proses
-						Pemesanan</a>
-				  </div>
-
-			   </div>
-			   <div class="dropdown">
-				  <a style="text-decoration: none;" class="dropdown-toggle text-dark" href="#" data-toggle="dropdown">
-               @if (auth()->user()->photo != null)
-					 <img src="{{asset('img/user/'.auth()->user()->photo)}}" height="64px" width="64px"
-						style="border-radius: 50%; margin-left: 30px;">
-
+ 
+                </div>
+             </li>
                @else
-					 <img src="{{asset('img/profil.png')}}" height="64px" width="64px"
-						style="border-radius: 50%; margin-left: 30px;">
-				  @endif
-				  </a>
-				  <div class="dropdown-menu dropdown-menu-sm-right">
-					 <ul class="list-unstyled p-3">
-						<li style="font-size: medium; font-weight: 500;">{{auth()->user()->name}}</li>
-						<li style="font-size: small;">{{auth()->user()->nim}}</li>
-					 </ul>
-					 <div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="{{ route('logout') }}"
-							onclick="event.preventDefault();
-							document.getElementById('logout-form').submit();">
-							{{ __('Logout') }}
-						</a>
-
-						<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-							@csrf
-						</form>
-				  </div>
-			   </div>
-			   <!-- Notif -->
-            @if (auth()->user()->is_admin!=1)
-			   <div class="dropdown ml-4">
-               <livewire:notification />
-			   </div>
-            @endif
-			</div>
-		 </nav>
+             <li class="nav-item ml-2">
+                <div class="dropdown ml-2">
+                <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                   Pesan
+                </a>
+                <div class="dropdown-menu dropdown-menu-sm-right" aria-labelledby="dropdownMenu2">
+                   <a href="{{url('legalisir')}}" class="dropdown-item" type="button"
+                      style="font-size: small; font-weight: 600;">
+                      Legalisir
+                   </a>
+                   <a href="{{url('surat')}}" class="dropdown-item" type="button"
+                      style="font-size: small; font-weight: 600;">
+                      Surat Keterangan
+                   </a>
+                   <a href="{{url('lainnya')}}" class="dropdown-item" type="button"
+                      style="font-size: small; font-weight: 600;">
+                      Lain-lainya
+                   </a>
+                </div>
+ 
+                </div>
+             </li>
+             <li class="nav-item ml-2">
+               <a class="nav-link" href="{{route('riwayat')}}">Riwayat Pemesanan</a>
+             </li>
+           </ul>
+           <div class="dropdown ml-2">
+             <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+               Bantuan
+             </a>
+               @endif
+ 
+               
+               <div class="dropdown-menu dropdown-menu-sm-right" aria-labelledby="dropdownMenu2">
+                 <a href="{{route('alur')}}" class="dropdown-item" type="button" style="font-size: small;">Alur Proses
+                   Pemesanan</a>
+               </div>
+ 
+             </div>
+             <div class="dropdown">
+               <a style="text-decoration: none;" class="dropdown-toggle text-dark" href="#" data-toggle="dropdown">
+                @if (auth()->user()->photo != null)
+                 <img src="{{asset('img/user/'.auth()->user()->photo)}}" height="64px" width="64px"
+                   style="border-radius: 50%; margin-left: 30px;">
+ 
+                @else
+                 <img src="{{asset('img/profil.png')}}" height="64px" width="64px"
+                   style="border-radius: 50%; margin-left: 30px;">
+               @endif
+               </a>
+               <div class="dropdown-menu dropdown-menu-sm-right">
+                 <ul class="list-unstyled p-3">
+                   <li style="font-size: medium; font-weight: 500;">{{auth()->user()->name}}</li>
+                   <li style="font-size: small;">{{auth()->user()->nim}}</li>
+                 </ul>
+                 <div class="dropdown-divider"></div>
+                   <a class="dropdown-item" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();">
+                      {{ __('Logout') }}
+                   </a>
+ 
+                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                   </form>
+               </div>
+             </div>
+             <!-- Notif -->
+             @if (auth()->user()->is_admin!=1)
+             <div class="dropdown ml-4">
+                <livewire:notification />
+             </div>
+             @endif
+          </div>
+          @endauth
+        </nav>
 	  </div>
    </div>
    <!-- end header -->

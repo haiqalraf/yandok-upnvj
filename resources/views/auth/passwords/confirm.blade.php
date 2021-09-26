@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.app-guest')
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row d-flex justify-content-center mt-5 h-100">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Confirm Password') }}</div>
