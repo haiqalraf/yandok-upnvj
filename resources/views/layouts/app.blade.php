@@ -172,7 +172,7 @@
                    style="border-radius: 50%; margin-left: 30px;">
  
                 @else
-                 <img src="{{asset('img/profil.png')}}" height="64px" width="64px"
+                 <img src="{{asset('img/icon/person-circle.svg')}}" height="64px" width="64px"
                    style="border-radius: 50%; margin-left: 30px;">
                @endif
                </a>
