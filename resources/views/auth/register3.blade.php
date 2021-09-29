@@ -43,7 +43,7 @@
          <div class="col table-bordered bg-white p-3"
             style="border-top: 18px solid #06750F; border-radius: 8px 8px 0px 0px;">
             <div class="d-flex justify-content-end">
-               <a href="{{url()->previous()}}" class="btn btn-sm btn-outline-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
+               <a href="{{route('index')}}" class="btn btn-sm btn-outline-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
             </div>
             <div style="height: 20px; width: 100%; color: black;"></div>
             <h2 class="text-center mt-2">Registrasi</h2><br>

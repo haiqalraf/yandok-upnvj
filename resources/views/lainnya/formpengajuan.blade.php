@@ -43,7 +43,7 @@
 
       <div class="row">
          <div class="col-2">
-            <a class="btn btn-sm text-left aktif p-2" href="{{ url()->previous() }}"><i
+            <a class="btn btn-sm text-left aktif p-2" href="{{ route('lainnya') }}"><i
                   class="fa fa-arrow-left"></i>&nbsp;Kembali</a>
          </div>
          <div class="col-10 bg-white rounded shadow p-3 mb-3">
