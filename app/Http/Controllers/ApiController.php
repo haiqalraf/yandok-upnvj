@@ -82,6 +82,7 @@ class ApiController extends Controller
                 'nim' => $request->nim_verified,
                 'fakultas' => $User->encodeFakultas($request->fakultas),
                 'name' => $request->name,
+                'email' => $request->email,
                 'password' => bcrypt($request->password),
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'thn_lulus' => substr($request->tahun_lulus, strpos($request->tahun_lulus, "/") + 1),
