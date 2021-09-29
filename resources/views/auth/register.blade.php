@@ -113,11 +113,15 @@
                   </div>
                   <div>
                      <div class="form-row mb-3">
-                        <div class="col">
+                        <div class="col-12 my-3">
+                           <label for="wa" class="text-sm">Email</label>
+                           <input name="email" type="email" class="form-control" placeholder="" id="email" required>
+                        </div>
+                        <div class="col-6">
                            <label for="wa" class="text-sm">Telepon WA</label>
                            <input name="no_hp" type="tel" class="form-control" placeholder="" id="wa" pattern="^(^\+62\s?|^0)(\d{3,4}-?){2}\d{3,4}$">
                         </div>
-                        <div class="col">
+                        <div class="col-6">
                            <label for="rumah" class="text-sm">Telepon Rumah</label>
                            <input name="no_rumah" type="tel" class="form-control" placeholder="" id="rumah" pattern="^(^\+62\s?|^0)(\d{3,4}-?){2}\d{3,4}$">
                         </div>
@@ -128,7 +132,7 @@
                            <label for="pass1" class="text-sm">Password</label>
                            <div class="input-group" id="show_hide_password">
                               <input name="password" type="password" class="form-control form-control-sm" placeholder="Password"
-                                 aria-label="Password" aria-describedby="basic-addon2" id="pass1">
+                                 aria-label="Password" aria-describedby="basic-addon2" id="pass1" required>
                               <div class="input-group-append">
                                  <a class="input-group-text" id="basic-addon2"><i class="fa fa-eye-slash"
                                        aria-hidden="true"></i></a>
@@ -140,7 +144,7 @@
                            <div class="input-group" id="show_hide_password1">
                               <input name="password_confirmation" type="password" class="form-control form-control-sm"
                                  placeholder="Ulangi Password" aria-label="Password" aria-describedby="basic-addon2"
-                                 id="pass2">
+                                 id="pass2" required>
                               <div class="input-group-append">
                                  <a class="input-group-text" id="basic-addon2"><i class="fa fa-eye-slash"
                                        aria-hidden="true"></i>
@@ -239,8 +243,8 @@
                      
                   } else {
 
-                     showAlert("Berhasil", text, function (e) {
-                        window.location.replace("login");
+                     showAlert("Berhasil", text, () => {
+                        location.replace("login");
                      });
                   }
                      
