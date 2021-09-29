@@ -56,12 +56,18 @@
                </div>
                <div class="form-group">
                   <i class="fa fa-key mr-1"></i> <label for="pass" class="text-sm"> Sandi</label>
-                  <input type="password" name="password" class="form-control form-control-sm" id="pass"
+                  <input type="password" name="password" class="form-control form-control-sm @if(Session::has('error')) is-invalid @endif" id="pass"
                      placeholder="Harap masukan sandi anda disini">
-                     <a href="{{route('password.request')}}"><small>Lupa Sandi Anda?</small></a>
+                  @if(Session::has('error'))
+                     <span class="invalid-feedback" role="alert">
+                           <strong>{{ Session::get('error') }}</strong>
+                     </span>
+                  @endif
                </div>
+               
                <div class="form-group">
                   <input type="submit" value="Submit"> 
+                  <a class="ml-3" href="{{route('password.request')}}"><small>Lupa Sandi Anda?</small></a>
                </div>
             </form>
             <div style="border-left: 1px solid black; border-right-width: thick;" class="mb-3">
