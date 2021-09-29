@@ -64,17 +64,14 @@
             <tr>
                <td>Email</td>
                <td>
-                  <input type="email" name="email" class="form-control form-control-sm" value="{{ $user->email }}" placeholder="Email lengkap anda" required>
+                  <input type="email" name="email" class="form-control form-control-sm" value="{{ $user->email }}" placeholder="Email lengkap anda" readonly>
                </td>
             </tr>
 
             <tr>
                <td>Password</td>
                <td>
-                  <input type="password" name="password" class="form-control form-control-sm" placeholder="Password"
-                     value="********">
-                  <p class="text-danger text-right" style="font-size: 13px;">Ketik Minimal 6 karakter untuk mengganti
-                     ke sandi baru.</p>
+                  <a href="{{route('password.edit')}}" class="btn btn-dark">Ubah Sandi</a>
                </td>
             </tr>
 

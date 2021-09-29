@@ -8,6 +8,7 @@ use App\Http\Controllers\SuketController;
 use App\Http\Controllers\LainyaController;
 use App\Http\Controllers\LegalisirController;
 use App\Http\Controllers\admin\PesananController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\superadmin\AkpkController;
 use App\Http\Controllers\superadmin\DekanController;
 
@@ -27,6 +28,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('index');
 
+Route::get('/password/edit', [ResetPasswordController::class, 'showResetFormWithoutToken'])->middleware('auth')->name('password.edit');
+Route::post('/password/edit', [ResetPasswordController::class, 'updatePasswordFromOldPassword'])->middleware('auth')->name('password.update-auth');
 Auth::routes();
 
 Route::get('/alur', [App\Http\Controllers\HomeController::class, 'alur'])->name('alur');
