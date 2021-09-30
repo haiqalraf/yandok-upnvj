@@ -71,7 +71,7 @@
             <tr>
                <td>Password</td>
                <td>
-                  <a href="{{route('password.edit')}}" class="btn btn-dark">Ubah Sandi</a>
+                  <a href="{{route('password.edit')}}" class="btn btn-link">Ubah Sandi</a>
                </td>
             </tr>
 
