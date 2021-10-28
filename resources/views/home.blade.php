@@ -146,7 +146,7 @@
                   class="font-weight-bold">Trace Study</span> terlebih dahulu
             </div>
             <div class="modal-footer">
-               <a href="{{route('tracestudy')}}" class="btn btn-success">Isi sekarang</a>
+               <button type="button" class="btn btn-success" onclick="tracer()">Isi sekarang</button>
             </div>
          </div>
       </div>
@@ -212,9 +212,16 @@ $(document).ready(function () {
    showAlert("Berhasil", "{{session('status')}}");
 </script>
 @endif
-@if (!auth()->user()->tracerstudy)
+@if (!auth()->user()->is_tracer)
 <script>
    $('#tracestudy').modal('show');
+</script>
+
+<script>
+   function tracer() {
+      window.open("https://tracer.upnvj.ac.id/admin/login", "_blank")
+      window.location.href = "{{route('tracestudy')}}";
+   }
 </script>
 @endif
 @endsection

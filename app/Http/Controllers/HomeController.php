@@ -1,8 +1,6 @@
 <?php
    
 namespace App\Http\Controllers;
-use App\Models\Legalisir;
-use App\Models\TracerStudy;
 use Illuminate\Http\Request;
    
 class HomeController extends Controller
@@ -57,46 +55,8 @@ class HomeController extends Controller
 
     public function tracestudy()
     {
-        if (auth()->user()->tracerstudy) {
-            return abort(404);
-        }
-        return view('tracestudy');
-    }
-
-    public function updateTracer(Request $request)
-    {
-        if ($request->filled('tempat_kerja') || 
-            $request->filled('jabatan') || 
-            $request->filled('status_kerja') || 
-            $request->filled('alamat_kerja') || 
-            $request->filled('tanggal_kerja')) {
-            
-            $request->validate([
-                'tempat_kerja' => 'required',
-                'jabatan' => 'required',
-                'status_kerja' => 'required',
-                'alamat_kerja' => 'required',
-                'tanggal_kerja' => 'required|date',
-
-            ]);
-            $tracer = new TracerStudy([
-                'nim' => auth()->user()->nim,
-                'tempat_kerja' => $request->tempat_kerja,
-                'jabatan' => $request->jabatan,
-                'alamat_kerja' => $request->alamat_kerja,
-                'tanggal_kerja' => $request->tanggal_kerja,
-                'status_kerja' => $request->status_kerja,
-                'waktu_kontrak' => $request->waktu_kontrak,
-            ]);
-            auth()->user()->tracerstudy()->save($tracer);
-            auth()->user()->save();
-        } else {
-            $tracer = new TracerStudy([
-                'nim' => auth()->user()->nim,
-            ]);
-            auth()->user()->tracerstudy()->save($tracer);
-        }
-
-        return redirect()->route('home')->with('status', 'Tracer Study berhasil diisi!');
+        auth()->user()->is_tracer = true;
+        auth()->user()->save();
+        return redirect()->back();
     }
 }

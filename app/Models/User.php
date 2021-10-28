@@ -31,6 +31,7 @@ class User extends Authenticatable implements CanResetPassword
         'pekerjaan',
         'photo',
         'address',
+        'is_tracer'
     ];
 
     /**
@@ -127,11 +128,6 @@ class User extends Authenticatable implements CanResetPassword
     //         return $output;
     //     }
     // }
-
-    public function tracerstudy()
-    {
-        return $this->hasOne(TracerStudy::class);
-    }
 
     public function faculty()
     {

@@ -93,7 +93,6 @@ Route::prefix('superadmin')->group(function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/tracestudy', [App\Http\Controllers\HomeController::class, 'tracestudy'])->name('tracestudy');
-Route::post('/tracestudy', [App\Http\Controllers\HomeController::class, 'updateTracer']);
 Route::get('/riwayat', [App\Http\Controllers\RiwayatController::class, 'index'])->name('riwayat');
 Route::get('/riwayat/detail/{id}', [App\Http\Controllers\RiwayatController::class, 'detail']);
 Route::get('/riwayat/ambil/{id}', [App\Http\Controllers\RiwayatController::class, 'ambil']);
