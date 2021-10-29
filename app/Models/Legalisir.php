@@ -74,4 +74,63 @@ class Legalisir extends Model
 
         return $data;
     }
+
+    public function titleStatus()
+    {
+        switch ($this->verifikasi) {
+            case 0:
+                return 'Ditolak';
+            case 1:
+                return 'Belum Diproses';
+            case 2:
+                return 'Sedang Diproses';
+            case 3:
+                return 'Sudah Diproses';
+            default:
+                return 'Belum Diproses';
+        }
+    }
+
+    public function daftarPesanan() 
+    {
+        $daftar_pesanan = collect([]);
+        if ($this->dok_01 > 0) {
+            $daftar_pesanan->put('Legalisir Ijazah', $this->dok_01);
+        }
+        if ($this->dok_02 > 0) {
+            $daftar_pesanan->put('Legalisir Transkrip', $this->dok_02);
+        }
+        if ($this->dok_03 > 0) {
+            $daftar_pesanan->put('Legalisir Piagam Cum Laude', $this->dok_03);
+        }
+        if ($this->dok_04 > 0) {
+            $daftar_pesanan->put('Terjemahan Ijazah', $this->dok_04);
+        }
+        if ($this->dok_05 > 0) {
+            $daftar_pesanan->put('Terjemahan Transkrip', $this->dok_05);
+        }
+        if ($this->dok_06 > 0) {
+            $daftar_pesanan->put('Terjemahan Piagam Cumlaude', $this->dok_06);
+        }
+        if ($this->dok_07 > 0) {
+            $daftar_pesanan->put('Legalisir Akreditasi Program Studi (Tanggal Lulus)', $this->dok_07);
+        }
+        if ($this->dok_08 > 0) {
+            $daftar_pesanan->put('Legalisir Akreditasi Program Studi (Saat Ini)', $this->dok_08);
+        }
+        if ($this->dok_09 > 0) {
+            $daftar_pesanan->put('Legalisir Akreditasi Institusi (Tanggal Lulus)', $this->dok_09);
+        }
+        if ($this->dok_10 > 0) {
+            $daftar_pesanan->put('Legalisir Akreditasi Institusi (Saat Ini)', $this->dok_10);
+        }
+        if ($this->dok_11 > 0) {
+            $daftar_pesanan->put('Legalisir Akreditasi Program Profesi - Spesialis (Tanggal Lulus)', $this->dok_11);
+        }
+        if ($this->dok_12 > 0) {
+            $daftar_pesanan->put('Legalisir Akreditasi Program Profesi - Spesialis (Saat Ini)', $this->dok_12);
+        }
+
+        return $daftar_pesanan;
+    }
 }

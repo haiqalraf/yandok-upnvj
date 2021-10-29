@@ -129,6 +129,22 @@ class User extends Authenticatable implements CanResetPassword
     //     }
     // }
 
+    public function adminTitle()
+    {
+        switch ($this->is_admin) {
+            case 0:
+                return 'mahasiswa';
+            case 1:
+                return 'superadmin';
+            case 2:
+                return 'akpk';
+            case 3:
+                return 'dekan';
+            default:
+                return 'mahasiswa';
+        }
+    }
+
     public function faculty()
     {
         return $this->belongsTo(Fakultas::class, 'fakultas');
