@@ -16,21 +16,9 @@ class PesananController extends Controller
     {
         $surat = [];
         if ($request->has('status')) {
-            if (auth()->user()->is_admin==2 && in_array($request->status, [0,1,2])) {
-                $surat = Suket::where('verifikasi', $request->status)->get();
-                if (in_array($request->status,[2])) {
-                    $surat = Suket::where('verifikasi', $request->status)
-                        ->orWhere('verifikasi', $request->status+1)->get();
-                }
-            } elseif(auth()->user()->is_admin==3 && in_array($request->status, [1,2])) {
-                $surat = Suket::where('verifikasi', $request->status+1)->get();
-            }
+            $surat = Suket::where('verifikasi', $request->status)->get();
         } else {
-            if (auth()->user()->is_admin==2) {
-                $surat = Suket::where('verifikasi', '1')->get();
-            } elseif(auth()->user()->is_admin==3) {
-                $surat = Suket::where('verifikasi', '2')->get();
-            }
+            $surat = Suket::where('verifikasi', '1')->get();
         }
         
         return view('admin.surat.index', [
@@ -41,12 +29,9 @@ class PesananController extends Controller
 
     public function detailSurat(Suket $surat)
     {
-        if ((in_array($surat->verifikasi, [0,1]) && auth()->user()->is_admin==3)) {
-            return abort('404'); 
-        }
         $daftar_pesanan = collect([]);
-        foreach ($surat->dokumen_dipesan as $keys => $values) {
-            foreach ($values as $key => $value) {
+        foreach ($surat->dokumen_dipesan as $values) {
+            foreach ($values as $value) {
                 $daftar_pesanan->put($value, 1);
             }
         }
@@ -63,48 +48,16 @@ class PesananController extends Controller
             'status' => 'required'
         ]);
 
-        if ($request->status === '3') {
-            if (auth()->user()->is_admin==3) {
-                $request->validate([
-                    'upload' => 'required|file|mimes:zip,rar'
-                ]);
-    
-                if ($request->hasFile('upload')) {
-                    $file = $request->file("upload");
-    
-                    $extension = $file->getClientOriginalExtension();
-                    $username = User::where('nim', $surat->nim_pemesan)->first()->name;
-                    $date = now("Asia/Jakarta")->format('YmdHis');
-    
-                    $newName = $date . '_dok_dipesan_' . 'suratketerangan' . '_' . $username . '.' . $extension;
-    
-                    if (!Storage::disk('local')->exists('suket/selesai/' . $newName)) {
-                        Storage::disk('local')->put('suket/selesai/' . $newName, $file->get());
-                    }
-    
-                    $surat->final_dokumen = $newName;
-                } else {
-                    return back()->with("message", "File Not Found");
-                }
-            } else {
-                return back()->with("message", "You Don't Have Permission");
-            }
-        } elseif ($request->status === '0') {
-            if (auth()->user()->is_admin==2) {
-                $surat->komentar = $request->komentar;
-            } else {
-                return back()->with("message", "You Don't Have Permission");
-            }
+        if ($request->status === '0') {
+            $surat->komentar = $request->komentar;
         }
 
         $surat->verifikasi = $request->status;
         $surat->save();
 
-        if (auth()->user()->is_admin==2) {
-            return redirect()->route('akpk.surat', ['status' => $request->status]);
-        } elseif (auth()->user()->is_admin==3) {
-            return redirect()->route('dekan.surat', ['status' => $request->status-1]);
-        }
+        $adminTitle = auth()->user()->adminTitle();
+
+        return redirect()->route($adminTitle.'.surat', ['status' => $request->status]);
     }
 
     public function lainnya(Request $request)
