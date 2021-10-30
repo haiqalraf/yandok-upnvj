@@ -49,4 +49,20 @@ class Lainya extends Model
 
         return $data;
     }
+
+    public function titleStatus()
+    {
+        switch ($this->verifikasi) {
+            case 0:
+                return 'Ditolak';
+            case 1:
+                return 'Belum Diproses';
+            case 2:
+                return 'Sedang Diproses';
+            case 3:
+                return 'Sudah Diproses';
+            default:
+                return 'Belum Diproses';
+        }
+    }
 }

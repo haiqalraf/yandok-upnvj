@@ -6,7 +6,7 @@ use App\Models\Suket;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AdminLegalisirController extends Controller
+class AdminSuratController extends Controller
 {
   public function surat(Request $request)
   {
