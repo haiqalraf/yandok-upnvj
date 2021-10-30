@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use App\Http\Traits\UsesUuid;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Legalisir extends Model
 {
@@ -132,5 +133,15 @@ class Legalisir extends Model
         }
 
         return $daftar_pesanan;
+    }
+
+    public function isKebutuhanForAkpk() { 
+        $kebutuhan = Str::lower($this->kebutuhan);
+        if( $kebutuhan == 'asn') {
+            return true;
+        } elseif ($kebutuhan == 'tni atau polri') {
+            return true;
+        }
+        return false;
     }
 }

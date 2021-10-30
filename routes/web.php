@@ -74,14 +74,6 @@ Route::prefix('dekan')->middleware('is_dekan')->group(function ()
     Route::get('/legalisir', [AdminLegalisirController::class, 'legalisir'])->name('dekan.legalisir');
     Route::get('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'detailLegalisir'])->name('dekan.legalisir.detail');
     Route::put('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'updateLegalisir'])->name('dekan.legalisir.detail');
-    
-    Route::get('/surat', [AdminSuratController::class, 'surat'])->name('dekan.surat');
-    Route::get('/surat/{surat:id}', [AdminSuratController::class, 'detailSurat'])->name('dekan.surat.detail');
-    Route::put('/surat/{surat:id}', [AdminSuratController::class, 'updateSurat'])->name('dekan.surat.detail');
-    
-    Route::get('/lainnya', [AdminLainnyaController::class, 'lainnya'])->name('dekan.lainnya');
-    Route::get('/lainnya/{lainnya:id}', [AdminLainnyaController::class, 'detailLainnya'])->name('dekan.lainnya.detail');
-    Route::put('/lainnya/{lainnya:id}', [AdminLainnyaController::class, 'updateLainnya'])->name('dekan.lainnya.detail');
 });
 
 #superadmin

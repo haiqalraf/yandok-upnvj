@@ -12,9 +12,21 @@ class AdminLegalisirController extends Controller
   {
       $legalisir = [];
       if ($request->has('status')) {
-          $legalisir = Legalisir::where('verifikasi', $request->status)->get();
+        if (auth()->user()->is_admin==2) {
+          $legalisir = Legalisir::where('verifikasi', $request->status)
+            ->where('kebutuhan', 'ASN')->orWhere('kebutuhan', 'TNI atau Polri')->get();
+        } elseif (auth()->user()->is_admin==3) {
+        $legalisir = Legalisir::where('verifikasi', $request->status)
+          ->where('kebutuhan', 'Swasta')->orWhere('kebutuhan', 'Lainnya')->get();
+        }
       } else {
-          $legalisir = Legalisir::where('verifikasi', '1')->get();
+      if (auth()->user()->is_admin == 2) {
+        $legalisir = Legalisir::where('verifikasi', 1)
+          ->where('kebutuhan', 'ASN')->orWhere('kebutuhan', 'TNI atau Polri')->get();
+      } elseif (auth()->user()->is_admin == 3) {
+        $legalisir = Legalisir::where('verifikasi', 1)
+        ->where('kebutuhan', 'Swasta')->orWhere('kebutuhan', 'Lainnya')->get();
+      }
       }
 
       return view('admin.legalisir.index', [
@@ -25,6 +37,9 @@ class AdminLegalisirController extends Controller
 
   public function detailLegalisir(Legalisir $legalisir)
   {
+    if ($legalisir->isKebutuhanForAkpk() && auth()->user()->is_admin == 3) {
+      abort('404');
+    }
       $daftar_pesanan = $legalisir->daftarPesanan();
 
       return view('admin.legalisir.detail', [
@@ -35,6 +50,9 @@ class AdminLegalisirController extends Controller
 
   public function updateLegalisir(Legalisir $legalisir, Request $request)
   {
+    if ($legalisir->isKebutuhanForAkpk() && auth()->user()->is_admin == 3) {
+      abort('404');
+    }
       $request->validate([
           'status' => 'required'
       ]);

@@ -87,18 +87,20 @@
                         Daftar Pesanan
                     </a>
                     <div class="dropdown-menu dropdown-menu-sm-right " aria-labelledby="dropdownMenu2">
-                        <a href="@if(auth()->user()->is_admin==2){{route('akpk.legalisir')}}@elseif(auth()->user()->is_admin==3){{route('dekan.legalisir')}}@endif" class="dropdown-item on" type="button"
-                            style="font-size: small; font-weight: 600;">
-                            Legalisir
-                        </a>
-                        <a href="@if(auth()->user()->is_admin==2){{route('akpk.surat')}}@elseif(auth()->user()->is_admin==3){{route('dekan.surat')}}@endif" class="dropdown-item" type="button"
-                            style="font-size: small; font-weight: 600;">
-                            Surat Keterangan
-                        </a>
-                        <a href="@if(auth()->user()->is_admin==2){{route('akpk.lainnya')}}@elseif(auth()->user()->is_admin==3){{route('dekan.lainnya')}}@endif" class="dropdown-item" type="button"
-                            style="font-size: small; font-weight: 600;">
-                            Lainnya
-                        </a>
+                     <a href="@if(auth()->user()->is_admin==2){{route('akpk.legalisir')}}@elseif(auth()->user()->is_admin==3){{route('dekan.legalisir')}}@endif" class="dropdown-item on" type="button"
+                        style="font-size: small; font-weight: 600;">
+                        Legalisir
+                     </a>
+                     @if (auth()->user()->is_admin==2)
+                     <a href="{{route('akpk.surat')}}" class="dropdown-item" type="button"
+                         style="font-size: small; font-weight: 600;">
+                         Surat Keterangan
+                     </a>
+                     <a href="{{route('akpk.lainnya')}}" class="dropdown-item" type="button"
+                         style="font-size: small; font-weight: 600;">
+                         Lainnya
+                     </a>
+                     @endif
                     </div>
  
                 </div>
