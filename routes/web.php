@@ -8,9 +8,10 @@ use App\Http\Controllers\SuketController;
 use App\Http\Controllers\LainyaController;
 use App\Http\Controllers\LegalisirController;
 use App\Http\Controllers\admin\PesananController;
-use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\superadmin\AkpkController;
 use App\Http\Controllers\superadmin\DekanController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\admin\AdminLegalisirController;
 
 /*
 /*
@@ -50,9 +51,9 @@ Route::post('verifikasi',[ApiController::class,'verifikasi'])->name('verifikasi'
 Route::prefix('akpk')->middleware('is_akpk')->group(function ()
 {
     Route::get('/download', [PesananController::class, 'fileDownload'])->name('akpk.download');
-    Route::get('/legalisir', [PesananController::class, 'legalisir'])->name('akpk.legalisir');
-    Route::get('/legalisir/{legalisir:id}', [PesananController::class, 'detailLegalisir'])->name('akpk.legalisir.detail');
-    Route::put('/legalisir/{legalisir:id}', [PesananController::class, 'updateLegalisir'])->name('akpk.legalisir.detail');
+    Route::get('/legalisir', [AdminLegalisirController::class, 'legalisir'])->name('akpk.legalisir');
+    Route::get('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'detailLegalisir'])->name('akpk.legalisir.detail');
+    Route::put('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'updateLegalisir'])->name('akpk.legalisir.detail');
     
     Route::get('/surat', [PesananController::class, 'surat'])->name('akpk.surat');
     Route::get('/surat/{surat:id}', [PesananController::class, 'detailSurat'])->name('akpk.surat.detail');
@@ -67,9 +68,9 @@ Route::prefix('akpk')->middleware('is_akpk')->group(function ()
 Route::prefix('dekan')->middleware('is_dekan')->group(function ()
 {
     Route::get('/download', [PesananController::class, 'fileDownload'])->name('dekan.download');
-    Route::get('/legalisir', [PesananController::class, 'legalisir'])->name('dekan.legalisir');
-    Route::get('/legalisir/{legalisir:id}', [PesananController::class, 'detailLegalisir'])->name('dekan.legalisir.detail');
-    Route::put('/legalisir/{legalisir:id}', [PesananController::class, 'updateLegalisir'])->name('dekan.legalisir.detail');
+    Route::get('/legalisir', [AdminLegalisirController::class, 'legalisir'])->name('dekan.legalisir');
+    Route::get('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'detailLegalisir'])->name('dekan.legalisir.detail');
+    Route::put('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'updateLegalisir'])->name('dekan.legalisir.detail');
     
     Route::get('/surat', [PesananController::class, 'surat'])->name('dekan.surat');
     Route::get('/surat/{surat:id}', [PesananController::class, 'detailSurat'])->name('dekan.surat.detail');
