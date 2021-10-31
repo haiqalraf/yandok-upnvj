@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Models\Legalisir;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 class AdminLegalisirController extends Controller
 {
@@ -20,14 +21,18 @@ class AdminLegalisirController extends Controller
           ->where('kebutuhan', 'Swasta')->orWhere('kebutuhan', 'Lainnya')->get();
         }
       } else {
-      if (auth()->user()->is_admin == 2) {
-        $legalisir = Legalisir::where('verifikasi', 1)
-          ->where('kebutuhan', 'ASN')->orWhere('kebutuhan', 'TNI atau Polri')->get();
-      } elseif (auth()->user()->is_admin == 3) {
-        $legalisir = Legalisir::where('verifikasi', 1)
-        ->where('kebutuhan', 'Swasta')->orWhere('kebutuhan', 'Lainnya')->get();
+        if (auth()->user()->is_admin == 2) {
+          $legalisir = Legalisir::where('verifikasi', 1)
+            ->where('kebutuhan', 'ASN')->orWhere('kebutuhan', 'TNI atau Polri')->get();
+        } elseif (auth()->user()->is_admin == 3) {
+          $legalisir = Legalisir::where('verifikasi', 1)
+          ->where('kebutuhan', 'Swasta')->orWhere('kebutuhan', 'Lainnya')->get();
+        }
       }
-      }
+
+      $legalisir = $legalisir->filter(function ($value, $key) {
+        return User::where('nim', $value->nim_pemesan)->first()->fakultas === auth()->user()->fakultas;
+      });
 
       return view('admin.legalisir.index', [
           'legalisir' => $legalisir->sortByDesc('updated_at'),
