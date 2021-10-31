@@ -19,25 +19,20 @@ class CreateUserSeeder extends Seeder
         $user = [
             [
                'name'=>'Admin',
-               'nim'=>'18106',
+               'nim'=>'18110',
                 'is_admin'=>'1',
                'password'=> bcrypt('123456'),
             ],
             [
                 'name'=>'AKPK',
-                'nim'=>'18107',
+                'nim'=>'18109',
                  'is_admin'=>'2',
                 'password'=> bcrypt('123456'),
              ],
-             [
-                'name'=>'Dekanat',
-                'nim'=>'18108',
-                 'is_admin'=>'3',
-                'password'=> bcrypt('123456'),
-             ],
             [
-                'nim'=>'18105',
+                'nim'=>'1810511',
                 'name'=>'albet',
+                'fakultas' => 'FIK',
                 'thn_lulus'=>Carbon::parse('2000-01-01'),
                 'email'=>'albet@upn.com',
                 'no_hp'=>'081123456789',
