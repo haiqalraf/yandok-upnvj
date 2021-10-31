@@ -25,7 +25,7 @@ class LegalisirObserver
                 'model_pesanan' => 'legalisir', 'id_pesanan'  => $legalisir->id, 'message'=>'Pesanan '.$legalisir->id.' telah dibuat',
             ]));
         } else {
-            $dekan = User::where('is_admin', 3)->get();
+            $dekan = User::where('is_admin', 3)->where('fakultas', $user->fakultas)->get();
             Notification::send($dekan, new Pesanan([
                 'model_pesanan' => 'legalisir', 'id_pesanan'  => $legalisir->id, 'message' => 'Pesanan ' . $legalisir->id . ' telah dibuat',
             ]));
