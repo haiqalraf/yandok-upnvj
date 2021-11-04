@@ -30,9 +30,11 @@ class AdminLegalisirController extends Controller
         }
       }
 
-      $legalisir = $legalisir->filter(function ($value, $key) {
-        return User::where('nim', $value->nim_pemesan)->first()->fakultas === auth()->user()->fakultas;
-      });
+      if (auth()->user()->is_admin==3) {
+        $legalisir = $legalisir->filter(function ($value, $key) {
+          return User::where('nim', $value->nim_pemesan)->first()->fakultas === auth()->user()->fakultas;
+        });
+      }
 
       return view('admin.legalisir.index', [
           'legalisir' => $legalisir->sortByDesc('updated_at'),
