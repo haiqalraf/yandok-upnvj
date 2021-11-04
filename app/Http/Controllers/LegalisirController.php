@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Legalisir;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class LegalisirController extends Controller
 {
@@ -43,6 +45,7 @@ class LegalisirController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->tujuan);
         $request->validate([
             'dok_01' => 'required|numeric',
             'dok_02' => 'required|numeric',
@@ -57,8 +60,15 @@ class LegalisirController extends Controller
             'dok_11' => 'required|numeric',
             'dok_12' => 'required|numeric',
             'file' => 'required|file|mimes:zip,rar',
+            'tujuan' => 'required',
             'kebutuhan' => 'required'
         ]);
+
+        Validator::make($request->all(), [
+            'alamat' => Rule::requiredIf(function () use ($request) {
+                return $request->tujuan==2;
+            }),
+        ])->validate();
 
         if ($request->hasFile('file')) {
             $file = $request->file("file");
@@ -88,6 +98,8 @@ class LegalisirController extends Controller
                 'dok_11' => $request->dok_11,
                 'dok_12' => $request->dok_12,
                 'file' => $newName,
+                'tujuan' => (int)$request->tujuan,
+                'alamat' => ($request->alamat ? $request->alamat : null),
                 'kebutuhan' => $request->kebutuhan,
                 'keterangan' => $request->keterangan
             ]);

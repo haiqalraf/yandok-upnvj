@@ -47,6 +47,8 @@ class Legalisir extends Model
         'komentar',
         'kebutuhan',
         'keterangan',
+        'tujuan',
+        'alamat',
         'verifikasi',
         'created_at',
     ];
@@ -143,5 +145,18 @@ class Legalisir extends Model
             return true;
         }
         return false;
+    }
+
+    // to use this, type name variable ->text_tujuan
+    // example : $legalisir->text_tujuan
+    public function getTextTujuanAttribute()
+    {
+        if ($this->tujuan==1) {
+            return "Ambil Langsung ke UPNVJ";
+        } elseif ($this->tujuan==2) {
+            return "Dikirim ke Alamat Saya";
+        } else  {
+            return "";
+        }
     }
 }
