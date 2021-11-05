@@ -24,7 +24,7 @@
       <div class="row mb-5">
         <div class="col p-3 bg-white rounded shadow">
             <div class="d-flex justify-content-end">
-            <a href="{{route($adminTitle.'.surat')}}" class="btn btn-sm btn-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
+            <a href="{{route($adminTitle.'.lainnya')}}" class="btn btn-sm btn-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
           </div>
           <h3>Detail Pesanan</h3>
           <hr>
@@ -41,12 +41,20 @@
                   <td>{{$user->name}}</td>
                 </tr>
                 <tr>
+                  <td>NIM Pemesan</td>
+                  <td>{{$user->nim}}</td>
+                </tr>
+                <tr>
+                  <td>Tahun Lulus</td>
+                  <td>{{$user->thn_lulus->format('Y')}}</td>
+                </tr>
+                <tr>
                   <td>Fakultas</td>
                   <td>{{$user->faculty->nama}}</td>
                 </tr>
                 <tr>
                   <td>Tanggal Pemesanan</td>
-                  <td>{{date('d-m-Y', strtotime($lainnya->created_at))}}</td>
+                  <td>{{$lainnya->created_at->format('d F Y')}}</td>
                 </tr>
                 <tr>
                     <td>Detail Status</td>

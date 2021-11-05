@@ -41,12 +41,20 @@
                   <td>{{$user->name}}</td>
                 </tr>
                 <tr>
+                  <td>NIM Pemesan</td>
+                  <td>{{$user->nim}}</td>
+                </tr>
+                <tr>
+                  <td>Tahun Lulus</td>
+                  <td>{{$user->thn_lulus->format('Y')}}</td>
+                </tr>
+                <tr>
                   <td>Fakultas</td>
                   <td>{{$user->faculty->nama}}</td>
                 </tr>
                 <tr>
                   <td>Tanggal Pemesanan</td>
-                  <td>{{date('d-m-Y', strtotime($surat->created_at))}}</td>
+                  <td>{{$surat->created_at->format('d F Y')}}</td>
                 </tr>
                 <tr>
                     <td>Detail Status</td>
