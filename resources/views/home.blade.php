@@ -128,7 +128,10 @@
          </button>
       </form>
    </div>
-   @if (in_array(auth()->user()->is_admin, [0, null]))
+   @if (in_array(auth()->user()->is_admin, [0, null])
+      && !auth()->user()->is_tracer 
+      && auth()->user()->thn_lulus->format('Y') <= now()->format('Y')
+      && now()->addYear(-5)->format('Y') <= auth()->user()->thn_lulus->format('Y'))
    <!-- Modal -->
    <div class="modal fade" id="tracestudy" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
@@ -212,7 +215,10 @@ $(document).ready(function () {
    showAlert("Berhasil", "{{session('status')}}");
 </script>
 @endif
-@if (!auth()->user()->is_tracer)
+@isset(auth()->user()->thn_lulus)
+@if (!auth()->user()->is_tracer 
+   && auth()->user()->thn_lulus->format('Y') <= now()->format('Y')
+   && now()->addYear(-5)->format('Y') <= auth()->user()->thn_lulus->format('Y'))
 <script>
    $('#tracestudy').modal('show');
 </script>
@@ -224,4 +230,5 @@ $(document).ready(function () {
    }
 </script>
 @endif
+@endisset
 @endsection
