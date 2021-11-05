@@ -54,7 +54,7 @@
                 </tr>
                 <tr>
                   <td>Tanggal Pemesanan</td>
-                  <td>{{$surat->created_at->format('d F Y')}}</td>
+                  <td>{{$surat->created_at->locale('id')->isoFormat('LL');}}</td>
                 </tr>
                 <tr>
                     <td>Detail Status</td>

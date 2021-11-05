@@ -51,7 +51,7 @@
               </tr>
               <tr>
                 <td>Tanggal Pemesanan</td>
-                <td>{{$legalisir->created_at->format('d F Y')}}</td>
+                <td>{{$legalisir->created_at->locale('id')->isoFormat('LL');}}</td>
               </tr>
               <tr>
                   <td>Detail Status</td>
