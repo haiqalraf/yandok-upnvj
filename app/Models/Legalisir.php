@@ -147,13 +147,11 @@ class Legalisir extends Model
         return false;
     }
 
-    // to use this, type name variable ->text_tujuan
-    // example : $legalisir->text_tujuan
-    public function getTextTujuanAttribute()
+    public function getTujuanAttribute($value)
     {
-        if ($this->tujuan==1) {
+        if ($value==1) {
             return "Ambil Langsung ke UPNVJ";
-        } elseif ($this->tujuan==2) {
+        } elseif ($value==2) {
             return "Dikirim ke Alamat Saya";
         } else  {
             return "";
