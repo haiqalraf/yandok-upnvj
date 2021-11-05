@@ -23,10 +23,56 @@
       </h4>
       <div class="row mb-5">
         <div class="col p-3 bg-white rounded shadow">
+            <div class="d-flex justify-content-end">
+            <a href="{{route($adminTitle.'.surat')}}" class="btn btn-sm btn-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
+          </div>
+          <h3>Detail Pesanan</h3>
+          <hr>
+          <table class="table table-bordered table-md table-responsive-sm">
+            <thead class="text-white" style="background-color: #06750F;">
+                <tr>
+                    <th>Kode Pemesanan</th>
+                    <th>{{strtoupper($lainnya->id)}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td>Nama Pemesan</td>
+                  <td>{{$user->name}}</td>
+                </tr>
+                <tr>
+                  <td>Fakultas</td>
+                  <td>{{$user->faculty->nama}}</td>
+                </tr>
+                <tr>
+                  <td>Tanggal Pemesanan</td>
+                  <td>{{date('d-m-Y', strtotime($lainnya->created_at))}}</td>
+                </tr>
+                <tr>
+                    <td>Detail Status</td>
+                    @if ($lainnya->verifikasi == 0)
+                      @if ($lainnya->komentar)
+                      <td>{{$lainnya->komentar}}</td>
+                      @else
+                      <td>Dokumen yang diunggah tidak sesuai persyaratan. Harap di cek lagi dengan teliti dan lakukan pesanan ulang</td>
+                      @endif
+                    @elseif ($lainnya->verifikasi == 1)
+                        <td>Pesanan perlu ditinjau</td>
+                    @elseif ($lainnya->verifikasi == 2)
+                        <td>Masih dalam peninjauan</td>
+                    @else
+                        <td>Sudah Selesai</td>
+                    @endif
+                </tr>
+            </tbody>
+          </table>
           <table class="table table-bordered" style="width: 100%;">
             <thead class="text-white" style="background-color: #06750F;">
               <tr>
-                <th>Kode Pesanan</th>
+                @php
+                  $x=1
+                @endphp
+                <th>No.</th>
                 <th>Daftar Pesanan</th>
                 <th>Jumlah </th>
                 @if (in_array($lainnya->verifikasi, [0]))
@@ -38,9 +84,7 @@
             <tbody>
               @foreach ($daftar_pesanan as $key => $item)
                 <tr>
-                  @if ($loop->first)
-                    <td rowspan="12" class="text-center align-middle">{{ $lainnya->id }}</td>
-                  @endif
+                  <td class="text-center align-middle">{{ $x++ }}</td>
                   <td>{{ $key }}</td>
                   <td class="text-center">{{ $item }}</td>
 

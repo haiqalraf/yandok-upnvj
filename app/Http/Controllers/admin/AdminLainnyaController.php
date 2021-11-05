@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\User;
+use App\Models\Lainya;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Lainya;
 use Illuminate\Support\Facades\Storage;
 
 class AdminLainnyaController extends Controller
@@ -29,8 +30,10 @@ class AdminLainnyaController extends Controller
     {
         $daftar_pesanan = collect([]);
         $daftar_pesanan->put($lainnya->dokumen_dipesan, 1);
+        $user = User::where('nim', $lainnya->nim_pemesan)->first();
         return view('admin.lainnya.detail', [
             'lainnya' => $lainnya,
+            'user' => $user,
             'daftar_pesanan' => $daftar_pesanan
         ]);
     }

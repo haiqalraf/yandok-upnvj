@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\User;
 use App\Models\Suket;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,8 +33,11 @@ class AdminSuratController extends Controller
       }
     }
 
+    $user = User::where('nim', $surat->nim_pemesan)->first();
+
     return view('admin.surat.detail', [
       'surat' => $surat,
+      'user' => $user,
       'daftar_pesanan' => $daftar_pesanan
     ]);
   }

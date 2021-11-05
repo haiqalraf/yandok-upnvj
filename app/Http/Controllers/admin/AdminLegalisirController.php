@@ -47,12 +47,14 @@ class AdminLegalisirController extends Controller
     if ($legalisir->isKebutuhanForAkpk() && auth()->user()->is_admin == 3) {
       abort('404');
     }
-      $daftar_pesanan = $legalisir->daftarPesanan();
+    $daftar_pesanan = $legalisir->daftarPesanan();
+    $user = User::where('nim', $legalisir->nim_pemesan)->first();
 
-      return view('admin.legalisir.detail', [
-          'legalisir' => $legalisir,
-          'daftar_pesanan' => $daftar_pesanan
-      ]);
+    return view('admin.legalisir.detail', [
+        'legalisir' => $legalisir,
+        'user' => $user,
+        'daftar_pesanan' => $daftar_pesanan
+    ]);
   }
 
   public function updateLegalisir(Legalisir $legalisir, Request $request)
