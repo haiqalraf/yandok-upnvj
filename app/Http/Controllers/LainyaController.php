@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Lainya;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class LainyaController extends Controller
 {
@@ -118,11 +120,23 @@ class LainyaController extends Controller
 
     public function bulkUpdate(Request $request)
     {
+        $request->validate([
+            'tujuan' => 'required',
+        ]);
+
+        Validator::make($request->all(), [
+            'alamat' => Rule::requiredIf(function () use ($request) {
+                return $request->tujuan == 2;
+            }),
+        ])->validate();
+
         foreach ($request->item as $key => $value) {
             if ($value != 0) {
                 $lainnya = Lainya::find($key);
                 $lainnya->jumlah_dokumen = $value;
                 $lainnya->verifikasi = 1;
+                $lainnya->tujuan = (int)$request->tujuan;
+                $lainnya->alamat = ($request->alamat ? $request->alamat : null);
                 $lainnya->save();
             }
         }
