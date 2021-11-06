@@ -22,7 +22,7 @@ class Lainya extends Model
     ];
 
     protected $cast = [
-        'jumlah_dokumen' => 'float',
+        'jumlah_dokumen' => 'integer',
     ];
 
     public function getData($nim = null, $id = null, $type = 'all'){

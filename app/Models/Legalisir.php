@@ -15,18 +15,18 @@ class Legalisir extends Model
     public $timestamp = true;
 
     protected $cast = [
-        'dok_01' => 'float',
-        'dok_02' => 'float',
-        'dok_03' => 'float',
-        'dok_04' => 'float',
-        'dok_05' => 'float',
-        'dok_06' => 'float',
-        'dok_07' => 'float',
-        'dok_08' => 'float',
-        'dok_09' => 'float',
-        'dok_10' => 'float',
-        'dok_11' => 'float',
-        'dok_12' => 'float',
+        'dok_01' => 'integer',
+        'dok_02' => 'integer',
+        'dok_03' => 'integer',
+        'dok_04' => 'integer',
+        'dok_05' => 'integer',
+        'dok_06' => 'integer',
+        'dok_07' => 'integer',
+        'dok_08' => 'integer',
+        'dok_09' => 'integer',
+        'dok_10' => 'integer',
+        'dok_11' => 'integer',
+        'dok_12' => 'integer',
     ];
 
     protected $fillable = [

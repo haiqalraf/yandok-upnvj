@@ -35,7 +35,7 @@
                      <td>{{$item->dokumen_dipesan}}</td>
                      <td>
                         <input id="item[{{++$count;}}]" type="number" min="0" class="form-control form-control-sm" style="width: 100px;"
-                           value="{{$item->jumlah_dokumen}}" name="item[{{$item->id}}]">
+                           value="{{(int)$item->jumlah_dokumen}}" name="item[{{$item->id}}]">
                      </td>
                   </tr>
                   @endforeach
