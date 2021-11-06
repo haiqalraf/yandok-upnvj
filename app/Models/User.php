@@ -146,6 +146,43 @@ class User extends Authenticatable implements CanResetPassword
         }
     }
 
+    public function getIsProfileCompletedAttribute()
+    {
+        // $total = 5;
+        // $data = 0;
+        if ($this->is_admin != 0) {
+            return true;
+        }
+        foreach ($this->attributes as $key => $attribute) {
+            if(!in_array($key, [
+                'id', 
+                'created_at', 
+                'updated_at', 
+                'remember_token', 
+                'is_admin', 
+                'is_tracer', 
+                'email',
+                'thn_lulus',
+                'tanggal_lahir',
+                'password',
+                'fakultas',
+                'nim',
+                'name',
+                'email_verified_at',
+            ])) {
+                // if ($attribute != null) {
+                //     $data++;
+                // }
+                if ($attribute == null) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+        // return ($data/$total) * 100;
+    }
+
     public function faculty()
     {
         return $this->belongsTo(Fakultas::class, 'fakultas');

@@ -18,7 +18,13 @@
 <div class="row">
    <div class="col bg-white p-3 rounded shadow">
       <h3>Profil Saya</h3>
-      <hr><br>
+      <hr>
+      @if (!auth()->user()->is_profile_completed)
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+         <strong>Harap Lengkapi Biodata Profil Anda!</strong>
+      </div>
+      @endif      
+      <br>
       <form action="{{ route('updUser') }}" method="POST" class="ajax_action">
          @csrf
          <table class="table table-borderless table-responsive-sm table-sm">
