@@ -21,7 +21,7 @@
     <div class="row mb-5">
       <div class="col p-3 bg-white rounded shadow">
         <div class="d-flex justify-content-end">
-          <a href="{{route($adminTitle.'.legalisir')}}" class="btn btn-sm btn-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
+          <a href="{{route($adminTitle.'.legalisir', ['status'=>$legalisir->verifikasi])}}" class="btn btn-sm btn-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
         </div>
         <h3>Detail Pesanan</h3>
         <hr>
