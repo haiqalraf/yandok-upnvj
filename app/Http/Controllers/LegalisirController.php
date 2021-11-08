@@ -101,7 +101,8 @@ class LegalisirController extends Controller
                 'tujuan' => (int)$request->tujuan,
                 'alamat' => ($request->alamat ? $request->alamat : null),
                 'kebutuhan' => $request->kebutuhan,
-                'keterangan' => $request->keterangan
+                'keterangan' => $request->keterangan,
+
             ]);
             return redirect('/riwayat');
         } else {

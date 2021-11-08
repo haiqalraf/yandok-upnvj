@@ -42,11 +42,11 @@
 
                             @elseif ($data->verifikasi == 1)
 
-                                <td>Pesanan akan ditinjau oleh bagian AKPK</td>
+                                <td>Pesanan Anda akan ditinjau</td>
                             
                             @elseif ($data->verifikasi == 2)
 
-                                <td>Masih dalam peninjauan di bagian AKPK</td>
+                                <td>Pesanan Anda sedang diproses</td>
 
                             @else
 

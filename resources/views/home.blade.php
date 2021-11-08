@@ -110,23 +110,42 @@
                </td>
             </tr>
 
-            @if ($user->is_admin == 0)
             <tr>
-               <td>Pekerjaan saat ini</td>
-               <td>
-                  <input type="text" name="pekerjaan" class="form-control form-control-sm" value="{{ $user->pekerjaan }}" required>
-               </td>
-            </tr>
-            @endif
-
-            <tr>
-               <td>Alamat</td>
+               <td>Alamat </td>
                <td id="alamat">
                   <textarea name="alamat" class="form-control form-control-sm" placeholder="Alamat" style="height: 250px;" required>{{ $user->address }}</textarea>
                      
                   <div class="invalid-feedback">Please fill out this field.</div>
                </td>
             </tr>
+
+            @if ($user->is_admin == 0)
+            
+            <tr>
+               <td>Pekerjaan saat ini</td>
+               <td>
+                  <input type="text" name="pekerjaan" class="form-control form-control-sm" value="{{ $user->pekerjaan }}" required>
+               </td>
+            </tr>
+            <tr>
+               <td>Nama perusahaan</td>
+               <td>
+                  <input type="text" name="nama_perusahaan" class="form-control form-control-sm" value="{{ $user->nama_perusahaan }}" required>
+               </td>
+            </tr>
+            <tr>
+               <td>Jabatan</td>
+               <td>
+                  <input type="text" name="jabatan" class="form-control form-control-sm" value="{{ $user->jabatan }}" required>
+               </td>
+            </tr>
+            <tr>
+               <td>Alamat Perusahaan</td>
+               <td>
+                  <input type="text" name="alamat_perusahaan" class="form-control form-control-sm" value="{{ $user->alamat_perusahaan }}" required>
+               </td>
+            </tr>
+            @endif
 
          </table>
          <button type="submit" class="btn btn-sm btn-success pull-right">

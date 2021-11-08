@@ -70,7 +70,7 @@ Route::prefix('akpk')->middleware('is_akpk')->group(function ()
 #dekan
 Route::prefix('dekan')->middleware('is_dekan')->group(function ()
 {
-    Route::get('/download', [PesananController::class, 'fileDownload'])->name('dekan.download');
+    Route::get('/download', [DownloadController::class, 'fileDownload'])->name('dekan.download');
     Route::get('/legalisir', [AdminLegalisirController::class, 'legalisir'])->name('dekan.legalisir');
     Route::get('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'detailLegalisir'])->name('dekan.legalisir.detail');
     Route::put('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'updateLegalisir'])->name('dekan.legalisir.detail');

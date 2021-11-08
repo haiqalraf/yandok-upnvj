@@ -19,6 +19,9 @@ class ActionController extends Controller
             'alamat' => 'required|string',
             'email' => 'required|email',
             'pekerjaan' => 'required|string',
+            'nama_perusahaan' => 'required|string',
+            'jabatan' => 'required|string',
+            'alamat_perusahaan' => 'required|string',
         ]);
             
         try {
@@ -29,6 +32,9 @@ class ActionController extends Controller
                 'address' => $request->alamat,
                 'email' => $request->email,
                 'pekerjaan' => $request->pekerjaan,
+                'nama_perusahaan' => $request->nama_perusahaan,
+                'jabatan' => $request->jabatan,
+                'alamat_perusahaan' => $request->alamat_perusahaan,
             ];
 
             if (!empty($request->password)){

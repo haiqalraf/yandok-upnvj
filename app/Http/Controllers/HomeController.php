@@ -22,6 +22,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // print_r(auth()->user());
         return view('home')->with(array('user'=>auth()->user()));
     }
   
