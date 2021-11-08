@@ -51,7 +51,6 @@ class User extends Authenticatable implements CanResetPassword
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'thn_lulus' => 'date'
     ];
 
     public function encodeFakultas($fakultas)

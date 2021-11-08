@@ -43,7 +43,7 @@
                 </tr>
                 <tr>
                   <td>Tahun Lulus</td>
-                  <td>{{$user->thn_lulus->format('Y')}}</td>
+                  <td>{{$user->thn_lulus}}</td>
                 </tr>
               <tr>
                 <td>Fakultas</td>
@@ -137,7 +137,7 @@
         Tolak
       </button>
       <button type="submit" class="btn btn-sm btn-success pull-right">
-        Selesai
+        Proses
       </button>
       @elseif ($legalisir->verifikasi==2)
       <button type="submit" class="btn btn-sm btn-success pull-right">

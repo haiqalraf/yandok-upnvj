@@ -155,8 +155,8 @@
    </div>
    @if (in_array(auth()->user()->is_admin, [0, null])
       && !auth()->user()->is_tracer 
-      && auth()->user()->thn_lulus->format('Y') <= now()->format('Y')
-      && now()->addYear(-5)->format('Y') <= auth()->user()->thn_lulus->format('Y'))
+      && auth()->user()->thn_lulus <= now()->format('Y')
+      && now()->addYear(-5)->format('Y') <= auth()->user()->thn_lulus)
    <!-- Modal -->
    <div class="modal fade" id="tracestudy" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
@@ -242,8 +242,8 @@ $(document).ready(function () {
 @endif
 @isset(auth()->user()->thn_lulus)
 @if (!auth()->user()->is_tracer 
-   && auth()->user()->thn_lulus->format('Y') <= now()->format('Y')
-   && now()->addYear(-5)->format('Y') <= auth()->user()->thn_lulus->format('Y'))
+   && auth()->user()->thn_lulus <= now()->format('Y')
+   && now()->addYear(-5)->format('Y') <= auth()->user()->thn_lulus)
 <script>
    $('#tracestudy').modal('show');
 </script>
