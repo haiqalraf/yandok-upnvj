@@ -11,35 +11,48 @@ class AdminLegalisirController extends Controller
 {
   public function legalisir(Request $request)
   {
-      $legalisir = [];
-      if ($request->has('status')) {
-        if (auth()->user()->is_admin==2) {
-          $legalisir = Legalisir::where('verifikasi', $request->status)
-            ->where('kebutuhan', 'ASN')->orWhere('kebutuhan', 'TNI atau Polri')->get();
-        } elseif (auth()->user()->is_admin==3) {
-        $legalisir = Legalisir::where('verifikasi', $request->status)
-          ->where('kebutuhan', 'Swasta')->orWhere('kebutuhan', 'Lainnya')->get();
-        }
-      } else {
-        if (auth()->user()->is_admin == 2) {
-          $legalisir = Legalisir::where('verifikasi', 1)
-            ->where('kebutuhan', 'ASN')->orWhere('kebutuhan', 'TNI atau Polri')->get();
-        } elseif (auth()->user()->is_admin == 3) {
-          $legalisir = Legalisir::where('verifikasi', 1)
-          ->where('kebutuhan', 'Swasta')->orWhere('kebutuhan', 'Lainnya')->get();
-        }
+    $legalisir = [];
+    if ($request->has('status')) {
+      if (auth()->user()->is_admin==2) {
+        $legalisir = Legalisir::where(function ($query) use ($request)
+        {
+          $query->where('verifikasi', $request->status)->where('kebutuhan', 'ASN');
+        })->orWhere(function ($query) use ($request)
+        {
+          $query->where('verifikasi', $request->status)->where('kebutuhan', 'TNI atau Polri');
+        })->get();
+      } elseif (auth()->user()->is_admin==3) {
+        $legalisir = Legalisir::where(function ($query) use ($request) {
+          $query->where('verifikasi', $request->status)->where('kebutuhan', 'Swasta');
+        })->orWhere(function ($query) use ($request) {
+          $query->where('verifikasi', $request->status)->where('kebutuhan', 'Lainnya');
+        })->get();
       }
-
-      if (auth()->user()->is_admin==3) {
-        $legalisir = $legalisir->filter(function ($value, $key) {
-          return User::where('nim', $value->nim_pemesan)->first()->fakultas === auth()->user()->fakultas;
-        });
+    } else {
+      if (auth()->user()->is_admin == 2) {
+        $legalisir = Legalisir::where(function ($query) {
+          $query->where('verifikasi', 1)->where('kebutuhan', 'ASN');
+        })->orWhere(function ($query) {
+          $query->where('verifikasi', 1)->where('kebutuhan', 'TNI atau Polri');
+        })->get();
+      } elseif (auth()->user()->is_admin == 3) {
+        $legalisir = Legalisir::where(function ($query) {
+          $query->where('verifikasi', 1)->where('kebutuhan', 'Swasta');
+        })->orWhere(function ($query) {
+          $query->where('verifikasi', 1)->where('kebutuhan', 'Lainnya');
+        })->get();
       }
+    }
 
-      return view('admin.legalisir.index', [
-          'legalisir' => $legalisir->sortByDesc('updated_at'),
-          'status' => $request->status
-      ]);
+    if (auth()->user()->is_admin==3) {
+      $legalisir = $legalisir->filter(function ($value, $key) {
+        return User::where('nim', $value->nim_pemesan)->first()->fakultas === auth()->user()->fakultas;
+      });
+    }
+    return view('admin.legalisir.index', [
+        'legalisir' => $legalisir->sortByDesc('updated_at'),
+        'status' => $request->status
+    ]);
   }
 
   public function detailLegalisir(Legalisir $legalisir)
