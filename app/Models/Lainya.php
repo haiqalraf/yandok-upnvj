@@ -65,4 +65,9 @@ class Lainya extends Model
                 return 'Belum Diproses';
         }
     }
+
+    public function getRawTujuanAttribute()
+    {
+        return $this->attributes['tujuan'];
+    }
 }

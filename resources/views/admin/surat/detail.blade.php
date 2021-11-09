@@ -142,9 +142,38 @@
           Proses
         </button>
         @elseif ($surat->verifikasi == 2)
-        <button type="submit" class="btn btn-sm btn-success pull-right">
-          Proses
+        @if ($surat->raw_tujuan==2)
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#pembayaranModal">
+          Tetapkan Biaya Pengiriman
         </button>
+        <!-- Modal -->
+        <div class="modal fade" id="pembayaranModal" tabindex="-1" aria-labelledby="pembayaranModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="pembayaranModalLabel">Biaya Pengiriman</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="biaya">Tetapkan Biaya Pengiriman untuk Pesanan Surat ini</label>
+                  <input type="number" class="form-control" id="biaya" name="biaya" min="0">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Selesai</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        @else
+        <button type="submit" class="btn btn-sm btn-success pull-right">
+          Selesai
+        </button>
+        @endif
         @endif
       </div>
     </div>

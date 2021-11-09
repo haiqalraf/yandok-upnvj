@@ -157,4 +157,9 @@ class Legalisir extends Model
             return "";
         }
     }
+
+    public function getRawTujuanAttribute()
+    {
+        return $this->attributes['tujuan'];
+    }
 }

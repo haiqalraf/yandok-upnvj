@@ -85,4 +85,9 @@ class Suket extends Model
         elseif (strpos($key, 'Alumni'))
             return ["Scan Ijazah / Transkrip Nilai"];
     }
+
+    public function getRawTujuanAttribute()
+    {
+        return $this->attributes['tujuan'];
+    }
 }

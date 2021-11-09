@@ -48,6 +48,14 @@ class AdminLainnyaController extends Controller
             $lainnya->komentar = $request->komentar;
         }
 
+        if ($lainnya->raw_tujuan == 2 && $lainnya->verifikasi==2) {
+            $request->validate([
+                'biaya' => 'required'
+            ]);
+
+            $lainnya->biaya = $request->biaya;
+        }
+
         $lainnya->verifikasi = $request->status;
         $lainnya->save();
 

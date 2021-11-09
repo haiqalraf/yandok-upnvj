@@ -75,17 +75,25 @@ class AdminLegalisirController extends Controller
     if ($legalisir->isKebutuhanForAkpk() && auth()->user()->is_admin == 3) {
       abort('404');
     }
+    $request->validate([
+        'status' => 'required'
+    ]);
+
+    if ($legalisir->raw_tujuan==2 && $legalisir->verifikasi == 2) {
       $request->validate([
-          'status' => 'required'
+        'biaya' => 'required'
       ]);
 
-      if ($request->status === '0') {
-          $legalisir->komentar = $request->komentar;
-      }
-      
-      $legalisir->verifikasi = $request->status;
-      $legalisir->save();
-      $adminTitle = auth()->user()->adminTitle();
-      return redirect()->route($adminTitle.'.legalisir', ['status' => $request->status]);
+      $legalisir->biaya = $request->biaya;
+    }
+
+    if ($request->status === '0') {
+        $legalisir->komentar = $request->komentar;
+    }
+    
+    $legalisir->verifikasi = $request->status;
+    $legalisir->save();
+    $adminTitle = auth()->user()->adminTitle();
+    return redirect()->route($adminTitle.'.legalisir', ['status' => $request->status]);
   }
 }

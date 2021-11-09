@@ -52,6 +52,14 @@ class AdminSuratController extends Controller
       $surat->komentar = $request->komentar;
     }
 
+    if ($surat->raw_tujuan ==2 && $surat->verifikasi == 2) {
+      $request->validate([
+        'biaya' => 'required'
+      ]);
+
+      $surat->biaya = $request->biaya;
+    }
+
     $surat->verifikasi = $request->status;
     $surat->save();
 
