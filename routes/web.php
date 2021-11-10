@@ -97,4 +97,8 @@ Route::get('/riwayat', [App\Http\Controllers\RiwayatController::class, 'index'])
 Route::get('/riwayat/detail/{id}', [App\Http\Controllers\RiwayatController::class, 'detail']);
 Route::get('/riwayat/ambil/{id}', [App\Http\Controllers\RiwayatController::class, 'ambil']);
 Route::get('/download/{pesanan:id}', [App\Http\Controllers\RiwayatController::class, 'download'])->name('riwayat.download');
+Route::get('/bayar', function ()
+{
+    return view('riwayat.bukti-bayar');
+});
 
