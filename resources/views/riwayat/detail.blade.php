@@ -48,9 +48,12 @@
 
                                 <td>Pesanan Anda sedang diproses</td>
 
-                            @else
-
+                            @elseif($data->verifikasi == 3)
+                                @if ($data->tujuan==2)
+                                <td>Sudah Selesai, harap melakukan pembayaran <a class="text-info" href="{{ url('/riwayat/ambil') }}/{{$data->id}}">di sini!</a></td>
+                                @else
                                 <td>Sudah Selesai, harap mengambil dokumen di loket ULT dengan menunjukan <a class="text-info" href="{{ url('/riwayat/ambil') }}/{{$data->id}}">kode pesanan</a></td>
+                                @endif
 
                             @endif
                         </tr>

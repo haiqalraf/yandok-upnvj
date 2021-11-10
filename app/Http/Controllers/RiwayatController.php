@@ -44,12 +44,19 @@ class RiwayatController extends Controller
                     $result->verifikasi = 'Ditolak';
                     $result->pesanan = false;
 
-                }  else {
+                }  elseif ($result->verifikasi == 3) {
 
+                    $result->badge = 'badge-warning';
+                    $result->verifikasi = 'Selesai';
+                    if ($result->tujuan==2) {
+                        $result->verifikasi = 'Belum Dibayar';
+                    }
+                    $result->pesanan = true;
+
+                } else {
                     $result->badge = 'badge-success';
                     $result->verifikasi = 'Selesai';
                     $result->pesanan = true;
-
                 }
             }
 

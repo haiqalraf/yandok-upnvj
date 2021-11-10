@@ -30,9 +30,15 @@
                               class="fa fa-arrow-right" aria-hidden="true"></i>
                         </a>
                         @if ($data->pesanan)
-                        <a href="{{ url('/riwayat/ambil') }}/{{$data->id}}" title="Ambil" class="btn btn-sm btn-primary" target="blank">Ambil Pesanan <i
+                        @if ($data->tujuan==2)
+                        <a href="{{ url('/riwayat/ambil') }}/{{$data->id}}" title="Ambil" class="btn btn-sm btn-primary" target="blank">Bayar Pesanan <i
                               class="fa fa-dropbox"></i>
 
+                        </a>
+                        @else
+                           <a href="{{ url('/riwayat/ambil') }}/{{$data->id}}" title="Ambil" class="btn btn-sm btn-primary" target="blank">Ambil Pesanan <i
+                           class="fa fa-dropbox"></i>
+                        @endif
                         </a>
                         @endif
                      </td>
