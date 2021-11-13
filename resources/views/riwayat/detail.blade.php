@@ -54,7 +54,18 @@
                                 @else
                                 <td>Sudah Selesai, harap mengambil dokumen di loket ULT dengan menunjukan <a class="text-info" href="{{ url('/riwayat/ambil') }}/{{$data->id}}">kode pesanan</a></td>
                                 @endif
-
+                            @elseif($data->verifikasi == 4)
+                                @if ($data->tujuan==2)
+                                    <td>Bukti Pembayaran sedang diverifikasi</td>
+                                @else
+                                    <td>Sudah Selesai, harap mengambil dokumen di loket ULT dengan menunjukan <a class="text-info" href="{{ url('/riwayat/ambil') }}/{{$data->id}}">kode pesanan</a></td>
+                                @endif
+                            @elseif($data->verifikasi == 5)
+                                @if ($data->tujuan==2)
+                                    <td>Bukti Pembayaran Telah dikonfirmasi dan Pesanan sedang dikirim dengan resi <span class="text-info">Dummy</span></td>
+                                @else
+                                    <td>Sudah Selesai, harap mengambil dokumen di loket ULT dengan menunjukan <a class="text-info" href="{{ url('/riwayat/ambil') }}/{{$data->id}}">kode pesanan</a></td>
+                                @endif
                             @endif
                         </tr>
                     </tbody>
@@ -83,7 +94,7 @@
                                 <td>{{intval($table['jumlah'])}}</td>
                                 @if ($loop->first)
                                 <td rowspan="{{count($data->table)}}">
-                                    @if ($data->verifikasi == 3)
+                                    @if ($data->verifikasi >= 3)
                                     <div class="d-flex w-100 h-100 justify-content-center align-items-center">
                                         <a href="{{route('riwayat.download', [ 
                                             $data

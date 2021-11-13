@@ -162,4 +162,9 @@ class Legalisir extends Model
     {
         return $this->attributes['tujuan'];
     }
+
+    public function buktiBayar()
+    {
+        return $this->morphOne(BuktiPembayaran::class, 'pesanan');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BuktiPembayaran;
 use Illuminate\Http\Request;
 use App\Models\Pesanan;
 use App\Models\User;
@@ -52,11 +53,22 @@ class RiwayatController extends Controller
                         $result->verifikasi = 'Belum Dibayar';
                     }
                     $result->pesanan = true;
-
+                } elseif ($result->verifikasi == 4) {
+                    
+                    $result->badge = 'badge-info';
+                    $result->verifikasi = 'Menunggu Konfirmasi';
+                    $result->pesanan = false;
+                    if ($result->tujuan == 1) {
+                        $result->verifikasi = 'Selesai';
+                        $result->pesanan = true;
+                    }
                 } else {
                     $result->badge = 'badge-success';
                     $result->verifikasi = 'Selesai';
                     $result->pesanan = true;
+                    if ($result->tujuan == 2) {
+                        $result->pesanan = false;
+                    }
                 }
             }
 
@@ -205,5 +217,72 @@ class RiwayatController extends Controller
             return response()->download(storage_path('app' . DIRECTORY_SEPARATOR . ($filePath)), Str::of($filePath)->basename(), [], 'inline');
     
         }
+    }
+
+    public function bayar(Pesanan $id)
+    {
+        if ($id->source_code == 0) {
+            $pesanan = Legalisir::find($id->id);
+        } elseif ($id->source_code == 1) {
+            $pesanan = Suket::find($id->id);
+        } elseif ($id->source_code == 2) {
+            $pesanan = Lainya::find($id->id);
+        } else {
+            $pesanan = Legalisir::find($id->id);
+        }
+        return view('riwayat.bukti-bayar', ['pesanan' => $pesanan]);
+    }
+
+    public function uploadBuktiBayar(Pesanan $id, Request $request)
+    {
+        if ($id->source_code == 0) {
+            $pesanan = Legalisir::find($id->id);
+        } elseif ($id->source_code == 1) {
+            $pesanan = Suket::find($id->id);
+        } elseif ($id->source_code == 2) {
+            $pesanan = Lainya::find($id->id);
+        } else {
+            $pesanan = Legalisir::find($id->id);
+        }
+        $request->validate([
+            'bank' => 'required',
+            'owner' => 'required',
+            'norek' => 'required',
+            'jml_bayar' => 'required|numeric',
+            'tgl_bayar' => 'required',
+            'bukti_bayar' => 'required|image|max:102400',
+        ]);
+
+        $newName = '';
+        if ($request->hasFile('bukti_bayar')) {
+            $file = $request->file("bukti_bayar");
+
+            $extension = $file->getClientOriginalExtension();
+            $username = auth()->user()->name;
+            $date = now("Asia/Jakarta")->format('YmdHis');
+
+            $newName = $date . '_buktibayar_'.$pesanan->id.'_'. $username . '.' . $extension;
+
+            if (!Storage::disk('local')->exists('bukti_bayar' . $newName)) {
+                Storage::disk('local')->put('bukti_bayar' . $newName, $file->get());
+            }
+        } else {
+            return back()->with("message", "File Not Found");
+        }
+
+        $bukti = new BuktiPembayaran([
+            'bank' => $request->bank,
+            'owner' => $request->owner,
+            'norek' => $request->norek,
+            'jml_bayar' => $request->jml_bayar,
+            'tgl_bayar' => $request->tgl_bayar,
+            'bukti_bayar' => $newName
+        ]);
+
+        $pesanan->buktiBayar()->save($bukti);
+        $pesanan->verifikasi = 4;
+        $pesanan->save();
+
+        return redirect()->route('riwayat');
     }
 }
