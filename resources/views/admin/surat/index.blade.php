@@ -51,7 +51,7 @@
                   <tr>
                     <th>Kode Pesanan</th>
                     <th>Tanggal Pemesanan</th>
-                    <th>Tanggal Selesai</th>
+                    <th>Tanggal {{$status<=2? 'Target' : ''}} Selesai</th>
                     <th>Nama Pemesan</th>
                     <th>Detail</th>
                   </tr>

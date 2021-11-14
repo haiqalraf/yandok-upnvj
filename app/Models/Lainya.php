@@ -17,6 +17,7 @@ class Lainya extends Model
         'komentar',
         'dokumen_dipesan',
         'verifikasi',
+        'verifikasi_pengiriman',
         'jumlah_dokumen',
         'file',
     ];
@@ -66,6 +67,11 @@ class Lainya extends Model
         }
     }
 
+    public function getRouteNameAttribute()
+    {
+        return 'lainnya';
+    }
+
     public function getRawTujuanAttribute()
     {
         return $this->attributes['tujuan'];
@@ -74,5 +80,10 @@ class Lainya extends Model
     public function buktiBayar()
     {
         return $this->morphOne(BuktiPembayaran::class, 'pesanan');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'nim_pemesan', 'nim');
     }
 }

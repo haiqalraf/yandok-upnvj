@@ -49,23 +49,33 @@
                                 <td>Pesanan Anda sedang diproses</td>
 
                             @elseif($data->verifikasi == 3)
+
                                 @if ($data->tujuan==2)
-                                <td>Sudah Selesai, harap melakukan pembayaran <a class="text-info" href="{{ url('/riwayat/ambil') }}/{{$data->id}}">di sini!</a></td>
+
+                                    @if ($data->verifikasi_pengiriman == 1)
+
+                                        <td>Sudah Selesai, harap melakukan pembayaran <a class="text-info" href="{{ route('bayar', ['id'=> $data->id]) }}">di sini</a></td>
+                                    
+                                    @elseif($data->verifikasi_pengiriman == 2)
+
+                                        <td>Bukti Pembayaran sedang diverifikasi</td>
+
+                                    @elseif($data->verifikasi_pengiriman == 3)
+
+                                        <td>Bukti Pembayaran Telah dikonfirmasi dan Pesanan sedang dikirim dengan resi <span class="text-info">Dummy</span></td>
+
+                                    @elseif($data->verifikasi_pengiriman == 4)
+
+                                        <td>Sudah Selesai, Pesanan telah diterima dengan resi <span class="text-info">Dummy</span></td>
+
+                                    @endif
+
                                 @else
-                                <td>Sudah Selesai, harap mengambil dokumen di loket ULT dengan menunjukan <a class="text-info" href="{{ url('/riwayat/ambil') }}/{{$data->id}}">kode pesanan</a></td>
-                                @endif
-                            @elseif($data->verifikasi == 4)
-                                @if ($data->tujuan==2)
-                                    <td>Bukti Pembayaran sedang diverifikasi</td>
-                                @else
+
                                     <td>Sudah Selesai, harap mengambil dokumen di loket ULT dengan menunjukan <a class="text-info" href="{{ url('/riwayat/ambil') }}/{{$data->id}}">kode pesanan</a></td>
+
                                 @endif
-                            @elseif($data->verifikasi == 5)
-                                @if ($data->tujuan==2)
-                                    <td>Bukti Pembayaran Telah dikonfirmasi dan Pesanan sedang dikirim dengan resi <span class="text-info">Dummy</span></td>
-                                @else
-                                    <td>Sudah Selesai, harap mengambil dokumen di loket ULT dengan menunjukan <a class="text-info" href="{{ url('/riwayat/ambil') }}/{{$data->id}}">kode pesanan</a></td>
-                                @endif
+
                             @endif
                         </tr>
                     </tbody>
@@ -112,6 +122,16 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                @if ($data->verifikasi_pengiriman == 3)
+
+                    <form action="{{route('terima', ['id' => $data->id, 'status_kirim' => 4])}}" method="post">
+                    @csrf
+                    @method('PUT')
+                        <button class="btn btn-success w-100" type="submit">Terima Pesanan</button>
+                    </form>
+                    
+                @endif
             </div>
         </div>
     </div>

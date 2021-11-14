@@ -17,10 +17,11 @@ class CreateLainyaTable extends Migration
             $table->uuid('id')->primary();
             $table->string ('nim_pemesan')->nullable();
             $table->string ('dokumen_dipesan')->nullable();
-            $table->integer('verifikasi')->default(1);
             $table->decimal ('jumlah_dokumen',32)->nullable()->default(0.00);
             $table->string('file')->nullable();
             $table->string('final_dokumen')->nullable();
+            $table->integer('verifikasi')->default(1);
+            $table->integer('verifikasi_pengiriman')->nullable()->default(1);
             $table->timestamps();
         });
     }

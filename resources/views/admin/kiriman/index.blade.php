@@ -11,31 +11,31 @@
 
 @section('content')
   <div class="container p-3 bg-white shadow rounded">
-    <h3>Daftar Pesanan Legalisir</h3>
+    <h3>Daftar Kiriman</h3>
     <hr>
     <ul class="nav nav-fill justify-content-center">
       <li class="nav-item">
-        <a class="nav-link @if ($status === '1' || $status === null){{ 'active' }}@endif" \
-          href="{{ route($adminTitle.'.legalisir', ['status' => '1']) }}">
-          Belum Diproses
+        <a class="nav-link @if ($status === '1' || $status === null){{ 'active' }}@endif" 
+          href="{{ route($adminTitle.'.kiriman', ['status' => '1']) }}">
+          Belum Dibayar
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link @if ($status === '2'){{ 'active' }}@endif" 
-          href="{{ route($adminTitle.'.legalisir', ['status' => '2']) }}">
-          Sedang Diproses
+          href="{{ route($adminTitle.'.kiriman', ['status' => '2']) }}">
+          Sudah Dibayar
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link @if ($status === '3'){{ 'active' }}@endif" 
-          href="{{ route($adminTitle.'.legalisir', ['status' => '3']) }}">
-          Sudah Diproses
+          href="{{ route($adminTitle.'.kiriman', ['status' => '3']) }}">
+          Sudah Dikirim
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link @if ($status === '0'){{ 'active' }}@endif" 
-          href="{{ route($adminTitle.'.legalisir', ['status' => '0']) }}">
-          Ditolak
+        <a class="nav-link @if ($status === '4'){{ 'active' }}@endif" 
+          href="{{ route($adminTitle.'.kiriman', ['status' => '4']) }}">
+          Sudah Dikirim
         </a>
       </li>
     </ul>
@@ -49,24 +49,38 @@
               <table class="table table-striped table-bordered mydatatable" style="width: 100%;">
                 <thead class="text-white" style="background-color: #06750F;">
                   <tr>
-                    <th>Kode Pesanan</th>
-                    <th>Tanggal Pemesanan</th>
-                    <th>Tanggal {{$status<=2? 'Target' : ''}} Selesai</th>
                     <th>Nama Pemesan</th>
+                    <th>Alamat</th>
+                    {{-- <th>Kontak</th> --}}
+                    <th>Status Pembayaran</th>
+                    <th>Status Pengiriman</th>
                     <th>Detail</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($legalisir as $item)
+                  @foreach ($pesanan as $item)
+                  @php
+                    $routeName = $item->route_name;
+                  @endphp
                     <tr>
-                      <td>{{ $item->id }}</td>
-                      <td>{{ $item->created_at }}</td>
-                      <td>{{ $item->created_at->addDays(1) }}</td>
+                      <td>{{ $item->user->name }}</td>
+                      <td>{{ $item->alamat }}</td>
+                      {{-- <td>
+                        @if($item->no_rumah)<i class="fa fa-home"></i> {{ $item->no_rumah }}@endif
+                        @if($item->no_hp)<br> <i class="fa fa-phone"></i> {{ $item->no_hp }}@endif 
+                      </td> --}}
                       <td>
-                        {{ auth()->user()->where('nim', $item->nim_pemesan)->first()->name }}
+                        <div class="badge {{ $item->buktiBayar ? 'badge-success' : 'badge-warning'}}">
+                          {{ $item->buktiBayar ? 'Telah Dibayar' : 'Belum Dibayar'}}
+                        </div>
                       </td>
                       <td>
-                        <a href="{{ route($adminTitle.'.legalisir.detail', ['legalisir' => $item]) }}" title="Detail"
+                        <div class="badge {{ $item->verifikasi_pengiriman == 4 ? 'badge-success' : ($item->verifikasi_pengiriman == 3 ? 'badge-info' : 'badge-warning') }}">
+                          {{ $item->verifikasi_pengiriman == 4 ? 'Telah Diterima' : ($item->verifikasi_pengiriman == 3 ? 'Telah Dikirim' : 'Belum Dikirim') }}
+                        </div>
+                      </td>
+                      <td>
+                        <a href="{{ route($adminTitle.'.'.$routeName.'.detail', [$routeName => $item]) }}" title="Detail"
                           class="btn btn-sm btn-success">Detail</a>
                       </td>
                     </tr>

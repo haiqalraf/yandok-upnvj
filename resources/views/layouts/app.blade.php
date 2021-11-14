@@ -105,6 +105,11 @@
  
                 </div>
             </li>
+            <li class="ml-3">
+               <a href="{{route(auth()->user()->adminTitle().'.kiriman')}}" class="nav-link active" type="button">
+                  Daftar Dikirim
+               </a>
+            </li>
                @elseif(in_array(auth()->user()->is_admin, [1]))
              <li class="nav-item ml-2">
                 <div class="dropdown ml-2">

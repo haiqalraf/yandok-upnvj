@@ -24,7 +24,7 @@
       <div class="row mb-5">
         <div class="col p-3 bg-white rounded shadow">
           <div class="d-flex justify-content-end">
-            <a href="{{route($adminTitle.'.surat', ['status'=>$surat->verifikasi])}}" class="btn btn-sm btn-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
+            <a href="{{url()->previous()}}" class="btn btn-sm btn-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
           </div>
           <h3>Detail Pesanan</h3>
           <hr>
@@ -58,19 +58,63 @@
                 </tr>
                 <tr>
                     <td>Detail Status</td>
-                    @if ($surat->verifikasi == 0)
-                      @if ($surat->komentar)
-                      <td>{{$surat->komentar}}</td>
-                      @else
-                      <td>Dokumen yang diunggah tidak sesuai persyaratan. Harap di cek lagi dengan teliti dan lakukan pesanan ulang</td>
-                      @endif
-                    @elseif ($surat->verifikasi == 1)
-                        <td>Pesanan perlu ditinjau</td>
-                    @elseif ($surat->verifikasi == 2)
-                        <td>Masih dalam peninjauan</td>
+                  @if ($surat->verifikasi == 0)
+                    @if ($surat->komentar)
+                    <td>{{$surat->komentar}}</td>
                     @else
-                        <td>Sudah Selesai</td>
+                    <td>Dokumen yang diunggah tidak sesuai persyaratan. Harap di cek lagi dengan teliti dan lakukan pesanan ulang</td>
                     @endif
+                  @elseif ($surat->verifikasi == 1)
+                      <td>Pesanan perlu ditinjau</td>
+                  @elseif ($surat->verifikasi == 2)
+                      <td>Masih dalam peninjauan</td>
+                  @elseif($surat->verifikasi == 3)
+                    @if ($surat->raw_tujuan == 1)
+                      <td>Sudah Selesai</td>
+                    @elseif($surat->verifikasi_pengiriman == 1)
+                      <td>Pesanan selesai, menunggu pengiriman Bukti Pembayaran</td>
+                    @elseif($surat->verifikasi_pengiriman == 2)
+                      <td>Bukti Pembayaran telah dikirim. Bukti pembayaran dapat dilihat 
+                        <a href="#" data-toggle="modal" data-target="#buktiModal">
+                          Di Sini
+                        </a>.
+                      </td>
+                      <div class="modal fade" id="buktiModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Bukti Pembayaran</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="row row-cols-2">
+                                <div class="col">Nama Bank</div>
+                                <div class="col">: {{$surat->buktiBayar->bank}}</div>
+                                <div class="col">Nomor Rekening</div>
+                                <div class="col">: {{$surat->buktiBayar->norek}}</div>
+                                <div class="col">Nama Pemilik Rekening</div>
+                                <div class="col">: {{$surat->buktiBayar->owner}}</div>
+                                <div class="col">Jumlah Dikirimkan</div>
+                                <div class="col">: {{$surat->buktiBayar->jml_bayar}}</div>
+                                <div class="col">Tanggal Pembayaran</div>
+                                <div class="col">: {{$surat->buktiBayar->tgl_bayar->locale('id')->isoFormat('LL')}}</div>
+                              </div>
+                              <div class="row">
+                                <div class="col-12">Bukti Pembayaran:</div>
+                                <img class="col-12 w-100" src="{{route($adminTitle.'.download', ['filePath' => 'bukti_bayar/' . $surat->buktiBayar->bukti_bayar,])}}" alt="bukti_bayar">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    @elseif($surat->verifikasi_pengiriman == 3)
+                      <td>Pesanan Telah Dikirim dengan resi <span class="text-info">Dummy</span></td>
+                    @elseif($surat->verifikasi_pengiriman == 4)
+                      <td>Pesanan Telah Diterima dengan resi <span class="text-info">Dummy</span></td>
+                    @endif
+                  @endif
                 </tr>
             </tbody>
           </table>
@@ -142,39 +186,77 @@
           Proses
         </button>
         @elseif ($surat->verifikasi == 2)
-        @if ($surat->raw_tujuan==2)
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#pembayaranModal">
-          Tetapkan Biaya Pengiriman
-        </button>
-        <!-- Modal -->
-        <div class="modal fade" id="pembayaranModal" tabindex="-1" aria-labelledby="pembayaranModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="pembayaranModalLabel">Biaya Pengiriman</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="form-group">
-                  <label for="biaya">Tetapkan Biaya Pengiriman untuk Pesanan Surat ini</label>
-                  <input type="number" class="form-control" id="biaya" name="biaya" min="0">
+          @if ($surat->raw_tujuan==2)
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#pembayaranModal">
+              Tetapkan Biaya Pengiriman
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="pembayaranModal" tabindex="-1" aria-labelledby="pembayaranModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="pembayaranModalLabel">Biaya Pengiriman</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="biaya">Tetapkan Biaya Pengiriman untuk Pesanan Surat ini</label>
+                      <input type="number" class="form-control" id="biaya" name="biaya" min="0">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Selesai</button>
+                  </div>
                 </div>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Selesai</button>
-              </div>
             </div>
-          </div>
-        </div>
-        @else
-        <button type="submit" class="btn btn-sm btn-success pull-right">
-          Selesai
+          @else
+            <button type="submit" class="btn btn-sm btn-success pull-right">
+              Selesai
+            </button>
+          @endif
+        @elseif($surat->verifikasi == 3 && $surat->verifikasi_pengiriman == 2)
+          <button type="button" data-toggle="modal" data-target="#pengirimanModal" class="btn btn-sm btn-success pull-right">
+            Kirim Pesanan
+          </button>
+        @endif
+    </div>
+  </div>
+</form>
+
+@if ($surat->verifikasi == 3 && $surat->verifikasi_pengiriman == 2)
+<!-- Modal -->
+<div class="modal fade" id="pengirimanModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <form action="{{ route($adminTitle.'.kiriman.surat', ['surat' => $surat, 'status' => 3]) }}" method="post"
+    class="modal-dialog">
+    @csrf
+    @method('PUT')
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pesanan akan dikirim</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
         </button>
-        @endif
-        @endif
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="formresi">Masukkan resi pengiriman</label>
+          <input class="form-control" id="formresi" name="resi">
+        </div>
+        <p>Pilihan tidak dapat diubah. Yakin dengan pilihan Anda? </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-primary">Yakin</button>
+      </div>
+    </div>
+  </form>
+</div>
+@endif
+
       </div>
     </div>
   </form>

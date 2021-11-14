@@ -45,30 +45,29 @@ class RiwayatController extends Controller
                     $result->verifikasi = 'Ditolak';
                     $result->pesanan = false;
 
-                }  elseif ($result->verifikasi == 3) {
-
-                    $result->badge = 'badge-warning';
-                    $result->verifikasi = 'Selesai';
-                    if ($result->tujuan==2) {
-                        $result->verifikasi = 'Belum Dibayar';
-                    }
-                    $result->pesanan = true;
-                } elseif ($result->verifikasi == 4) {
-                    
-                    $result->badge = 'badge-info';
-                    $result->verifikasi = 'Menunggu Konfirmasi';
-                    $result->pesanan = false;
+                }  else {
                     if ($result->tujuan == 1) {
+                        $result->badge = 'badge-success';
                         $result->verifikasi = 'Selesai';
                         $result->pesanan = true;
-                    }
-                } else {
-                    $result->badge = 'badge-success';
-                    $result->verifikasi = 'Selesai';
-                    $result->pesanan = true;
-                    if ($result->tujuan == 2) {
+                    } elseif ($result->verifikasi_pengiriman == 1) {
+                        $result->badge = 'badge-warning';
+                        $result->verifikasi = 'Belum Dibayar';
+                        $result->pesanan = true;
+                    } elseif ($result->verifikasi_pengiriman == 2) {
+                        $result->badge = 'badge-info';
+                        $result->pesanan = false;
+                        $result->verifikasi = 'Menunggu Verifikasi';
+                    } elseif ($result->verifikasi_pengiriman == 3) {
+                        $result->badge = 'badge-info';
+                        $result->verifikasi = 'Dikirim';
+                        $result->pesanan = false;
+                    } else {
+                        $result->badge = 'badge-success';
+                        $result->verifikasi = 'Selesai';
                         $result->pesanan = false;
                     }
+
                 }
             }
 
@@ -221,11 +220,11 @@ class RiwayatController extends Controller
 
     public function bayar(Pesanan $id)
     {
-        if ($id->source_code == 0) {
+        if ($id->source_table == 0) {
             $pesanan = Legalisir::find($id->id);
-        } elseif ($id->source_code == 1) {
+        } elseif ($id->source_table == 1) {
             $pesanan = Suket::find($id->id);
-        } elseif ($id->source_code == 2) {
+        } elseif ($id->source_table == 2) {
             $pesanan = Lainya::find($id->id);
         } else {
             $pesanan = Legalisir::find($id->id);
@@ -235,11 +234,11 @@ class RiwayatController extends Controller
 
     public function uploadBuktiBayar(Pesanan $id, Request $request)
     {
-        if ($id->source_code == 0) {
+        if ($id->source_table == 0) {
             $pesanan = Legalisir::find($id->id);
-        } elseif ($id->source_code == 1) {
+        } elseif ($id->source_table == 1) {
             $pesanan = Suket::find($id->id);
-        } elseif ($id->source_code == 2) {
+        } elseif ($id->source_table == 2) {
             $pesanan = Lainya::find($id->id);
         } else {
             $pesanan = Legalisir::find($id->id);
@@ -263,8 +262,8 @@ class RiwayatController extends Controller
 
             $newName = $date . '_buktibayar_'.$pesanan->id.'_'. $username . '.' . $extension;
 
-            if (!Storage::disk('local')->exists('bukti_bayar' . $newName)) {
-                Storage::disk('local')->put('bukti_bayar' . $newName, $file->get());
+            if (!Storage::disk('local')->exists('bukti_bayar/' . $newName)) {
+                Storage::disk('local')->put('bukti_bayar/' . $newName, $file->get());
             }
         } else {
             return back()->with("message", "File Not Found");
@@ -280,9 +279,27 @@ class RiwayatController extends Controller
         ]);
 
         $pesanan->buktiBayar()->save($bukti);
-        $pesanan->verifikasi = 4;
+        $pesanan->verifikasi_pengiriman = 2;
         $pesanan->save();
 
         return redirect()->route('riwayat');
+    }
+
+    public function updateStatusKirim(Pesanan $id, Request $request)
+    {
+        if ($id->source_table == 0) {
+            $pesanan = Legalisir::find($id->id);
+        } elseif ($id->source_table == 1) {
+            $pesanan = Suket::find($id->id);
+        } elseif ($id->source_table == 2) {
+            $pesanan = Lainya::find($id->id);
+        } else {
+            $pesanan = Legalisir::find($id->id);
+        }
+
+        $pesanan->verifikasi_pengiriman = $request->status_kirim;
+        $pesanan->save();
+
+        return redirect()->back();
     }
 }

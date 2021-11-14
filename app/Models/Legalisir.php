@@ -50,6 +50,7 @@ class Legalisir extends Model
         'tujuan',
         'alamat',
         'verifikasi',
+        'verifikasi_pengiriman',
         'created_at',
     ];
 
@@ -158,6 +159,11 @@ class Legalisir extends Model
         }
     }
 
+    public function getRouteNameAttribute()
+    {
+        return 'legalisir';
+    }
+
     public function getRawTujuanAttribute()
     {
         return $this->attributes['tujuan'];
@@ -166,5 +172,10 @@ class Legalisir extends Model
     public function buktiBayar()
     {
         return $this->morphOne(BuktiPembayaran::class, 'pesanan');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'nim_pemesan', 'nim');
     }
 }

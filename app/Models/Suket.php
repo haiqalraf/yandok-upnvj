@@ -16,6 +16,7 @@ class Suket extends Model
         'nim_pemesan',
         'dokumen_dipesan',
         'verifikasi',
+        'verifikasi_pengiriman',
         'komentar',
         'file',
         'final_dokumen'
@@ -86,6 +87,11 @@ class Suket extends Model
             return ["Scan Ijazah / Transkrip Nilai"];
     }
 
+    public function getRouteNameAttribute()
+    {
+        return 'surat';
+    }
+
     public function getRawTujuanAttribute()
     {
         return $this->attributes['tujuan'];
@@ -94,5 +100,10 @@ class Suket extends Model
     public function buktiBayar()
     {
         return $this->morphOne(BuktiPembayaran::class, 'pesanan');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'nim_pemesan', 'nim');
     }
 }

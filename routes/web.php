@@ -1,13 +1,11 @@
 <?php
 
-use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SuketController;
 use App\Http\Controllers\LainyaController;
 use App\Http\Controllers\LegalisirController;
-use App\Http\Controllers\admin\PesananController;
+use App\Http\Controllers\admin\AdminKirimanController;
 use App\Http\Controllers\admin\DownloadController;
 use App\Http\Controllers\superadmin\AkpkController;
 use App\Http\Controllers\admin\AdminSuratController;
@@ -15,6 +13,7 @@ use App\Http\Controllers\superadmin\DekanController;
 use App\Http\Controllers\admin\AdminLainnyaController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\admin\AdminLegalisirController;
+use App\Http\Controllers\RiwayatController;
 
 /*
 /*
@@ -65,6 +64,10 @@ Route::prefix('akpk')->middleware('is_akpk')->group(function ()
     Route::get('/lainnya', [AdminLainnyaController::class, 'lainnya'])->name('akpk.lainnya');
     Route::get('/lainnya/{lainnya:id}', [AdminLainnyaController::class, 'detailLainnya'])->name('akpk.lainnya.detail');
     Route::put('/lainnya/{lainnya:id}', [AdminLainnyaController::class, 'updateLainnya'])->name('akpk.lainnya.detail');
+    Route::get('/kiriman', [AdminKirimanController::class, 'index'])->name('akpk.kiriman');
+    Route::put('/kiriman/{legalisir:id}', [AdminKirimanController::class, 'legalisir'])->name('akpk.kiriman.legalisir');
+    Route::put('/kiriman/{surat:id}', [AdminKirimanController::class, 'surat'])->name('akpk.kiriman.surat');
+    Route::put('/kiriman/{lainnya:id}', [AdminKirimanController::class, 'lainnya'])->name('akpk.kiriman.lainnya');
 });
 
 #dekan
@@ -74,6 +77,11 @@ Route::prefix('dekan')->middleware('is_dekan')->group(function ()
     Route::get('/legalisir', [AdminLegalisirController::class, 'legalisir'])->name('dekan.legalisir');
     Route::get('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'detailLegalisir'])->name('dekan.legalisir.detail');
     Route::put('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'updateLegalisir'])->name('dekan.legalisir.detail');
+    Route::get('/kiriman', [AdminKirimanController::class, 'index'])->name('dekan.kiriman');
+    Route::put('/kiriman/{legalisir:id}', [AdminKirimanController::class, 'legalisir'])->name('akpk.kiriman.legalisir');
+    Route::put('/kiriman/{surat:id}', [AdminKirimanController::class, 'surat'])->name('akpk.kiriman.surat');
+    Route::put('/kiriman/{lainnya:id}', [AdminKirimanController::class, 'lainnya'])->name('akpk.kiriman.lainnya');
+
 });
 
 #superadmin
@@ -99,4 +107,5 @@ Route::get('/riwayat/ambil/{id}', [App\Http\Controllers\RiwayatController::class
 Route::get('/download/{pesanan:id}', [App\Http\Controllers\RiwayatController::class, 'download'])->name('riwayat.download');
 Route::get('/bayar/{id}', [App\Http\Controllers\RiwayatController::class, 'bayar'])->name('bayar');
 Route::put('/bayar/{id}', [App\Http\Controllers\RiwayatController::class, 'uploadBuktiBayar'])->name('bayar.update');
+Route::put('/terima/{id}', [RiwayatController::class, 'updateStatusKirim'])->name('terima');
 
