@@ -25,8 +25,10 @@ class AddFakultasToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('fakultas');
-        });
+        if(Schema::hasTable('users')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->dropConstrainedForeignId('fakultas');
+            });
+        }
     }
 }

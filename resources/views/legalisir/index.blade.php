@@ -161,7 +161,7 @@
                               <span aria-hidden="true">&times;</span>
                            </button>
                         </div>
-                        <div class="modal-body text-sm-left bg-light" style="font-size: 15px;">
+                        <div class="modal-body text-sm-left bg-light" style="font-size: 15px;" id='modalKeterangan'>
                            <div class="form-group">
                               <label for="opsirole">Anda memesan dokumen untuk memenuhi kebutuhan apa?</label>
                               <select class="form-control" id="opsirole" name="kebutuhan">
@@ -175,6 +175,13 @@
                               <label for="alasan">Apakah anda memiliki permintaaan khusus? Jika ada harap tulis dikolom
                                  di bawah ini</label>
                               <input type="text" class="form-control form-control-sm" name="keterangan">
+                           </div>
+                           <div class="form-group metode">
+                              <label for="tujuan">Metode Pengiriman</label>
+                              <select class="form-control" id="tujuan" name="tujuan">
+                                 <option value="1" selected>Ambil Langsung ke UPNVJ</option>
+                                 <option value="2">Dikirim ke Alamat Saya</option>
+                              </select>
                            </div>
                         </div>
 
@@ -205,6 +212,19 @@
    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
    <script type="text/javascript">
       $(document).ready(function () {
+         $('#tujuan').change(function() {
+            if($(this).val()==2) {
+               console.log($(this).val())
+               $(this).parent().parent().append(`
+                  <div class="form-group alamat">
+                     <label for="alamat">Alamat Pengiriman</label>
+                     <textarea class="form-control" id="alamat" rows="3" name="alamat">{{auth()->user()->address}}</textarea>
+                  </div>
+               `)
+            } else {
+               $(this).parent().parent().find('.alamat').remove()
+            }
+         })
          $("#item1, #item2, #item3, #item4, #item5, #item6, #item7, #item8, #item9, #item10, #item11, #item12").change(
             function () {
                var item1 = $("#item1").val();

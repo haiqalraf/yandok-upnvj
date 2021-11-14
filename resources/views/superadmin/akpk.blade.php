@@ -13,6 +13,7 @@
                     <th>Nama</th>
                     <th>Password</th>
                     <th>Status</th>
+                    <th>Hapus Akun</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +28,13 @@
                         @else
                             <span><i class="fa fa-circle" style="color: red;"></i> Offline
                         @endif
+                    </td>
+                    <td>
+                        <form action="{{route('superadmin.akpk.delete')}}" class="ajax_action" method="post">
+                            @csrf
+                            <input type="hidden" name="nim" id="" value="{{$item->nim}}">
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
@@ -43,7 +51,8 @@
         </div>
     </div>
 
-    </div>
+</div>
+   <div class="alert"></div>
 @endsection
 
 @section('script')
@@ -55,4 +64,57 @@
 <script>
     $('.mydatatable').DataTable();
 </script>
+<script src="{{asset('js/alert.js')}}"></script>
+<script>
+      $(document).ready(function () {
+         // ALFIO
+         $(".ajax_action").submit(function(event){
+
+         $(':input[type="submit"]').prop('disabled', true);
+
+         event.preventDefault();
+         var post_url = $(this).attr("action"); // Get the form action URL
+         var request_method = $(this).attr("method"); // Get form GET/POST method
+         var form_data = new FormData(this);
+
+         $.ajax({
+            url : post_url,
+            type: request_method,
+            data : form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType: 'json', 
+            success: function(results){
+               
+               var status = results.status;
+               var text = results.text;
+
+               if (status){
+                  showAlert("Berhasil", text, function (e) {
+                     window.location.reload();
+                  });
+                //   showAlert("Berhasil", text);
+                  $(':input[type="submit"]').prop('disabled', false);
+                  // window.location.replace("login");
+                     
+               } else {
+
+                  showAlert("Gagal", text);
+                  $(':input[type="submit"]').prop('disabled', false);
+               
+               }
+            },
+            error: function (xhr, status, error){
+
+               var text = xhr.responseJSON.message
+
+               showAlert("Gagal", text);
+
+               $(':input[type="submit"]').prop('disabled', false);
+            }
+         });
+         });
+      });
+   </script>
 @endsection

@@ -3,11 +3,10 @@
 
 @section('content')
     <div class="row">
-         <div class="col-2">
-            <a class="btn btn-sm text-left aktif p-2" href="{{ url()->previous() }}"><i
-                  class="fa fa-arrow-left"></i>&nbsp;Kembali</a>
-         </div>
         <div class="col bg-white rounded shadow p-3">
+            <div class="d-flex justify-content-end">
+               <a href="{{route('riwayat')}}" class="btn btn-sm btn-success"><i class="fa fa-arrow-left"></i> Kembali</a> 
+            </div>
             <h3>Riwayat Pesanan Anda</h3>
             <hr>
             <div class="mb-4" style="font-size: 1rem;">Berikut daftar riwayat pesanan anda</div>
@@ -21,8 +20,16 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td>Nama Pemesan</td>
+                            <td>{{$data->name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Fakultas</td>
+                            <td>{{$data->FAK}}</td>
+                        </tr>
+                        <tr>
                             <td>Tanggal Pemesanan</td>
-                            <td>{{date('d-m-y', strtotime($data->created_at))}}</td>
+                            <td>{{date('d-m-Y', strtotime($data->created_at))}}</td>
                         </tr>
                         <tr>
                             <td>Detail Status</td>
@@ -35,15 +42,39 @@
 
                             @elseif ($data->verifikasi == 1)
 
-                                <td>Pesanan akan ditinjau oleh bagian AKPK</td>
+                                <td>Pesanan Anda akan ditinjau</td>
                             
                             @elseif ($data->verifikasi == 2)
 
-                                <td>Masih dalam peninjauan di bagian AKPK</td>
+                                <td>Pesanan Anda sedang diproses</td>
 
-                            @else
+                            @elseif($data->verifikasi == 3)
 
-                                <td>Sudah Selesai, harap mengambil dokumen di loket ULT dengan menunjukan <a class="text-info" href="{{ url('/riwayat/ambil') }}/{{$data->id}}">kode pesanan</a></td>
+                                @if ($data->tujuan==2)
+
+                                    @if ($data->verifikasi_pengiriman == 1)
+
+                                        <td>Sudah Selesai, harap melakukan pembayaran <a class="text-info" href="{{ route('bayar', ['id'=> $data->id]) }}">di sini</a></td>
+                                    
+                                    @elseif($data->verifikasi_pengiriman == 2)
+
+                                        <td>Bukti Pembayaran sedang diverifikasi</td>
+
+                                    @elseif($data->verifikasi_pengiriman == 3)
+
+                                        <td>Bukti Pembayaran Telah dikonfirmasi dan Pesanan sedang dikirim dengan resi <span class="text-info">Dummy</span></td>
+
+                                    @elseif($data->verifikasi_pengiriman == 4)
+
+                                        <td>Sudah Selesai, Pesanan telah diterima dengan resi <span class="text-info">Dummy</span></td>
+
+                                    @endif
+
+                                @else
+
+                                    <td>Sudah Selesai, harap mengambil dokumen di loket ULT dengan menunjukan <a class="text-info" href="{{ url('/riwayat/ambil') }}/{{$data->id}}">kode pesanan</a></td>
+
+                                @endif
 
                             @endif
                         </tr>
@@ -73,7 +104,7 @@
                                 <td>{{intval($table['jumlah'])}}</td>
                                 @if ($loop->first)
                                 <td rowspan="{{count($data->table)}}">
-                                    @if ($data->verifikasi == 3)
+                                    @if ($data->verifikasi >= 3)
                                     <div class="d-flex w-100 h-100 justify-content-center align-items-center">
                                         <a href="{{route('riwayat.download', [ 
                                             $data
@@ -91,6 +122,16 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                @if ($data->verifikasi_pengiriman == 3)
+
+                    <form action="{{route('terima', ['id' => $data->id, 'status_kirim' => 4])}}" method="post">
+                    @csrf
+                    @method('PUT')
+                        <button class="btn btn-success w-100" type="submit">Terima Pesanan</button>
+                    </form>
+                    
+                @endif
             </div>
         </div>
     </div>

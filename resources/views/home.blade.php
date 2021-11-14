@@ -18,56 +18,66 @@
 <div class="row">
    <div class="col bg-white p-3 rounded shadow">
       <h3>Profil Saya</h3>
-      <hr><br>
+      <hr>
+      @if (!auth()->user()->is_profile_completed)
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+         <strong>Harap Lengkapi Biodata Profil Anda!</strong>
+      </div>
+      @endif      
+      <br>
       <form action="{{ route('updUser') }}" method="POST" class="ajax_action">
          @csrf
          <table class="table table-borderless table-responsive-sm table-sm">
             <tr>
                <td>Nama</td>
                <td>
-                  <input type="text" name="nama_alumni" class="form-control form-control-sm" placeholder="Nama anda" value="{{ $user->name }}" readonly>
+                  <input type="text" name="nama_alumni" class="form-control form-control-sm" placeholder="Nama anda" value="{{ empty($user->name) ? "-" : $user->name }}" readonly>
                </td>
             </tr>
             @if ($user->is_admin == 0)
             <tr>
                <td>NIM</td>
                <td>
-                  <input type="text" name="nim" class="form-control form-control-sm" placeholder="NIM" value="{{ $user->nim }}" readonly>
+                  <input type="text" name="nim" class="form-control form-control-sm" placeholder="NIM" value="{{ empty($user->nim) ? "-" : $user->nim }}" readonly>
+               </td>
+            </tr>
+
+            <tr>
+               <td>Fakultas</td>
+               <td>
+                  <input type="text" name="fakultas" class="form-control form-control-sm" placeholder="Fakultas" value="{{ empty($user->faculty) ? "-" : $user->faculty->nama }}" readonly>
                </td>
             </tr>
 
             <tr>
                <td>Tahun Lulus</td>
                <td>
-                  <input type="number" name="thn_lulus" class="form-control form-control-sm" placeholder="Tahun Lulus" value="{{ date('Y', strtotime($user->thn_lulus)) }}" readonly>
+                  <input type="text" name="thn_lulus" class="form-control form-control-sm" placeholder="Tahun Lulus" value="{{empty($user->thn_lulus) ? "-" : $user->thn_lulus}}" readonly>
                </td>
             </tr>
             <tr>
                <td>Tanggal Lahir</td>
                <td id="tgl">
-                  <input type="text" class="form-control form-control-sm" value="{{ $user->tanggal_lahir }}" readonly>
+                  <input type="text" class="form-control form-control-sm" value="{{ empty($user->tanggal_lahir) ? "-" : $user->tanggal_lahir }}" readonly>
                      
                   <div class="invalid-feedback">Please fill out this field.</div>
                </td>
             </tr>
             @else
-                  <input type="hidden" name="nim" class="form-control form-control-sm" placeholder="NIM" value="{{ $user->nim }}" readonly>
+                  <input type="hidden" name="nim" class="form-control form-control-sm" placeholder="NIM" value="{{ empty($user->nim) ? "-" : $user->nim }}" readonly>
             @endif
 
             <tr>
                <td>Email</td>
                <td>
-                  <input type="email" name="email" class="form-control form-control-sm" value="{{ $user->email }}" placeholder="Email lengkap anda" required>
+                  <input type="email" name="email" class="form-control form-control-sm" value="{{ $user->email }}" placeholder="Email lengkap anda" readonly>
                </td>
             </tr>
 
             <tr>
                <td>Password</td>
                <td>
-                  <input type="password" name="password" class="form-control form-control-sm" placeholder="Password"
-                     value="">
-                  <p class="text-danger text-right" style="font-size: 13px;">Ketik Minimal 6 karakter untuk mengganti
-                     ke sandi baru.</p>
+                  <a href="{{route('password.edit')}}" class="btn btn-link">Ubah Sandi</a>
                </td>
             </tr>
 
@@ -100,17 +110,8 @@
                </td>
             </tr>
 
-            @if ($user->is_admin == 0)
             <tr>
-               <td>Pekerjaan saat ini</td>
-               <td>
-                  <input type="text" name="pekerjaan" class="form-control form-control-sm" value="{{ $user->pekerjaan }}" required>
-               </td>
-            </tr>
-            @endif
-
-            <tr>
-               <td>Alamat</td>
+               <td>Alamat </td>
                <td id="alamat">
                   <textarea name="alamat" class="form-control form-control-sm" placeholder="Alamat" style="height: 250px;" required>{{ $user->address }}</textarea>
                      
@@ -118,13 +119,44 @@
                </td>
             </tr>
 
+            @if ($user->is_admin == 0)
+            
+            <tr>
+               <td>Pekerjaan saat ini</td>
+               <td>
+                  <input type="text" name="pekerjaan" class="form-control form-control-sm" value="{{ $user->pekerjaan }}" required>
+               </td>
+            </tr>
+            <tr>
+               <td>Nama perusahaan</td>
+               <td>
+                  <input type="text" name="nama_perusahaan" class="form-control form-control-sm" value="{{ $user->nama_perusahaan }}" required>
+               </td>
+            </tr>
+            <tr>
+               <td>Jabatan</td>
+               <td>
+                  <input type="text" name="jabatan" class="form-control form-control-sm" value="{{ $user->jabatan }}" required>
+               </td>
+            </tr>
+            <tr>
+               <td>Alamat Perusahaan</td>
+               <td>
+                  <input type="text" name="alamat_perusahaan" class="form-control form-control-sm" value="{{ $user->alamat_perusahaan }}" required>
+               </td>
+            </tr>
+            @endif
+
          </table>
          <button type="submit" class="btn btn-sm btn-success pull-right">
             <i class="fa fa-check-circle-o" aria-hidden="true"></i> Update Data Profil
          </button>
       </form>
    </div>
-   @if (in_array(auth()->user()->is_admin, [0, null]))
+   @if (in_array(auth()->user()->is_admin, [0, null])
+      && !auth()->user()->is_tracer 
+      && auth()->user()->thn_lulus <= now()->format('Y')
+      && now()->addYear(-5)->format('Y') <= auth()->user()->thn_lulus)
    <!-- Modal -->
    <div class="modal fade" id="tracestudy" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
@@ -142,7 +174,7 @@
                   class="font-weight-bold">Trace Study</span> terlebih dahulu
             </div>
             <div class="modal-footer">
-               <a href="{{route('tracestudy')}}" class="btn btn-success">Isi sekarang</a>
+               <button type="button" class="btn btn-success" onclick="tracer()">Isi sekarang</button>
             </div>
          </div>
       </div>
@@ -208,9 +240,20 @@ $(document).ready(function () {
    showAlert("Berhasil", "{{session('status')}}");
 </script>
 @endif
-@if (!auth()->user()->tracerstudy)
+@isset(auth()->user()->thn_lulus)
+@if (!auth()->user()->is_tracer 
+   && auth()->user()->thn_lulus <= now()->format('Y')
+   && now()->addYear(-5)->format('Y') <= auth()->user()->thn_lulus)
 <script>
    $('#tracestudy').modal('show');
 </script>
+
+<script>
+   function tracer() {
+      window.open("https://tracer.upnvj.ac.id/admin/login", "_blank")
+      window.location.href = "{{route('tracestudy')}}";
+   }
+</script>
 @endif
+@endisset
 @endsection

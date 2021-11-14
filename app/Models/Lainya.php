@@ -17,12 +17,13 @@ class Lainya extends Model
         'komentar',
         'dokumen_dipesan',
         'verifikasi',
+        'verifikasi_pengiriman',
         'jumlah_dokumen',
         'file',
     ];
 
     protected $cast = [
-        'jumlah_dokumen' => 'float',
+        'jumlah_dokumen' => 'integer',
     ];
 
     public function getData($nim = null, $id = null, $type = 'all'){
@@ -48,5 +49,41 @@ class Lainya extends Model
         }
 
         return $data;
+    }
+
+    public function titleStatus()
+    {
+        switch ($this->verifikasi) {
+            case 0:
+                return 'Ditolak';
+            case 1:
+                return 'Belum Diproses';
+            case 2:
+                return 'Sedang Diproses';
+            case 3:
+                return 'Sudah Diproses';
+            default:
+                return 'Belum Diproses';
+        }
+    }
+
+    public function getRouteNameAttribute()
+    {
+        return 'lainnya';
+    }
+
+    public function getRawTujuanAttribute()
+    {
+        return $this->attributes['tujuan'];
+    }
+
+    public function buktiBayar()
+    {
+        return $this->morphOne(BuktiPembayaran::class, 'pesanan');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'nim_pemesan', 'nim');
     }
 }

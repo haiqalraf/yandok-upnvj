@@ -16,12 +16,19 @@ note:
 
 login username and password
 
-user/mahasiswa  : 18105
+user/mahasiswa  : 1810511
 
-superadmin      : 18106
+superadmin      : 18110
 
-akpk            : 18107
+akpk            : 18109
 
-dekan           : 18108
+dekan           :
+  feb           : 18101
+  fk            : 18102
+  ft            : 18103
+  fisip         : 18104
+  fik           : 18105
+  fh            : 18106
+  fikes         : 18107
 
 password: 123456

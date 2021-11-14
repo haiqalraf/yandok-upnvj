@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Support\Str;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements CanResetPassword
 {
     use Notifiable, HasFactory, Notifiable;
 
@@ -30,6 +31,7 @@ class User extends Authenticatable
         'pekerjaan',
         'photo',
         'address',
+        'is_tracer'
     ];
 
     /**
@@ -49,7 +51,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'thn_lulus'=>'datetime',
     ];
 
     public function encodeFakultas($fakultas)
@@ -128,9 +129,57 @@ class User extends Authenticatable
     //     }
     // }
 
-    public function tracerstudy()
+    public function adminTitle()
     {
-        return $this->hasOne(TracerStudy::class);
+        switch ($this->is_admin) {
+            case 0:
+                return 'mahasiswa';
+            case 1:
+                return 'superadmin';
+            case 2:
+                return 'akpk';
+            case 3:
+                return 'dekan';
+            default:
+                return 'mahasiswa';
+        }
+    }
+
+    public function getIsProfileCompletedAttribute()
+    {
+        // $total = 5;
+        // $data = 0;
+        if ($this->is_admin != 0) {
+            return true;
+        }
+        foreach ($this->attributes as $key => $attribute) {
+            if(!in_array($key, [
+                'id', 
+                'created_at', 
+                'updated_at', 
+                'remember_token', 
+                'is_admin', 
+                'is_tracer', 
+                'email',
+                'thn_lulus',
+                'tanggal_lahir',
+                'password',
+                'fakultas',
+                'nim',
+                'name',
+                'email_verified_at',
+            ])) {
+                // if ($attribute != null) {
+                //     $data++;
+                // }
+                if ($attribute == null) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+        // return ($data/$total) * 100;
     }
 
     public function faculty()

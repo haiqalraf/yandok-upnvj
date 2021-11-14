@@ -1,15 +1,19 @@
 <?php
 
-use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SuketController;
 use App\Http\Controllers\LainyaController;
 use App\Http\Controllers\LegalisirController;
-use App\Http\Controllers\admin\PesananController;
+use App\Http\Controllers\admin\AdminKirimanController;
+use App\Http\Controllers\admin\DownloadController;
 use App\Http\Controllers\superadmin\AkpkController;
+use App\Http\Controllers\admin\AdminSuratController;
 use App\Http\Controllers\superadmin\DekanController;
+use App\Http\Controllers\admin\AdminLainnyaController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\admin\AdminLegalisirController;
+use App\Http\Controllers\RiwayatController;
 
 /*
 /*
@@ -27,6 +31,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('index');
 
+Route::get('/password/edit', [ResetPasswordController::class, 'showResetFormWithoutToken'])->middleware('auth')->name('password.edit');
+Route::post('/password/edit', [ResetPasswordController::class, 'updatePasswordFromOldPassword'])->middleware('auth')->name('password.update-auth');
 Auth::routes();
 
 Route::get('/alur', [App\Http\Controllers\HomeController::class, 'alur'])->name('alur');
@@ -44,34 +50,39 @@ Route::post('verifikasi',[ApiController::class,'verifikasi'])->name('verifikasi'
 #
 
 #akpk
-Route::get('home', [HomeController::class, 'index'])->name('akpk.home')->middleware('is_akpk');
-Route::get('akpk/download', [PesananController::class, 'fileDownload'])->name('akpk.download')->middleware('is_akpk');
-Route::get('akpk/legalisir', [PesananController::class, 'legalisir'])->name('akpk.legalisir')->middleware('is_akpk');
-Route::get('akpk/legalisir/{legalisir:id}', [PesananController::class, 'detailLegalisir'])->name('akpk.legalisir.detail')->middleware('is_akpk');
-Route::put('akpk/legalisir/{legalisir:id}', [PesananController::class, 'updateLegalisir'])->name('akpk.legalisir.detail')->middleware('is_akpk');
-
-Route::get('akpk/surat', [PesananController::class, 'surat'])->name('akpk.surat')->middleware('is_akpk');
-Route::get('akpk/surat/{surat:id}', [PesananController::class, 'detailSurat'])->name('akpk.surat.detail')->middleware('is_akpk');
-Route::put('akpk/surat/{surat:id}', [PesananController::class, 'updateSurat'])->name('akpk.surat.detail')->middleware('is_akpk');
-
-Route::get('akpk/lainnya', [PesananController::class, 'lainnya'])->name('akpk.lainnya')->middleware('is_akpk');
-Route::get('akpk/lainnya/{lainnya:id}', [PesananController::class, 'detailLainnya'])->name('akpk.lainnya.detail')->middleware('is_akpk');
-Route::put('akpk/lainnya/{lainnya:id}', [PesananController::class, 'updateLainnya'])->name('akpk.lainnya.detail')->middleware('is_akpk');
+Route::prefix('akpk')->middleware('is_akpk')->group(function ()
+{
+    Route::get('/download', [DownloadController::class, 'fileDownload'])->name('akpk.download');
+    Route::get('/legalisir', [AdminLegalisirController::class, 'legalisir'])->name('akpk.legalisir');
+    Route::get('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'detailLegalisir'])->name('akpk.legalisir.detail');
+    Route::put('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'updateLegalisir'])->name('akpk.legalisir.detail');
+    
+    Route::get('/surat', [AdminSuratController::class, 'surat'])->name('akpk.surat');
+    Route::get('/surat/{surat:id}', [AdminSuratController::class, 'detailSurat'])->name('akpk.surat.detail');
+    Route::put('/surat/{surat:id}', [AdminSuratController::class, 'updateSurat'])->name('akpk.surat.detail');
+    
+    Route::get('/lainnya', [AdminLainnyaController::class, 'lainnya'])->name('akpk.lainnya');
+    Route::get('/lainnya/{lainnya:id}', [AdminLainnyaController::class, 'detailLainnya'])->name('akpk.lainnya.detail');
+    Route::put('/lainnya/{lainnya:id}', [AdminLainnyaController::class, 'updateLainnya'])->name('akpk.lainnya.detail');
+    Route::get('/kiriman', [AdminKirimanController::class, 'index'])->name('akpk.kiriman');
+    Route::put('/kiriman/{legalisir:id}', [AdminKirimanController::class, 'legalisir'])->name('akpk.kiriman.legalisir');
+    Route::put('/kiriman/{surat:id}', [AdminKirimanController::class, 'surat'])->name('akpk.kiriman.surat');
+    Route::put('/kiriman/{lainnya:id}', [AdminKirimanController::class, 'lainnya'])->name('akpk.kiriman.lainnya');
+});
 
 #dekan
-route::get('home', [HomeController::class, 'index'])->name('dekan.home')->middleware('is_dekan');
-Route::get('dekan/download', [PesananController::class, 'fileDownload'])->name('dekan.download')->middleware('is_dekan');
-Route::get('dekan/legalisir', [PesananController::class, 'legalisir'])->name('dekan.legalisir')->middleware('is_dekan');
-Route::get('dekan/legalisir/{legalisir:id}', [PesananController::class, 'detailLegalisir'])->name('dekan.legalisir.detail')->middleware('is_dekan');
-Route::put('dekan/legalisir/{legalisir:id}', [PesananController::class, 'updateLegalisir'])->name('dekan.legalisir.detail')->middleware('is_dekan');
+Route::prefix('dekan')->middleware('is_dekan')->group(function ()
+{
+    Route::get('/download', [DownloadController::class, 'fileDownload'])->name('dekan.download');
+    Route::get('/legalisir', [AdminLegalisirController::class, 'legalisir'])->name('dekan.legalisir');
+    Route::get('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'detailLegalisir'])->name('dekan.legalisir.detail');
+    Route::put('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'updateLegalisir'])->name('dekan.legalisir.detail');
+    Route::get('/kiriman', [AdminKirimanController::class, 'index'])->name('dekan.kiriman');
+    Route::put('/kiriman/{legalisir:id}', [AdminKirimanController::class, 'legalisir'])->name('akpk.kiriman.legalisir');
+    Route::put('/kiriman/{surat:id}', [AdminKirimanController::class, 'surat'])->name('akpk.kiriman.surat');
+    Route::put('/kiriman/{lainnya:id}', [AdminKirimanController::class, 'lainnya'])->name('akpk.kiriman.lainnya');
 
-Route::get('dekan/surat', [PesananController::class, 'surat'])->name('dekan.surat')->middleware('is_dekan');
-Route::get('dekan/surat/{surat:id}', [PesananController::class, 'detailSurat'])->name('dekan.surat.detail')->middleware('is_dekan');
-Route::put('dekan/surat/{surat:id}', [PesananController::class, 'updateSurat'])->name('dekan.surat.detail')->middleware('is_dekan');
-
-Route::get('dekan/lainnya', [PesananController::class, 'lainnya'])->name('dekan.lainnya')->middleware('is_dekan');
-Route::get('dekan/lainnya/{lainnya:id}', [PesananController::class, 'detailLainnya'])->name('dekan.lainnya.detail')->middleware('is_dekan');
-Route::put('dekan/lainnya/{lainnya:id}', [PesananController::class, 'updateLainnya'])->name('dekan.lainnya.detail')->middleware('is_dekan');
+});
 
 #superadmin
 Route::prefix('superadmin')->group(function () {
@@ -80,17 +91,21 @@ Route::prefix('superadmin')->group(function () {
     Route::get('/akpk', [AkpkController::class, 'index'])->name('superadmin.akpk');
     Route::post('/akpk', [AkpkController::class, 'store']);
     Route::get('/akpk/create', [AkpkController::class, 'create'])->name('superadmin.akpk.create');
+    Route::post('/akpk/delete', [AkpkController::class, 'delete'])->name('superadmin.akpk.delete');
 
     Route::get('/dekan', [DekanController::class, 'index'])->name('superadmin.dekan');
     Route::post('/dekan', [DekanController::class, 'store']);
     Route::get('/dekan/create', [DekanController::class, 'create'])->name('superadmin.dekan.create');
+    Route::post('/dekan/delete', [DekanController::class, 'delete'])->name('superadmin.dekan.delete');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/tracestudy', [App\Http\Controllers\HomeController::class, 'tracestudy'])->name('tracestudy');
-Route::post('/tracestudy', [App\Http\Controllers\HomeController::class, 'updateTracer']);
 Route::get('/riwayat', [App\Http\Controllers\RiwayatController::class, 'index'])->name('riwayat');
 Route::get('/riwayat/detail/{id}', [App\Http\Controllers\RiwayatController::class, 'detail']);
 Route::get('/riwayat/ambil/{id}', [App\Http\Controllers\RiwayatController::class, 'ambil']);
 Route::get('/download/{pesanan:id}', [App\Http\Controllers\RiwayatController::class, 'download'])->name('riwayat.download');
+Route::get('/bayar/{id}', [App\Http\Controllers\RiwayatController::class, 'bayar'])->name('bayar');
+Route::put('/bayar/{id}', [App\Http\Controllers\RiwayatController::class, 'uploadBuktiBayar'])->name('bayar.update');
+Route::put('/terima/{id}', [RiwayatController::class, 'updateStatusKirim'])->name('terima');
 

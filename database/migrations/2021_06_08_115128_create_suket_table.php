@@ -17,9 +17,10 @@ class CreateSuketTable extends Migration
             $table->uuid('id')->primary();
             $table->string ('nim_pemesan')->nullable();
             $table->text ('dokumen_dipesan')->nullable();
-            $table->integer('verifikasi')->default(1);
             $table->text('file')->nullable();
             $table->text('final_dokumen')->nullable();
+            $table->integer('verifikasi')->default(1);
+            $table->integer('verifikasi_pengiriman')->nullable()->default(1);
             $table->timestamps();
         });
     }

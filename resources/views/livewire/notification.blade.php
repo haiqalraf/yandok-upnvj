@@ -24,7 +24,7 @@
             <span class="text-right">
         </p>
     </a>
-    @elseif(in_array(auth()->user()->is_admin, [3]))
+    @elseif(in_array(auth()->user()->is_admin, [3] )&& $notification->data['model_pesanan'] == 'legalisir')
     <a href="{{ route('dekan.'.$notification->data['model_pesanan'].'.detail', [$notification->data['model_pesanan'] => $notification->data['id_pesanan']])}}" class="dropdown-item" type="button" style="font-size: small;">
         <p wire:ignore.self class="@if($notification->read_at === null){{'font-weight-bold'}}@endif"> 
             {{$notification->data['message']}}

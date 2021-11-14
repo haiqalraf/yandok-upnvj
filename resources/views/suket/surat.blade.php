@@ -1,15 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
    <div class="container mb-5">
       <form action="{{url('surat')}}" method="POST" class="row" enctype="multipart/form-data">
          @csrf
@@ -222,7 +213,6 @@
                   class="btn btn-sm mt-2 text-white" style="background-color: #06750F;">
                   Simpan
                </button>
-
                <!-- Modal -->
                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                   aria-hidden="true" data-backdrop="static" data-keyboard="false" tabindex="-1">
@@ -235,6 +225,16 @@
                            </button>
                         </div>
                         <div class="modal-body text-sm-left bg-light" style="font-size: 15px;">
+                           <div class="form-group metode">
+                              <label for="tujuan">Metode Pengiriman</label>
+                              <select class="form-control" id="tujuan" name="tujuan">
+                                 <option value="1" selected>Ambil Langsung ke UPNVJ</option>
+                                 <option value="2">Dikirim ke Alamat Saya</option>
+                              </select>
+                           </div>
+                           
+                        </div>
+                        <div class="mb-3 text-left p-3">
                            Apakah anda yakin membuat pesanan dengan jumlah dokumen yang anda tentukan??<br><br>Pesanan
                            yang telah
                            dibuat tidak dapat diubah lagi jumlahnya
@@ -253,4 +253,25 @@
          </div>
       </form>
    </div>
+@endsection
+
+@section('script')
+   <!-- Script auto calculation -->
+   <script type="text/javascript">
+      $(document).ready(function () {
+         $('#tujuan').change(function() {
+            if($(this).val()==2) {
+               console.log($(this).val())
+               $(this).parent().parent().append(`
+                  <div class="form-group alamat">
+                     <label for="alamat">Alamat Pengiriman</label>
+                     <textarea class="form-control" id="alamat" rows="3" name="alamat">{{auth()->user()->address}}</textarea>
+                  </div>
+               `)
+            } else {
+               $(this).parent().parent().find('.alamat').remove()
+            }
+         })
+      })
+   </script>
 @endsection

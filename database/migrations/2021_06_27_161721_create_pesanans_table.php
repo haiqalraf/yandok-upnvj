@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreatePesanansTable extends Migration
 {
@@ -20,6 +21,9 @@ class CreatePesanansTable extends Migration
             id,
             nim_pemesan,
             verifikasi,
+            verifikasi_pengiriman,
+            tujuan,
+            biaya,
             0 AS source_table,
             created_at,
             updated_at
@@ -30,6 +34,9 @@ class CreatePesanansTable extends Migration
             id,
             nim_pemesan,
             verifikasi,
+            verifikasi_pengiriman,
+            tujuan,
+            biaya,
             1 AS source_table,
             created_at,
             updated_at
@@ -40,6 +47,9 @@ class CreatePesanansTable extends Migration
             id,
             nim_pemesan,
             verifikasi,
+            verifikasi_pengiriman,
+            tujuan,
+            biaya,
             2 AS source_table,
             created_at,
             updated_at

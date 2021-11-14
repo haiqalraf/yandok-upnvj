@@ -36,10 +36,6 @@ class LainnyaObserver
         $user = User::where('nim', $lainya->nim_pemesan)->first();
         if ($lainya->verifikasi==2) {
             $user->notify(new Pesanan(['model_pesanan' => 'lainnya', 'id_pesanan'  => $lainya->id, 'message'=>'Pesanan '.$lainya->id.' sedang diverifikasi/dibuat']));
-            $dekan = User::where('is_admin', 3)->get();
-            Notification::send($dekan, new Pesanan([
-                'model_pesanan' => 'lainnya', 'id_pesanan'  => $lainya->id, 'message'=>'Pesanan '.$lainya->id.' telah diverifikasi',
-            ]));
         } elseif ($lainya->verifikasi==3) {
             $user->notify(new Pesanan(['model_pesanan' => 'lainnya', 'id_pesanan'  => $lainya->id, 'message'=>'Pesanan '.$lainya->id.' telah diverifikasi/selesai']));
         } elseif ($lainya->verifikasi==0) {

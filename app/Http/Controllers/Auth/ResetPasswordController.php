@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
@@ -27,4 +29,23 @@ class ResetPasswordController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+
+    public function showResetFormWithoutToken()
+    {
+        return view('auth.passwords.reset-auth');
+    }
+
+    public function updatePasswordFromOldPassword(Request $request)
+    {
+        $request->validate([
+            'oldPassword' => 'password',
+            'password' => 'required|confirmed'
+        ]);
+
+        auth()->user()->update([
+            'password' => bcrypt($request->password)
+        ]);
+
+        return redirect()->route('home')->with("status", "Password Telah Berhasil diubah!");
+    }
 }

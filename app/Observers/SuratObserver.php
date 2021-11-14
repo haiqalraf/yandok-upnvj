@@ -36,10 +36,6 @@ class SuratObserver
         $user = User::where('nim', $suket->nim_pemesan)->first();
         if ($suket->verifikasi==2) {
             $user->notify(new Pesanan(['model_pesanan' => 'surat', 'id_pesanan'  => $suket->id, 'message'=>'Pesanan '.$suket->id.' sedang diverifikasi/dibuat']));
-            $dekan = User::where('is_admin', 3)->get();
-            Notification::send($dekan, new Pesanan([
-                'model_pesanan' => 'surat', 'id_pesanan'  => $suket->id, 'message'=>'Pesanan '.$suket->id.' telah diverifikasi',
-            ]));
         } elseif ($suket->verifikasi==3) {
             $user->notify(new Pesanan(['model_pesanan' => 'surat', 'id_pesanan'  => $suket->id, 'message'=>'Pesanan '.$suket->id.' telah diverifikasi/selesai']));
         } elseif ($suket->verifikasi==0) {

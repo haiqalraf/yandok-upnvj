@@ -60,6 +60,10 @@ class SuketController extends Controller
                 'file',
                 'mimes:zip,rar'
             ],
+            'alamat' => Rule::requiredIf(function () use ($request) {
+                return $request->tujuan == 2;
+            }),
+            'tujuan' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -102,6 +106,8 @@ class SuketController extends Controller
             }
         }
         $suket->dokumen_dipesan = $dokumen;
+        $suket->alamat = ($request->alamat ? $request->alamat : null);
+        $suket->tujuan = (int)$request->tujuan;
         $suket->file = $files;
         $suket->save();
         

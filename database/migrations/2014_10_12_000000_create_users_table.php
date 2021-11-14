@@ -24,9 +24,12 @@ class CreateUsersTable extends Migration
             $table->string('email')->nullable();
             $table->string('no_hp')->nullable();
             $table->string('no_rumah')->nullable();
-            $table->string('pekerjaan')->nullable();
             $table->string('photo')->nullable();
             $table->text('address')->nullable();
+            $table->string('pekerjaan')->nullable();
+            $table->string('nama_perusahaan')->nullable();
+            $table->string('jabatan')->nullable();
+            $table->string('alamat_perusahaan')->nullable();
             $table->decimal('is_admin')->nullable()->default(0.00);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

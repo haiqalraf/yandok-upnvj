@@ -20,13 +20,25 @@ class CreatePesananSeeder extends Seeder
 
             [
                 'id'=>'123',
-                'nim_pemesan'=>'18105',
+                'nim_pemesan'=>'1810511',
                 'dok_01'=>'1.00',
                 'dok_03'=>'2.00',
                 'kebutuhan'=>'ASN',
                 'keterangan'=>'tidak ada',
+                'alamat' => 'bogor',
+                'tujuan' => '2',
                 'verifikasi'=>'1',
                 'created_at'=>'2021-07-31 16:46:47',
+            ],
+            [
+                'id' => '456',
+                'nim_pemesan' => '1810511',
+                'dok_01' => '1.00',
+                'dok_03' => '2.00',
+                'kebutuhan' => 'Lainnya',
+                'keterangan' => 'tidak ada',
+                'verifikasi' => '1',
+                'created_at' => '2021-07-31 16:46:47',
             ]
         ];
         foreach ($legalisir as $key => $value) {
@@ -36,7 +48,7 @@ class CreatePesananSeeder extends Seeder
         $suket = [
             [
                 'id'=>'124',
-                'nim_pemesan'=>'18105',
+                'nim_pemesan'=>'1810511',
                 'dokumen_dipesan'=>[
                     'jenis_ralat' => [
                         1 => 'Surat Keterangan Ralat Ijazah'
@@ -53,7 +65,7 @@ class CreatePesananSeeder extends Seeder
         $lain = [
             [
                 'id'=>'125',
-                'nim_pemesan'=>'18105',
+                'nim_pemesan'=>'1810511',
                 'dokumen_dipesan'=>'Surat lainya test',
                 'verifikasi'=>'1',
                 'jumlah_dokumen'=>'2',

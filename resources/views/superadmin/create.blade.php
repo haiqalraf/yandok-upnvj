@@ -13,9 +13,9 @@
         </h3>
         <hr>
         @if ($role===2)
-        <form action="{{route('superadmin.akpk')}}" method="POST">
+        <form class="ajax_action" action="{{route('superadmin.akpk')}}" method="POST">
         @else
-        <form action="{{route('superadmin.dekan')}}" method="POST">
+        <form class="ajax_action" action="{{route('superadmin.dekan')}}" method="POST">
         @endif
         @csrf
             <div class="form-group">
@@ -26,7 +26,7 @@
             <div class="form-group">
                 <label for="NIM" class="text-sm font-weight-bold">NIP</label>
                 <input type="text" class="form-control form-control-sm" id="NIM"
-                placeholder="Harap masukan NIM anda disini" name="nim">
+                placeholder="Harap masukan NIP anda disini" name="nim">
             </div>
             <div class="form-group">
                 <label for="pass" class="text-sm font-weight-bold">Password</label>
@@ -59,10 +59,12 @@
         </form>
     </div>
 </div>
+<div class="alert"></div>
 @endsection
 
 @section('script')
 <!-- local script -->
+<script src="{{asset('js/alert.js')}}"></script>
 <script>
     $(document).ready(function () {
        $("#show_hide_password a").on('click', function (event) {
@@ -91,4 +93,56 @@
        });
     });
  </script>
+ <script>
+      $(document).ready(function () {
+         // ALFIO
+         $(".ajax_action").submit(function(event){
+
+         $(':input[type="submit"]').prop('disabled', true);
+
+         event.preventDefault();
+         var post_url = $(this).attr("action"); // Get the form action URL
+         var request_method = $(this).attr("method"); // Get form GET/POST method
+         var form_data = new FormData(this);
+
+         $.ajax({
+            url : post_url,
+            type: request_method,
+            data : form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType: 'json', 
+            success: function(results){
+               
+               var status = results.status;
+               var text = results.text;
+
+               if (status){
+                  showAlert("Berhasil", text, function (e) {
+                     window.history.back();
+                  });
+                //   showAlert("Berhasil", text);
+                  $(':input[type="submit"]').prop('disabled', false);
+                  // window.location.replace("login");
+                     
+               } else {
+
+                  showAlert("Gagal", text);
+                  $(':input[type="submit"]').prop('disabled', false);
+               
+               }
+            },
+            error: function (xhr, status, error){
+
+               var text = xhr.responseJSON.message
+
+               showAlert("Gagal", text);
+
+               $(':input[type="submit"]').prop('disabled', false);
+            }
+         });
+         });
+      });
+   </script>
 @endsection

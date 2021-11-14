@@ -31,6 +31,7 @@ class CreateLegalisirTable extends Migration
             $table->decimal('dok_12',32)->nullable()->default(0.00);
             $table->string('final_dokumen')->nullable();
             $table->integer('verifikasi')->default(1);
+            $table->integer('verifikasi_pengiriman')->nullable()->default(1);
             $table->timestamps();
         });
     }
