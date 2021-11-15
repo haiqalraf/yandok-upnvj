@@ -21,15 +21,24 @@
   </div>
   <div class="form-group col-6">
     <div class="card">
-      <div class="card-body p-3">
-        <small class="card-title">Total yang perlu dibayar:</small>
-        <h4 class="card-title">Rp{{number_format($pesanan->biaya)}}</h4>
+      <div class="card-body row">
+        <div class="col-12">
+          <small class="card-title">Total yang perlu dibayar:</small>
+          <h4 class="card-title">Rp{{number_format($pesanan->biaya)}}</h4>
+          <hr>
+        </div>
+        <div class="col-12">
+          <small class="card-title">Rekening pembayaran:</small>
+          <h4 class="card-title mb-0">0718 426194</h4>
+          <small class="card-subtitle">A.n. UPNVJ</small>
+        </div>
       </div>
     </div>
   </div>
   <div class="form-group col-6">
     <label for="bukti">Bukti Pembayaran</label>
     <input type="file" class="form-control-file" id="bukti" name="bukti_bayar">
+    <small class="form-text text-muted">Catatan: Harap upload dalam format gambar (max: 100MB)</small>
   </div>
   <div class="form-group col-4">
     <label for="bank">Nama Bank</label>
