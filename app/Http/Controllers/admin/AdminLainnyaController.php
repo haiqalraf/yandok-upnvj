@@ -19,9 +19,10 @@ class AdminLainnyaController extends Controller
         } else {
             $lainnya = Lainya::where('verifikasi', '1')->get();
         }
-        
-        return view('admin.lainnya.index', [
-            'lainnya' => $lainnya->sortByDesc('updated_at'),
+
+        return view('admin.index', [
+            'type' => 'lainnya',
+            'pesanan' => $lainnya->sortByDesc('updated_at'),
             'status' => $request->status
         ]);
     }
@@ -31,8 +32,9 @@ class AdminLainnyaController extends Controller
         $daftar_pesanan = collect([]);
         $daftar_pesanan->put($lainnya->dokumen_dipesan, 1);
         $user = User::where('nim', $lainnya->nim_pemesan)->first();
-        return view('admin.lainnya.detail', [
-            'lainnya' => $lainnya,
+        return view('admin.detail', [
+            'type' => 'lainnya',
+            'pesanan' => $lainnya,
             'user' => $user,
             'daftar_pesanan' => $daftar_pesanan
         ]);
@@ -46,6 +48,10 @@ class AdminLainnyaController extends Controller
 
         if ($request->status === '0') {
             $lainnya->komentar = $request->komentar;
+        }
+
+        if ($request->status == 3) {
+            $lainnya->completed_at = now();
         }
 
         if ($lainnya->raw_tujuan == 2 && $lainnya->verifikasi==2) {

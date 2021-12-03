@@ -50,6 +50,21 @@ class AdminKirimanController extends Controller
             'status' => 'required'
         ]);
 
+        if ($request->status==3) {
+            $request->validate([
+                'resi' => 'required'
+            ]);
+            $pesanan->sent_at = now();
+            $pesanan->resi = $request->resi;
+            $pesanan->buktiBayar->confirmed_at = now();
+            $pesanan->buktiBayar->is_confirmed = true;
+            $pesanan->buktiBayar->save();
+        }
+
+        if ($request->status == 4) {
+            $pesanan->accepted_at = now();
+        }
+
         $pesanan->verifikasi_pengiriman = $request->status;
         $pesanan->save();
     }

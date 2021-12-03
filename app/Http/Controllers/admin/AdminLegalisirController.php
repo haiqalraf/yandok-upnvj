@@ -49,8 +49,9 @@ class AdminLegalisirController extends Controller
         return User::where('nim', $value->nim_pemesan)->first()->fakultas === auth()->user()->fakultas;
       });
     }
-    return view('admin.legalisir.index', [
-        'legalisir' => $legalisir->sortByDesc('updated_at'),
+    return view('admin.index', [
+        'type' => 'legalisir',
+        'pesanan' => $legalisir->sortByDesc('updated_at'),
         'status' => $request->status
     ]);
   }
@@ -63,8 +64,9 @@ class AdminLegalisirController extends Controller
     $daftar_pesanan = $legalisir->daftarPesanan();
     $user = User::where('nim', $legalisir->nim_pemesan)->first();
 
-    return view('admin.legalisir.detail', [
-        'legalisir' => $legalisir,
+    return view('admin.detail', [
+        'type' => 'legalisir',
+        'pesanan' => $legalisir,
         'user' => $user,
         'daftar_pesanan' => $daftar_pesanan
     ]);
@@ -89,6 +91,10 @@ class AdminLegalisirController extends Controller
 
     if ($request->status === '0') {
         $legalisir->komentar = $request->komentar;
+    }
+
+    if ($request->status == 3) {
+      $legalisir->completed_at = now();
     }
     
     $legalisir->verifikasi = $request->status;

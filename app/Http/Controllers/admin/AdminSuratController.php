@@ -18,8 +18,9 @@ class AdminSuratController extends Controller
       $surat = Suket::where('verifikasi', '1')->get();
     }
 
-    return view('admin.surat.index', [
-      'surat' => $surat->sortByDesc('updated_at'),
+    return view('admin.index', [
+      'type' => 'surat',
+      'pesanan' => $surat->sortByDesc('updated_at'),
       'status' => $request->status
     ]);
   }
@@ -35,8 +36,9 @@ class AdminSuratController extends Controller
 
     $user = User::where('nim', $surat->nim_pemesan)->first();
 
-    return view('admin.surat.detail', [
-      'surat' => $surat,
+    return view('admin.detail', [
+      'type' => 'surat',
+      'pesanan' => $surat,
       'user' => $user,
       'daftar_pesanan' => $daftar_pesanan
     ]);
@@ -50,6 +52,10 @@ class AdminSuratController extends Controller
 
     if ($request->status === '0') {
       $surat->komentar = $request->komentar;
+    }
+
+    if ($request->status == 3) {
+      $surat->completed_at = now();
     }
 
     if ($surat->raw_tujuan ==2 && $surat->verifikasi == 2) {
