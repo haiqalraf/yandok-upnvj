@@ -23,6 +23,7 @@ class CreateBuktiPembayaranTable extends Migration
             $table->date('tgl_bayar');
             $table->text('bukti_bayar');
             $table->boolean('is_confirmed')->nullable();
+            $table->dateTime('confirmed_at')->nullable();
             $table->timestamps();
         });
     }

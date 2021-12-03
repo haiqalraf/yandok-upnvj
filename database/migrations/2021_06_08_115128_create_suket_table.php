@@ -21,6 +21,10 @@ class CreateSuketTable extends Migration
             $table->text('final_dokumen')->nullable();
             $table->integer('verifikasi')->default(1);
             $table->integer('verifikasi_pengiriman')->nullable()->default(1);
+            $table->string('resi')->nullable();
+            $table->dateTime('completed_at')->nullable();
+            $table->dateTime('sent_at')->nullable();
+            $table->dateTime('accepted_at')->nullable();
             $table->timestamps();
         });
     }
