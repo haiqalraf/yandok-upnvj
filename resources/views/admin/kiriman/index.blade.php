@@ -35,7 +35,7 @@
       <li class="nav-item">
         <a class="nav-link @if ($status === '4'){{ 'active' }}@endif" 
           href="{{ route($adminTitle.'.kiriman', ['status' => '4']) }}">
-          Sudah Dikirim
+          Sudah Diterima
         </a>
       </li>
     </ul>

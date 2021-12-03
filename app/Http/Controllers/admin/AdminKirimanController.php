@@ -58,20 +58,20 @@ class AdminKirimanController extends Controller
     {
         $this->pesanan($legalisir, $request);
 
-        return redirect()->back();
+        return redirect()->route(auth()->user()->adminTitle().'.kiriman', ['status' => $request->status]);
     }
 
     public function lainnya(Lainya $lainnya, Request $request)
     {
         $this->pesanan($lainnya, $request);
 
-        return redirect()->back();
+        return redirect()->route(auth()->user()->adminTitle() . '.kiriman', ['status' => $request->status]);
     }
 
     public function surat(Suket $surat, Request $request)
     {
         $this->pesanan($surat, $request);
 
-        return redirect()->back();
+        return redirect()->route(auth()->user()->adminTitle() . '.kiriman', ['status' => $request->status]);
     }
 }

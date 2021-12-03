@@ -78,9 +78,9 @@ Route::prefix('dekan')->middleware('is_dekan')->group(function ()
     Route::get('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'detailLegalisir'])->name('dekan.legalisir.detail');
     Route::put('/legalisir/{legalisir:id}', [AdminLegalisirController::class, 'updateLegalisir'])->name('dekan.legalisir.detail');
     Route::get('/kiriman', [AdminKirimanController::class, 'index'])->name('dekan.kiriman');
-    Route::put('/kiriman/{legalisir:id}', [AdminKirimanController::class, 'legalisir'])->name('akpk.kiriman.legalisir');
-    Route::put('/kiriman/{surat:id}', [AdminKirimanController::class, 'surat'])->name('akpk.kiriman.surat');
-    Route::put('/kiriman/{lainnya:id}', [AdminKirimanController::class, 'lainnya'])->name('akpk.kiriman.lainnya');
+    Route::put('/kiriman/{legalisir:id}', [AdminKirimanController::class, 'legalisir'])->name('dekan.kiriman.legalisir');
+    Route::put('/kiriman/{surat:id}', [AdminKirimanController::class, 'surat'])->name('dekan.kiriman.surat');
+    Route::put('/kiriman/{lainnya:id}', [AdminKirimanController::class, 'lainnya'])->name('dekan.kiriman.lainnya');
 
 });
 
