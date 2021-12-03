@@ -21,7 +21,8 @@ class BuktiPembayaran extends Model
     ];
 
     protected $casts = [
-        'tgl_bayar' => 'date'
+        'tgl_bayar' => 'date',
+        'confirmed_at' => 'datetime'
     ];
 
     public function pesanan()

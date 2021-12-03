@@ -115,6 +115,11 @@ class RiwayatController extends Controller
     
                 $results->table = $arr;
 
+                $results->resi = $res->resi;
+                $results->completed_at = $res->completed_at;
+                $results->sent_at = $res->sent_at;
+                $results->accepted_at = $res->accepted_at;
+
             } else if ($results->source_table == 1){
 
                 $Suket = new Suket();
@@ -132,6 +137,11 @@ class RiwayatController extends Controller
                 }
                 $results->table = $arr;
 
+                $results->resi = $res->resi;
+                $results->completed_at = $res->completed_at;
+                $results->sent_at = $res->sent_at;
+                $results->accepted_at = $res->accepted_at;
+
             } else if ($results->source_table == 2){
 
                 $Lainnya = new Lainya();
@@ -145,6 +155,11 @@ class RiwayatController extends Controller
                 array_push($arr, $temp);
     
                 $results->table = $arr;
+
+                $results->resi = $res->resi;
+                $results->completed_at = $res->completed_at;
+                $results->sent_at = $res->sent_at;
+                $results->accepted_at = $res->accepted_at;
 
             }
 
@@ -298,6 +313,7 @@ class RiwayatController extends Controller
         }
 
         $pesanan->verifikasi_pengiriman = $request->status_kirim;
+        $pesanan->accepted_at = now();
         $pesanan->save();
 
         return redirect()->back();

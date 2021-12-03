@@ -29,7 +29,19 @@
                         </tr>
                         <tr>
                             <td>Tanggal Pemesanan</td>
-                            <td>{{date('d-m-Y', strtotime($data->created_at))}}</td>
+                            <td>{{$data->created_at->locale('id')->isoFormat('LLL')}}</td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Selesai</td>
+                            <td>{{$data->completed_at ? $data->completed_at->locale('id')->isoFormat('LLL') : '-'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Dikirim</td>
+                            <td>{{$data->sent_at ? $data->sent_at->locale('id')->isoFormat('LLL') : '-'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Diterima</td>
+                            <td>{{$data->accepted_at ? $data->accepted_at->locale('id')->isoFormat('LLL') : '-'}}</td>
                         </tr>
                         <tr>
                             <td>Detail Status</td>
@@ -62,11 +74,11 @@
 
                                     @elseif($data->verifikasi_pengiriman == 3)
 
-                                        <td>Bukti Pembayaran Telah dikonfirmasi dan Pesanan sedang dikirim dengan resi <span class="text-info">Dummy</span></td>
+                                        <td>Bukti Pembayaran Telah dikonfirmasi dan Pesanan sedang dikirim dengan resi <span class="text-info">{{$data->resi}}</span></td>
 
                                     @elseif($data->verifikasi_pengiriman == 4)
 
-                                        <td>Sudah Selesai, Pesanan telah diterima dengan resi <span class="text-info">Dummy</span></td>
+                                        <td>Sudah Selesai, Pesanan telah diterima dengan resi <span class="text-info">{{$data->resi}}</span></td>
 
                                     @endif
 
@@ -87,7 +99,6 @@
                             <th>No.</th>
                             <th>Jenis Dokumen</th>
                             <th>Jumlah Item</th>
-                            <th>Unduh Dokumen</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -102,22 +113,6 @@
                                 <td>{{$x}}</td>
                                 <td>{{$table['jenis']}}</td>
                                 <td>{{intval($table['jumlah'])}}</td>
-                                @if ($loop->first)
-                                <td rowspan="{{count($data->table)}}">
-                                    @if ($data->verifikasi >= 3)
-                                    <div class="d-flex w-100 h-100 justify-content-center align-items-center">
-                                        <a href="{{route('riwayat.download', [ 
-                                            $data
-                                            ])}}" class="btn btn-light p-2 rounded"><i class="fa fa-download"></i> Download</a>
-                                        @elseif ($data->verifikasi < 3)
-                                        <span style="justify-content: center;
-                                            display: flex;
-                                            width: 100%;
-                                            font-weight: 600">-</span>
-                                    </div>
-                                    @endif
-                                </td>
-                                @endif
                             </tr>
                         @endforeach
                     </tbody>
