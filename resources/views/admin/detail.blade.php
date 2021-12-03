@@ -119,9 +119,9 @@
                         </div>
                       </div>
                     @elseif($pesanan->verifikasi_pengiriman == 3)
-                      <td>Pesanan Telah Dikirim dengan resi <span class="text-info">Dummy</span></td>
+                      <td>Pesanan Telah Dikirim dengan resi <span class="text-info">{{$pesanan->resi}}</span></td>
                     @elseif($pesanan->verifikasi_pengiriman == 4)
-                      <td>Pesanan Telah Diterima dengan resi <span class="text-info">Dummy</span></td>
+                      <td>Pesanan Telah Diterima dengan resi <span class="text-info">{{$pesanan->resi}}</span></td>
                     @endif
                   @endif
               </tr>
