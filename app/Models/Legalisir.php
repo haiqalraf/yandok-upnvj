@@ -14,7 +14,7 @@ class Legalisir extends Model
     protected $table = 'legalisir';
     public $timestamp = true;
 
-    protected $cast = [
+    protected $casts = [
         'dok_01' => 'integer',
         'dok_02' => 'integer',
         'dok_03' => 'integer',
@@ -27,6 +27,9 @@ class Legalisir extends Model
         'dok_10' => 'integer',
         'dok_11' => 'integer',
         'dok_12' => 'integer',
+        'completed_at' => 'datetime',
+        'sent_at' => 'datetime',
+        'accepted_at' => 'datetime',
     ];
 
     protected $fillable = [

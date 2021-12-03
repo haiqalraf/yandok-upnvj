@@ -24,6 +24,9 @@ class Lainya extends Model
 
     protected $cast = [
         'jumlah_dokumen' => 'integer',
+        'completed_at' => 'datetime',
+        'sent_at' => 'datetime',
+        'accepted_at' => 'datetime',
     ];
 
     public function getData($nim = null, $id = null, $type = 'all'){

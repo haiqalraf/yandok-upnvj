@@ -25,6 +25,9 @@ class Suket extends Model
     protected $casts = [
         'dokumen_dipesan' => 'array',
         'file' => 'array',
+        'completed_at' => 'datetime',
+        'sent_at' => 'datetime',
+        'accepted_at' => 'datetime',
     ];
 
     public function getData($nim = null, $id = null, $type = 'all'){
