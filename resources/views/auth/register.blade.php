@@ -60,7 +60,8 @@
                      </div>
                      <div class="form-group">
                         <label for="tgl" class="text-sm">Tanggal Lahir</label>
-                        <input name="tgl" type="text" class="form-control form-control-sm" id="tgl" placeholder="Misal : 2000-29-03">
+                        <input name="tgl" type="text" class="form-control form-control-sm" id="tgl" placeholder="YYYY-mm-dd">
+                        <small class="text-small text-muted">Misal: 2000-12-30</small>
                      </div>
                   
                   </div>
