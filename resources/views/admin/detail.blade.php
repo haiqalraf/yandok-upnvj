@@ -57,6 +57,7 @@
                 <td>Tanggal Selesai</td>
                 <td>{{$pesanan->completed_at ? $pesanan->completed_at->locale('id')->isoFormat('LLL') : '-'}}</td>
               </tr>
+              @if ($pesanan->raw_tujuan==2)    
               <tr>
                 <td>Tanggal Dikirim</td>
                 <td>{{$pesanan->sent_at ? $pesanan->sent_at->locale('id')->isoFormat('LLL') : '-'}}</td>
@@ -65,6 +66,7 @@
                 <td>Tanggal Diterima</td>
                 <td>{{$pesanan->accepted_at ? $pesanan->accepted_at->locale('id')->isoFormat('LLL') : '-'}}</td>
               </tr>
+              @endif
               <tr>
                   <td>Detail Status</td>
                   @if ($pesanan->verifikasi == 0)
