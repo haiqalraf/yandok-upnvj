@@ -49,4 +49,15 @@ class Pesanan extends Model
             return Lainya::find($model->id)->komentar;
         }
     }
+
+    public function getCompletedAtAttribute()
+    {
+        if ($this->source_table == 0) {
+            return Legalisir::find($this->id)->completed_at;
+        } elseif ($this->source_table == 1) {
+            return Suket::find($this->id)->completed_at;
+        } elseif ($this->source_table == 2) {
+            return Lainya::find($this->id)->completed_at;
+        }
+    }
 }

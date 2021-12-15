@@ -13,7 +13,7 @@
                   <th>Kode Pesanan</th>
                   <th>Status</th>
                   <th>Tanggal Memesan</th>
-                  <th>Tanggal Target Selesai</th>
+                  <th>Tanggal Selesai</th>
                   <th>Opsi</th>
                </tr>
             </thead>
@@ -24,7 +24,7 @@
                      <td>{{strtoupper($data->id)}}</td>
                      <td><span class="badge {{$data->badge}} p-2">{{$data->verifikasi}}</span></td>
                      <td>{{$data->created_at->locale('id')->isoFormat('LL')}}, {{$data->created_at->locale('id')->isoFormat('HH:mm')}}</td>
-                     <td>{{$data->completed_at ? $data->completed_at->addDays(1)->locale('id')->isoFormat('LL').', '.$data->completed_at->locale('id')->isoFormat('HH:mm') : '-'}}</td>
+                     <td>{{$data->completed_at ? $data->completed_at->locale('id')->isoFormat('LL').', '.$data->completed_at->locale('id')->isoFormat('HH:mm') : '-'}}</td>
                      <td>
                         <a href="{{ url('/riwayat/detail') }}/{{$data->id}}" title="Detail" class="btn btn-sm btn-success" target="blank">Detail <i
                               class="fa fa-arrow-right" aria-hidden="true"></i>
