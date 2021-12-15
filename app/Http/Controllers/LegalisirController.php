@@ -59,7 +59,7 @@ class LegalisirController extends Controller
             'dok_10' => 'required|numeric',
             'dok_11' => 'required|numeric',
             'dok_12' => 'required|numeric',
-            'file' => 'required|file|mimes:zip,rar',
+            'file' => 'required|file|mimes:zip,rar|size:10240',
             'tujuan' => 'required',
             'kebutuhan' => 'required'
         ]);

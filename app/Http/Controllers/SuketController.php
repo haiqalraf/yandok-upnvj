@@ -45,7 +45,8 @@ class SuketController extends Controller
                     $request->filled('pesan.jenis_pengganti')
                 ),
                 'file',
-                'mimes:rar,zip'
+                'mimes:rar,zip',
+                'size:10240'
             ],
             'upload.2' => [
                 Rule::requiredIf(
@@ -53,12 +54,14 @@ class SuketController extends Controller
                     || ($request->filled('pesan.jenis_ralat'))
                 ), 
                 'file',
-                'mimes:zip,rar'
+                'mimes:zip,rar',
+                'size:10240'
             ],
             'upload.3' => [
                 Rule::requiredIf($request->filled('pesan.jenis_alumni')), 
                 'file',
-                'mimes:zip,rar'
+                'mimes:zip,rar',
+                'size:10240'
             ],
             'alamat' => Rule::requiredIf(function () use ($request) {
                 return $request->tujuan == 2;

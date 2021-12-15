@@ -36,7 +36,8 @@
                         </span>
                         
                         <p style="font-size: 10px; color: slategray;">Catatan : Harap untuk di kompress dalam bentuk
-                           RAR/ZIP sebelum di upload</p>
+                           <span class="font-weight-bold">RAR/ZIP</span> maksimal <span class="font-weight-bold">10MB</span> sebelum di upload
+                        </p>
 
                         <script>
                            const actualBtn = document.getElementById('upload');

@@ -62,8 +62,9 @@
                         <span id="file-chosen" style="font-size: 12px; font-weight: 400; color:cadetblue;">
                            Tidak ada file yang dipilih.
                         </span><br>
-                        <span style="font-size: 10px; color: slategray;">Catatan : Harap untuk di kompress dalam bentuk
-                           RAR/ZIP sebelum di upload</span>
+                        <span style="font-size: 10px; color: slategray;">
+                           Catatan : Harap untuk di kompress dalam bentuk <span class="font-weight-bold">RAR/ZIP</span> maksimal <span class="font-weight-bold">10MB</span> sebelum di upload
+                        </span>
 
                         <script>
                            const actualBtn = document.getElementById('upload');
@@ -116,8 +117,9 @@
                         <span id="file-chosen2" style="font-size: 12px; font-weight: 400; color:cadetblue;">
                            Tidak ada file yang dipilih.
                         </span><br>
-                        <span style="font-size: 10px; color: slategray;">Catatan : Harap untuk di kompress dalam bentuk
-                           RAR/ZIP sebelum di upload</span>
+                        <span style="font-size: 10px; color: slategray;">
+                           Catatan : Harap untuk di kompress dalam bentuk <span class="font-weight-bold">RAR/ZIP</span> maksimal <span class="font-weight-bold">10MB</span> sebelum di upload
+                        </span>
 
                         <script>
                            const actualBtn2 = document.getElementById('upload2');
@@ -186,8 +188,9 @@
                         <span id="file-chosen3" style="font-size: 12px; font-weight: 400; color:cadetblue;">
                            Tidak ada file yang dipilih.
                         </span><br>
-                        <span style="font-size: 10px; color: slategray;">Catatan : Harap untuk di kompress dalam bentuk
-                           RAR/ZIP sebelum di upload</span>
+                        <span style="font-size: 10px; color: slategray;">
+                           Catatan : Harap untuk di kompress dalam bentuk <span class="font-weight-bold">RAR/ZIP</span> maksimal <span class="font-weight-bold">10MB</span> sebelum di upload
+                        </span>
 
                         <script>
                            const actualBtn3 = document.getElementById('upload3');
