@@ -34,22 +34,24 @@
                   <tr>
                      <td>{{$item->dokumen_dipesan}}</td>
                      <td>
-                        <input id="item[{{++$count;}}]" type="number" min="0" class="form-control form-control-sm" style="width: 100px;"
+                        <input id="item[{{++$count;}}]" type="number" min="0" class="form-control form-control-sm counter" style="width: 100px;"
                            value="{{(int)$item->jumlah_dokumen}}" name="item[{{$item->id}}]">
                      </td>
                   </tr>
                   @endforeach
                </tbody>
+               @if($document->isNotEmpty())
                <tfoot>
                   <tr>
                      <td class="text-center">Total</td>
                      <td colspan="2" class="font-weight-bold text-center">
                         <div class="form-group mb-0">
-                           <input type="text" id="total" class="form-control" readonly="">
+                           <input type="text" id="total" class="form-control" readonly="" value="{{$document->sum('jumlah_dokumen')}}">
                         </div>
                      </td>
                   </tr>
                </tfoot>
+               @endif
             </table>
             <hr>
             <div class="text-right">
@@ -147,6 +149,18 @@
                   item10) + parseInt(item11) + parseInt(item12);
                $("#total").val(total);
             });
+         const items = {{$document->count()}}
+         $(".counter").each(function () {
+               $(this).change(function() {
+                  var total = 0;
+                  $(".counter").each(function () {
+                     total += parseInt($(this).val())
+                     console.log(total)
+                  })
+                  $("#total").val(total);
+               })
+            }
+         )
       });
    </script>
 @endsection
