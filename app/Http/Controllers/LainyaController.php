@@ -44,7 +44,7 @@ class LainyaController extends Controller
         $request->validate([
             'dokumen_dipesan' => 'required',
             'jumlah_dokumen' => 'required|numeric',
-            'file' => 'required|file|mimes:zip,rar|size:10240',
+            'file' => 'required|file|mimes:zip,rar|max:10240',
         ]);
 
         if ($request->hasFile('file')) {
