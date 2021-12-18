@@ -70,6 +70,7 @@ class LegalisirFactory extends Factory
                             $buktiBayar->is_confirmed = true;
                             $buktiBayar->confirmed_at = $this->faker->dateTimeBetween($legalisir->completed_at, $legalisir->completed_at->addDays(rand(0, 1)));
                             $legalisir->sent_at = $buktiBayar->confirmed_at;
+                            $legalisir->resi = 'ABCDEFGHIJKLMN';
                         }
                         if ($legalisir->verifikasi_pengiriman >= 4) {
                             $legalisir->accepted_at = $this->faker->dateTimeBetween($legalisir->sent_at, $legalisir->sent_at->addDays(rand(0, 5)));

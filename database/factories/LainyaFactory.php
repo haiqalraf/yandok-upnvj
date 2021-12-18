@@ -58,6 +58,7 @@ class LainyaFactory extends Factory
                             $buktiBayar->is_confirmed = true;
                             $buktiBayar->confirmed_at = $this->faker->dateTimeBetween($lainya->completed_at, $lainya->completed_at->addDays(rand(0, 1)));
                             $lainya->sent_at = $buktiBayar->confirmed_at;
+                            $lainya->resi = 'ABCDEFGHIJKLMN';
                         }
                         if ($lainya->verifikasi_pengiriman >= 4) {
                             $lainya->accepted_at = $this->faker->dateTimeBetween($lainya->sent_at, $lainya->sent_at->addDays(rand(0, 5)));

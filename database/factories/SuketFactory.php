@@ -81,6 +81,7 @@ class SuketFactory extends Factory
                             $buktiBayar->is_confirmed = true;
                             $buktiBayar->confirmed_at = $this->faker->dateTimeBetween($suket->completed_at, $suket->completed_at->addDays(rand(0, 1)));
                             $suket->sent_at = $buktiBayar->confirmed_at;
+                            $suket->resi = 'ABCDEFGHIJKLMN';
                         }
                         if ($suket->verifikasi_pengiriman >= 4) {
                             $suket->accepted_at = $this->faker->dateTimeBetween($suket->sent_at, $suket->sent_at->addDays(rand(0, 5)));
