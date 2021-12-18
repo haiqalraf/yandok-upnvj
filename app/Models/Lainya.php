@@ -70,6 +70,17 @@ class Lainya extends Model
         }
     }
 
+    public function getTujuanAttribute($value)
+    {
+        if ($value==1) {
+            return "Ambil Langsung ke UPNVJ";
+        } elseif ($value==2) {
+            return "Dikirim ke Alamat Saya";
+        } else  {
+            return "";
+        }
+    }
+
     public function getRouteNameAttribute()
     {
         return 'lainnya';
