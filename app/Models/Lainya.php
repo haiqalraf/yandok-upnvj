@@ -22,7 +22,7 @@ class Lainya extends Model
         'file',
     ];
 
-    protected $cast = [
+    protected $casts = [
         'jumlah_dokumen' => 'integer',
         'completed_at' => 'datetime',
         'sent_at' => 'datetime',
