@@ -8,9 +8,6 @@
       <th>Daftar Pesanan</th>
       <th>Jumlah </th>
       <th>Persyaratan</th>
-      @if (in_array($pesanan->verifikasi, [0]))
-        <th>Catatan Penolakan</th>
-      @endif
     </tr>
   </thead>
   <tbody>
@@ -20,9 +17,6 @@
         <td>{{ $key }}</td>
         <td class="text-center">{{ (int)$item }}</td>
         @if ($loop->first)
-          @if ($pesanan->verifikasi === 0)
-            <td rowspan="12" class="text-center align-middle">{{ $pesanan->komentar ? $pesanan->komentar : 'Tidak ada Catatan' }}</td>
-          @endif
           <td rowspan="12" class="align-middle text-center" style="font-size: 15px;">
             <div class="d-flex justify-content-center">
               <ol type="number" class="text-left" style="font-size: 13px;">

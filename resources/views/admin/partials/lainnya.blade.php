@@ -7,9 +7,6 @@
       <th>No.</th>
       <th>Daftar Pesanan</th>
       <th>Jumlah </th>
-      @if (in_array($pesanan->verifikasi, [0]))
-        <th>Catatan Penolakan</th>
-      @endif
       <th>Persyaratan</th>
     </tr>
   </thead>
@@ -21,9 +18,6 @@
         <td class="text-center">{{ $item }}</td>
 
         @if ($loop->first)
-        @if ($pesanan->verifikasi==0)
-        <td>{{ $pesanan->komentar ? $pesanan->komentar : 'Tidak ada Catatan' }}</td>
-        @endif
         <td rowspan="12" class="align-middle text-center" style="font-size: 15px;">
           <a href="{{ route($adminTitle.'.download', ['filePath' => 'lainnya/' . $pesanan->file]) }}"
             class="btn btn-light p-2 rounded">Download <i class="fa fa-download"></i></a>
