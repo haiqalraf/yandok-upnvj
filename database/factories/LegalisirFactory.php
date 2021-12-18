@@ -55,26 +55,28 @@ class LegalisirFactory extends Factory
             }
         })->afterCreating(function (Legalisir $legalisir) {
             if ($legalisir->raw_tujuan == '2') {
-                $legalisir->verifikasi_pengiriman = rand(1, 4);
-                if ($legalisir->verifikasi_pengiriman >= 2) {
-                    $buktiBayar = new BuktiPembayaran([
-                        "bank" => $this->faker->randomElement(['BNI', 'BCA', 'BRI']),
-                        "owner" => User::where('nim', $legalisir->nim_pemesan)->first()->name,
-                        "norek" => $this->faker->iban(),
-                        "jml_bayar" => 10000,
-                        "tgl_bayar" => $this->faker->dateTimeBetween($legalisir->completed_at, $legalisir->completed_at->addDays(rand(0, 1))),
-                        "bukti_bayar" => '20211116151558_buktibayar_FSP161121Y187_Mentari.png'
-                    ]);
-                    if ($legalisir->verifikasi_pengiriman >= 3) {
-                        $buktiBayar->is_confirmed = true;
-                        $buktiBayar->confirmed_at = $this->faker->dateTimeBetween($legalisir->completed_at, $legalisir->completed_at->addDays(rand(0, 1)));
-                        $legalisir->sent_at = $buktiBayar->confirmed_at;
+                if ($legalisir->verifikasi==3) {
+                    $legalisir->verifikasi_pengiriman = rand(1, 4);
+                    if ($legalisir->verifikasi_pengiriman >= 2) {
+                        $buktiBayar = new BuktiPembayaran([
+                            "bank" => $this->faker->randomElement(['BNI', 'BCA', 'BRI']),
+                            "owner" => User::where('nim', $legalisir->nim_pemesan)->first()->name,
+                            "norek" => $this->faker->iban(),
+                            "jml_bayar" => 10000,
+                            "tgl_bayar" => $this->faker->dateTimeBetween($legalisir->completed_at, $legalisir->completed_at->addDays(rand(0, 1))),
+                            "bukti_bayar" => '20211116151558_buktibayar_FSP161121Y187_Mentari.png'
+                        ]);
+                        if ($legalisir->verifikasi_pengiriman >= 3) {
+                            $buktiBayar->is_confirmed = true;
+                            $buktiBayar->confirmed_at = $this->faker->dateTimeBetween($legalisir->completed_at, $legalisir->completed_at->addDays(rand(0, 1)));
+                            $legalisir->sent_at = $buktiBayar->confirmed_at;
+                        }
+                        if ($legalisir->verifikasi_pengiriman >= 4) {
+                            $legalisir->accepted_at = $this->faker->dateTimeBetween($legalisir->sent_at, $legalisir->sent_at->addDays(rand(0, 5)));
+                        }
+                        $legalisir->save();
+                        $legalisir->buktiBayar()->save($buktiBayar);
                     }
-                    if ($legalisir->verifikasi_pengiriman >= 4) {
-                        $legalisir->accepted_at = $this->faker->dateTimeBetween($legalisir->sent_at, $legalisir->sent_at->addDays(rand(0, 5)));
-                    }
-                    $legalisir->save();
-                    $legalisir->buktiBayar()->save($buktiBayar);
                 }
             }
         });
