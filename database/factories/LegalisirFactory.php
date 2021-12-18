@@ -39,7 +39,7 @@ class LegalisirFactory extends Factory
             'kebutuhan' => $this->faker->randomElement(['ASN', 'TNI atau Polri', 'Swasta', 'Lainnya']),
             'keterangan' => 'tidak ada keterangan',
             'tujuan' => $this->faker->randomElement(['1', '2']),
-            'verifikasi' => 3,
+            'verifikasi' => rand(1, 3),
             'completed_at' => $this->faker->dateTimeBetween(now(), now()->addDays(rand(0, 5))),
         ];
     }

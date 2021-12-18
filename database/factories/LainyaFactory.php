@@ -27,7 +27,7 @@ class LainyaFactory extends Factory
             'dokumen_dipesan' => $this->faker->sentence(5),
             'jumlah_dokumen' => rand(1,100),
             'tujuan' => $this->faker->randomElement(['1', '2']),
-            'verifikasi' => 3,
+            'verifikasi' => rand(1, 3),
             'completed_at' => $this->faker->dateTimeBetween(now(), now()->addDays(rand(0,5))),
         ];
     }
