@@ -50,7 +50,7 @@ class SuketFactory extends Factory
                 "jenis_alumni" => ["1" => "Surat Keterangan Alumni"]
             ]),
             'tujuan' => $this->faker->randomElement(['1', '2']),
-            'verifikasi' => rand(1,3),
+            'verifikasi' => rand(0,3),
             'completed_at' => $this->faker->dateTimeBetween(now(), now()->addDays(rand(0, 5))),
         ];
     }
