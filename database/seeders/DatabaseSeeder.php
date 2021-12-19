@@ -19,9 +19,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CreateUserSeeder::class,
             CreatePesananSeeder::class,
-            LainyaSeeder::class,
-            LegalisirSeeder::class,
-            SuketSeeder::class
+            // UserSeeder::class,
+            // LainyaSeeder::class,
+            // LegalisirSeeder::class,
+            // SuketSeeder::class
         ]);
     }
 }
