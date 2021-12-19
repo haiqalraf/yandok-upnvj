@@ -57,7 +57,11 @@
                 <td>Tanggal Selesai</td>
                 <td>{{$pesanan->completed_at ? $pesanan->completed_at->locale('id')->isoFormat('LLL') : '-'}}</td>
               </tr>
-              @if ($pesanan->raw_tujuan==2)    
+              @if ($pesanan->raw_tujuan==2)
+              <tr>
+                <td>Alamat Pengiriman</td>
+                <td>{{$pesanan->alamat ? $pesanan->alamat : '-'}}</td>
+              </tr>    
               <tr>
                 <td>Tanggal Dikirim</td>
                 <td>{{$pesanan->sent_at ? $pesanan->sent_at->locale('id')->isoFormat('LLL') : '-'}}</td>
