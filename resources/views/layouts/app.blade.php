@@ -220,7 +220,7 @@
 
 <section style="background-color: #06750F; margin-top: 30%;" class="bottom mt-4">
 	<div class="container text-center p-2 text-white">
-		© {{date('Y')}} Universitas Pembangunan Nasional Veteran Jakarta | made with <img src="{{asset('img/icon/coffee-cup.png')}}"
+		© {{date('Y')}} Universitas Pembangunan Nasional Veteran Jakarta
 			alt="kopi" width="24px" height="24px">
 	</div>
 </section>
