@@ -4,7 +4,7 @@
    <div class="container">
       <div class="row d-flex justify-content-center mb-5">
          <div class="col-11 bg-white rounded shadow p-3">
-            <h6 class="text-center">Alur Pemesanan Dokumen pada Sistem Yandok UPN Vetaran Jakarta</h6>
+            <h6 class="text-center">Alur Pemesanan Dokumen pada Sistem Layanda UPN Vetaran Jakarta</h6>
          </div>
       </div>
       <div class="row d-flex justify-content-center">

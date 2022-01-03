@@ -170,7 +170,7 @@
                </button>
             </div>
             <div class="modal-body">
-               Agar dapat melakukan pemesanan pada layanan YANDOK UPNVJ, anda harus mengisi <span
+               Agar dapat melakukan pemesanan pada Layanda UPNVJ, anda harus mengisi <span
                   class="font-weight-bold">Trace Study</span> terlebih dahulu
             </div>
             <div class="modal-footer">
