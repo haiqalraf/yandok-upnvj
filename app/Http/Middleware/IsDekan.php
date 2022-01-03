@@ -17,10 +17,13 @@ class IsDekan
     #middleware for dekan admin code = 3
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->is_admin == 3){
-            return $next($request);
+        if (auth()->check()) {
+            if(auth()->user()->is_admin == 3){
+                return $next($request);
+            }
+            return redirect('home')->with('error',"You don't have admin access.");
         }
    
-        return redirect('home')->with('error',"You don't have admin access.");
+        return redirect('/')->with('error',"You don't have admin access.");
     }
 }

@@ -99,13 +99,13 @@ Route::prefix('superadmin')->group(function () {
     Route::post('/dekan/delete', [DekanController::class, 'delete'])->name('superadmin.dekan.delete');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('home');
 Route::get('/tracestudy', [App\Http\Controllers\HomeController::class, 'tracestudy'])->name('tracestudy');
-Route::get('/riwayat', [App\Http\Controllers\RiwayatController::class, 'index'])->name('riwayat');
-Route::get('/riwayat/detail/{id}', [App\Http\Controllers\RiwayatController::class, 'detail']);
-Route::get('/riwayat/ambil/{id}', [App\Http\Controllers\RiwayatController::class, 'ambil']);
-Route::get('/download/{pesanan:id}', [App\Http\Controllers\RiwayatController::class, 'download'])->name('riwayat.download');
-Route::get('/bayar/{id}', [App\Http\Controllers\RiwayatController::class, 'bayar'])->name('bayar');
-Route::put('/bayar/{id}', [App\Http\Controllers\RiwayatController::class, 'uploadBuktiBayar'])->name('bayar.update');
-Route::put('/terima/{id}', [RiwayatController::class, 'updateStatusKirim'])->name('terima');
+Route::get('/riwayat', [App\Http\Controllers\RiwayatController::class, 'index'])->middleware('auth')->name('riwayat');
+Route::get('/riwayat/detail/{id}', [App\Http\Controllers\RiwayatController::class, 'detail'])->middleware('auth');
+Route::get('/riwayat/ambil/{id}', [App\Http\Controllers\RiwayatController::class, 'ambil'])->middleware('auth');
+Route::get('/download/{pesanan:id}', [App\Http\Controllers\RiwayatController::class, 'download'])->middleware('auth')->name('riwayat.download');
+Route::get('/bayar/{id}', [App\Http\Controllers\RiwayatController::class, 'bayar'])->middleware('auth')->name('bayar');
+Route::put('/bayar/{id}', [App\Http\Controllers\RiwayatController::class, 'uploadBuktiBayar'])->middleware('auth')->name('bayar.update');
+Route::put('/terima/{id}', [RiwayatController::class, 'updateStatusKirim'])->middleware('auth')->name('terima');
 
