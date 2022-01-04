@@ -51,7 +51,7 @@
 
    @yield('content')
 
-   <section class="fixed-bottom" style="background-color: #7D7D7D;">
+   <section class="position-sticky" style="background-color: #7D7D7D;bottom:0;">
       <div class="container text-center p-2 text-white">
          © {{date('Y')}} Universitas Pembangunan Nasional Veteran Jakarta
       </div>
