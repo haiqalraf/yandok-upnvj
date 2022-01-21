@@ -5,21 +5,18 @@ namespace App\Http\Controllers\superadmin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Fakultas;
 
 class DekanController extends Controller
 {
     public function index()
     {
         $dekan = User::where('is_admin', 3)->get();
-        
         return view('superadmin.dekan', ['dekan' => $dekan]);
     }
 
     public function create()
     {
-	$fakultas = Fakultas::all();
-        return view('superadmin.create', ['role' => 3, 'faculties' => $fakultas]);
+        return view('superadmin.create', ['role' => 3]);
     }
 
     public function store(Request $request)
@@ -27,7 +24,6 @@ class DekanController extends Controller
         $request->validate([
             'name' => 'required',
             'nim' => 'required',
-            'fakultas' => 'required',
             'password' => 'required|confirmed|string',
             'role' => 'required',
         ]);
@@ -38,7 +34,6 @@ class DekanController extends Controller
             User::create([
                 'name' => $request->name,
                 'nim' => $request->nim,
-                'fakultas' => $request->fakultas,
                 'password' => bcrypt($request->password),
                 'is_admin' => $request->role,
             ]);

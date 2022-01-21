@@ -28,22 +28,6 @@
                 <input type="text" class="form-control form-control-sm" id="NIM"
                 placeholder="Harap masukan NIP anda disini" name="nim">
             </div>
-            @if ($role===3)    
-            <div class="form-group">
-                <label for="fakultas" class="text-sm font-weight-bold">Fakultas</label>
-                <select type="text" class="form-control form-control-sm" id="fakultas" 
-                  name="fakultas">
-                  <option disabled hidden selected>Harap pilih fakultas anda di sini</option>
-                  <option value="FEB">Fakultas Ekonomi dan Bisnis</option>
-                  <option value="FHK">Fakultas Hukum</option>
-                  <option value="FIK">Fakultas Ilmu Komputer</option>
-                  <option value="FKD">Fakultas Kedokteran</option>
-                  <option value="FKS">Fakultas Ilmu Kesehatan</option>
-                  <option value="FSP">Fakultas Ilmu Sosial dan Ilmu Politik</option>
-                  <option value="FTK">Fakultas Teknik</option>
-               </select>
-            </div>
-            @endif
             <div class="form-group">
                 <label for="pass" class="text-sm font-weight-bold">Password</label>
                 <div class="input-group" id="show_hide_password">

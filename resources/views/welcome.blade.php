@@ -6,8 +6,8 @@
       <div class="container-fluid">
          <div class="row">
             <div class="col-6 col-sm-5 align-self-center mb-3" style="margin-left: 22px;">
-               <h2 class="" >Welcome To <span style="color: #06750F;">Layanda</span>
-                  UPN Veteran Jakarta
+               <h2 class="" >Welcome To <span style="color: #06750F;">Layanda<br><span style="font-size:24px;"><b>(Layanan Dokumen Alumni)</b></span></span>
+                 <br>UPN Veteran Jakarta
                </h2>
                <br>
                <p id="konten-banner">
